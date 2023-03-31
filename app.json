@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "osc_rn_app",
+    "slug": "osc_rn_app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "osc_rn_app"
+}
