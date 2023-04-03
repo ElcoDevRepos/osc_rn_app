@@ -1,14 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Linking,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+  TouchableOpacity
+} from 'react-native';
 import osc from 'react-native-osc';
 import tcpOsc from './services/tcpOsc';
+import { Header as HeaderRNE, HeaderProps, Icon } from '@rneui/themed';
+import LinearGradient from 'react-native-linear-gradient';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   NativeEventEmitter
 } from 'react-native';
+import CustomButton from './src/components/button';
+import Toolbar from './src/components/toolbar';
+import { CheckBox, Dialog, ListItem } from '@rneui/base';
+import SettingsDialog from './src/components/settingsDialog';
 
 
 export default function App() {
+  const [isSettingsVisible, setIsSettingsVisible] = useState(false);
+  const [isConsolesExpanded, setIsConsolesExpanded] = useState(false);
+
+  const openSettings = () => {
+    setIsSettingsVisible(!isSettingsVisible);
+  };
   const eventEmitter = new NativeEventEmitter(osc);
   eventEmitter.addListener('GotMessage', (oscMessage) => {
     console.log("message: ", oscMessage);
@@ -30,20 +52,35 @@ export default function App() {
 
   //osc.createClient("192.168.50.119", 8000);
   //osc.sendMessage("/eos/ping", ['0']);
-  
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <HeaderRNE
+        backgroundColor='#000'
+        centerComponent={{ text: 'OSC', style: styles.heading }}
+      />
+      <Toolbar openSettings={openSettings}></Toolbar>
+      <CustomButton buttonText="1"></CustomButton>
+
+      <SettingsDialog openSettings={openSettings} isSettingsVisible={isSettingsVisible} isConsolesExpanded={isConsolesExpanded} setIsConsolesExpanded={setIsConsolesExpanded}></SettingsDialog>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  heading: {
+    color: 'white',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  headerRight: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 5,
+  },
+  subheaderText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
