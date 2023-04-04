@@ -22,9 +22,13 @@ import CustomButton from './src/components/button';
 import Toolbar from './src/components/toolbar';
 import { CheckBox, Dialog, ListItem } from '@rneui/base';
 import SettingsDialog from './src/components/settingsDialog';
+import Remote from './src/pages/remote';
 
 
 export default function App() {
+  const [isRemoteShown, setIsRemoteShown] = useState(false);
+  const [isFocusShown, setIsFocusShown] = useState(false);
+
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
   const [isConsolesExpanded, setIsConsolesExpanded] = useState(false);
 
@@ -36,6 +40,12 @@ export default function App() {
     console.log("message: ", oscMessage);
   });
 
+  const toggleRemoteView = event => {setIsRemoteShown(true)};
+  const toggleFocusView = event => {setIsFocusShown(true)};
+
+  const hideAllViews = () => {
+    setIsRemoteShown(false);
+  }
   /**
    * Use these connection methods to connect and send to the EOS Server as preferred
    */
@@ -59,9 +69,17 @@ export default function App() {
         backgroundColor='#000'
         centerComponent={{ text: 'OSC', style: styles.heading }}
       />
-      <Toolbar openSettings={openSettings}></Toolbar>
-      <CustomButton buttonText="1"></CustomButton>
-
+      <Toolbar 
+        openSettings={openSettings}
+        toggleRemoteView={toggleRemoteView}
+        toggleFocusView={toggleFocusView}
+        hideAllViews={hideAllViews}
+      ></Toolbar>
+      {
+        isRemoteShown && (
+          <Remote></Remote>
+        )
+      }
       <SettingsDialog openSettings={openSettings} isSettingsVisible={isSettingsVisible} isConsolesExpanded={isConsolesExpanded} setIsConsolesExpanded={setIsConsolesExpanded}></SettingsDialog>
     </SafeAreaProvider>
   );

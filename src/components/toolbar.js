@@ -16,8 +16,14 @@ export default class Toolbar extends React.Component {
     render() {
         return (
             <View style={styles.row}>
-                <Text style={styles.text}>Remote</Text>
-                <Text style={styles.text}>Focus</Text>
+                <Text onPress={() => {
+                    this.props.hideAllViews(); 
+                    this.props.toggleRemoteView();
+                }} style={styles.text}>Remote</Text>
+                <Text onPress={() => {
+                    this.props.hideAllViews(); 
+                    this.props.toggleFocusView();
+                }}style={styles.text}>Focus</Text>
                 <Text style={styles.text}>Face Panel</Text>
                 <Text style={styles.text}>Encoders</Text>
                 <Text style={styles.text}>Direct Selects</Text>
@@ -34,12 +40,12 @@ const styles = StyleSheet.create({
         marginTop: 25
     },
     row: {
-         width: '100%', 
-         height: 55, 
-         backgroundColor: '#000', 
-         display: 'flex', 
-         flexDirection: 'row', 
-         justifyContent: 'space-around',
-         flexWrap: 'nowrap'
+        width: '100%',
+        height: 55,
+        backgroundColor: '#000',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        flexWrap: 'nowrap'
     }
 })
