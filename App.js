@@ -23,7 +23,7 @@ import Toolbar from './src/components/toolbar';
 import { CheckBox, Dialog, ListItem } from '@rneui/base';
 import SettingsDialog from './src/components/settingsDialog';
 import Remote from './src/pages/remote';
-
+import Focus from './src/pages/focus';
 
 export default function App() {
   const [isRemoteShown, setIsRemoteShown] = useState(true);
@@ -32,18 +32,25 @@ export default function App() {
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
   const [isConsolesExpanded, setIsConsolesExpanded] = useState(false);
 
+  const [isConnected, setIsConnected] = useState(false);
   const openSettings = () => {
     setIsSettingsVisible(!isSettingsVisible);
   };
-  const eventEmitter = new NativeEventEmitter(osc);
-  eventEmitter.addListener('GotMessage', (oscMessage) => {
-    console.log("message: ", oscMessage);
-  });
 
-  const toggleRemoteView = event => {setIsRemoteShown(true)};
+  
+
+  const toggleRemoteView = event => {const eventEmitter = new NativeEventEmitter(tcpOsc);
+    console.log(eventEmitter.listenerCount('GotMessage'));setIsRemoteShown(true)};
   const toggleFocusView = event => {setIsFocusShown(true)};
 
   const hideAllViews = () => {
+    const eventEmitter = new NativeEventEmitter(tcpOsc);
+    console.log(eventEmitter.listenerCount('GotMessage'));
+    if (eventEmitter.listenerCount('GotMessage') > 0) {
+      eventEmitter.removeAllListeners('GotMessage');
+    }
+    console.log(eventEmitter.listenerCount('GotMessage'));
+
     setIsRemoteShown(false);
   }
   /**
@@ -52,8 +59,16 @@ export default function App() {
   /**
    * TCP Connection and send
    */
-  tcpOsc.startConnection(3037, '192.168.50.119');
-
+  if (!isConnected) {
+    try {
+      tcpOsc.startConnection(3037, '192.168.50.119');
+      setIsConnected(true);
+    } catch (error) {
+      
+    }
+    
+  }
+  
   /** 
    * UDP Connection and Send 
    * */
@@ -76,6 +91,11 @@ export default function App() {
       {
         isRemoteShown && (
           <Remote></Remote>
+        )
+      }
+      {
+        isFocusShown && (
+          <Focus></Focus>
         )
       }
       <SettingsDialog openSettings={openSettings} isSettingsVisible={isSettingsVisible} isConsolesExpanded={isConsolesExpanded} setIsConsolesExpanded={setIsConsolesExpanded}></SettingsDialog>
