@@ -26,7 +26,7 @@ import Remote from './src/pages/remote';
 
 
 export default function App() {
-  const [isRemoteShown, setIsRemoteShown] = useState(false);
+  const [isRemoteShown, setIsRemoteShown] = useState(true);
   const [isFocusShown, setIsFocusShown] = useState(false);
 
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
@@ -52,9 +52,7 @@ export default function App() {
   /**
    * TCP Connection and send
    */
-  //tcpOsc.startConnection(3037, '192.168.50.119');
-
-  //tcpOsc.sendMessage('/eos/ping', ['0']);
+  tcpOsc.startConnection(3037, '192.168.50.119');
 
   /** 
    * UDP Connection and Send 

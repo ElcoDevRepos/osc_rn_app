@@ -26,9 +26,9 @@ export default class CustomButton extends React.Component {
                     width: 50,
                     height: 50,
                     borderRadius: 5,
-                    marginTop: 10
+                    margin: 5
                 }} onPress={this.props.onPress}>
-                    <Text style={{ textAlign: 'center' }}>{this.props.buttonText}</Text>
+                    <Text style={{ textAlign: 'center' }}>{this.props.title}</Text>
                 </TouchableOpacity>
             </View>
         );
