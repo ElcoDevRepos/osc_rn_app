@@ -9,6 +9,7 @@ import {
     ViewStyle,
     TouchableOpacity
 } from 'react-native';
+
 import tcpOsc from '../../services/tcpOsc';
 import {
     NativeEventEmitter
@@ -54,11 +55,19 @@ export default class Remote extends React.Component {
     }
     render() {
         return (
-            <View style={{
-                flexDirection: 'row'
-            }}>
-                {this.renderButtons()}
-            </View>
+                <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1, backgroundColor: 'red' }} >
+                        <Text>
+                            This is a test
+                        </Text>
+                    </View>
+                    <View style={{ flex: 1, backgroundColor: 'blue' }} >
+                        <Text>
+                            This is a another test
+                        </Text>
+                    </View>
+                </View>
+
         );
     }
 }
