@@ -51,7 +51,8 @@ export default function App() {
     }
     console.log(eventEmitter.listenerCount('GotMessage'));
 
-    setIsRemoteShown(false);
+      setIsRemoteShown(false);
+      setIsFocusShown(false);
   }
   /**
    * Use these connection methods to connect and send to the EOS Server as preferred

@@ -22,7 +22,9 @@ export default class Focus extends React.Component {
     render() {
         return (
             <View>
-
+                <Text>
+                    This Focus Page
+                </Text>
             </View>
            
         );

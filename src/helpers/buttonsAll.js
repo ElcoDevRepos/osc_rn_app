@@ -284,11 +284,6 @@ const buttonsAll = {
 
     'colorStore': { 'address': '', 'style': 'btn12', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'STORE', 'argtype': '', 'argvalue': '' },
 
-
-
-
-
-
     'encoder1': { 'address': '/eoc/', 'style': 'btn7', 'styleText': 'btn7Text', 'functype': 'btn', 'label': 'ENCODER 1', 'argtype': 's', 'argvalue': '1' },
     'encoder2': { 'address': '/eoc/', 'style': 'btn7', 'styleText': 'btn7Text', 'functype': 'btn', 'label': 'ENCODER 2', 'argtype': 's', 'argvalue': '1' },
     'encoder3': { 'address': '/eoc/', 'style': 'btn7', 'styleText': 'btn7Text', 'functype': 'btn', 'label': 'ENCODER 3', 'argtype': 's', 'argvalue': '1' },
