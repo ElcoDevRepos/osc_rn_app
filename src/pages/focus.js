@@ -23,8 +23,8 @@ export default class Focus extends React.Component {
         return (
             <View>
 
-
             </View>
+           
         );
     }
 }
