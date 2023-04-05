@@ -13,11 +13,16 @@ tcpOsc.startConnection = (port, ip) => {
     };
 
     // Create socket
+    oscLib.default.options.address = ip;
+    oscLib.default.options.remoteAddress = ip;
+    oscLib.default.options.port = port;
     this.client = TcpSocket.createConnection(options, () => { });
     
     this.client.setKeepAlive(true);
     this.client.on('data', function (data) {
-        eventEmitter.emit("GotMessage", data)
+        const decode = oscLib.default.decodeSLIP(data);
+        const finalDecode = oscLib.default.decodeOSC(decode);
+        eventEmitter.emit("GotMessage", finalDecode)
     });
 
     this.client.on('error', function (error) {

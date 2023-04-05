@@ -8,7 +8,16 @@
 /* global require, module, process, Buffer, Long, util */
 
 const osc = {};
-
+this.msgBufferIdx = 0;
+this.maxMessageSize = 10485760;
+osc.options = {
+    address:'',
+    port: '',
+    useSLIP: true,
+    remoteAddress: '',
+    remotePort: 8000,
+    localPort: 9000
+}
 const slip = {};
 
 osc.SECS_70YRS = 2208988800;
@@ -30,7 +39,7 @@ osc.isElectron = typeof process !== "undefined" &&
     process.versions && process.versions.electron ? true : false;
 
 // Unsupported, non-API property.
-osc.isBufferEnv = osc.isNode || osc.isElectron;
+osc.isBufferEnv = false;//osc.isNode || osc.isElectron;
 
 // Unsupported, non-API function.
 osc.isArray = function (obj) {
@@ -88,7 +97,6 @@ osc.byteArray = function (obj) {
     if (obj instanceof Uint8Array) {
         return obj;
     }
-
     var buf = obj.buffer ? obj.buffer : obj;
 
     if (!(buf instanceof ArrayBuffer) && (typeof buf.length === "undefined" || typeof buf === "string")) {
@@ -150,7 +158,7 @@ osc.readString = function (dv, offsetState) {
     var charCodes = [],
         idx = offsetState.idx;
 
-    for (; idx < dv.byteLength; idx++) {
+        for (; idx < dv.byteLength; idx++) {
         var charCode = dv.getUint8(idx);
         if (charCode !== 0) {
             charCodes.push(charCode);
@@ -171,6 +179,7 @@ osc.readString = function (dv, offsetState) {
 };
 
 osc.readString.raw = function (charCodes) {
+
     // If no Buffer or TextDecoder, resort to fromCharCode
     // This does not properly decode multi-byte Unicode characters.
     var str = "";
@@ -633,6 +642,10 @@ osc.jsToNTPTime = function (jsTime) {
 osc.readArguments = function (dv, options, offsetState) {
     var typeTagString = osc.readString(dv, offsetState);
     if (typeTagString.indexOf(",") !== 0) {
+        console.log("Throwing Error");
+        console.log("A malformed type tag string was found while reading " +
+        "the arguments of an OSC message. String was: " +
+        typeTagString, " at offset: " + offsetState.idx);
         // Despite what the OSC 1.0 spec says,
         // it just doesn't make sense to handle messages without type tags.
         // scsynth appears to read such messages as if they have a single
@@ -820,7 +833,6 @@ osc.readMessageContents = function (address, dv, options, offsetState) {
     }
 
     var args = osc.readArguments(dv, options, offsetState);
-
     return {
         address: address,
         args: args.length === 1 && options.unpackSingleArgs ? args[0] : args
@@ -952,9 +964,8 @@ osc.readPacket = function (data, options, offsetState, len) {
     offsetState = offsetState || {
         idx: 0
     };
-
-    var header = osc.readString(dv, offsetState),
-        firstChar = header[0];
+    var header = osc.readString(dv, offsetState);
+    var firstChar = header[0];
 
     if (firstChar === "#") {
         return osc.readBundleContents(dv, options, offsetState, len);
@@ -1116,9 +1127,21 @@ slip.expandByteArray = function (arr) {
 slip.byteArray = function (data, offset, length) {
     return data instanceof ArrayBuffer ? new Uint8Array(data, offset, length) : data;
 };
-slip.sliceByteArray = function (arr, start, end) {
+slip.sliceByteArray =  (arr, start, end) => {
     var sliced = arr.buffer.slice ? arr.buffer.slice(start, end) : arr.subarray(start, end);
     return new Uint8Array(sliced);
+};
+
+slip.handleEnd = () => {
+    if (this.msgBufferIdx === 0) {
+        return; // Toss opening END byte and carry on.
+    }
+    var msg = slip.sliceByteArray(this.msgBuffer, 0, this.msgBufferIdx);
+
+    // Clear our pointer into the message buffer.
+    this.msgBufferIdx = 0;
+
+    return msg;
 };
 
 osc.encode = function (data, o) {
@@ -1161,6 +1184,71 @@ osc.nativeBuffer = function (obj) {
     }
 
     return osc.isTypedArrayView(obj) ? obj : new Uint8Array(obj);
+};
+
+osc.decodeOSC = function (data, packetInfo) {
+    data = osc.byteArray(data);
+    try {
+        var packet = osc.readPacket(data, osc.options);
+        return packet;
+    } catch (err) {
+        return err;
+    }
+};
+
+osc.decodeSLIP =  (data) =>  {
+    data = osc.byteArray(data);
+    this.msgBuffer = data;
+    var msg;
+    for (var i = 0; i < data.length; i++) {
+        var val = data[i];
+
+        if (this.escape) {
+            if (val === slip.ESC_ESC) {
+                val = slip.ESC;
+            } else if (val === slip.ESC_END) {
+                val = slip.END;
+            }
+        } else {
+            if (val === slip.ESC) {
+                this.escape = true;
+                continue;
+            }
+
+            if (val === slip.END) {
+                msg = slip.handleEnd();
+                continue;
+            }
+        }
+        var more = slip.addByte(val);
+        if (!more) {
+            slip.handleMessageMaxError();
+        }
+    }
+    return msg;
+};
+
+slip.addByte = (val) => {
+    if (this.msgBufferIdx > this.msgBuffer.length - 1) {
+        this.msgBuffer = slip.expandByteArray(this.msgBuffer);
+    }
+
+    this.msgBuffer[this.msgBufferIdx++] = val;
+    this.escape = false;
+
+    return this.msgBuffer.length < this.maxMessageSize;
+};
+
+slip.handleMessageMaxError =  () => {
+    if (this.onError) {
+        this.onError(this.msgBuffer.subarray(0),
+            "The message is too large; the maximum message size is " +
+            this.maxMessageSize / 1024 + "KB. Use a larger maxMessageSize if necessary.");
+    }
+
+    // Reset everything and carry on.
+    this.msgBufferIdx = 0;
+    this.escape = false;
 };
 
 export default osc;
