@@ -22,8 +22,7 @@ tcpOsc.startConnection = (port, ip) => {
     this.client.on('data', function (data) {
         const decode = oscLib.default.decodeSLIP(data);
         const finalDecode = oscLib.default.decodeOSC(decode);
-        console.log(finalDecode);
-        //eventEmitter.emit("GotMessage", data)
+        eventEmitter.emit("GotMessage", finalDecode)
     });
 
     this.client.on('error', function (error) {
