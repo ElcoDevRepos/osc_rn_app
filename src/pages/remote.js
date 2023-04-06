@@ -419,6 +419,7 @@ export default class Remote extends React.Component {
                                 {this.renderButton('period')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
+
                     </View>{/* /module column */}
 
                     {/* /ROW 3 MODULE 4 */}

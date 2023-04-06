@@ -10,11 +10,32 @@ const styles = StyleSheet.create({
     height50: {
         flexBasis: '50%'
     },
+    height100: {
+        height: '100%'
+    },
     row_single_remote: {
         flexBasis: '12.2%'
     },
     row_double_remote: {
         flexBasis: '24.4%'
+    },
+
+    row_half_focus: {
+        flexBasis: '5.75%'
+    },
+    row_single_focus: {
+        flexBasis: '11.5%'
+    },
+    row_double_focus: {
+        flexBasis: '23%'
+    },
+
+
+    enc_col: {
+        width: '20.833333%'
+    },
+    enc_row_focus: {
+        height: '41%'
     },
 
     /* BUTTONS */
