@@ -7,7 +7,8 @@ import {
     StyleProp,
     TextStyle,
     ViewStyle,
-    TouchableOpacity
+    TouchableOpacity,
+    NativeEventEmitter
 } from 'react-native';
 import tcpOsc from '../../services/tcpOsc';
 
@@ -15,6 +16,7 @@ import CustomButton from '../components/button';
 import buttons from '../helpers/buttons';
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
+import updater from '../../services/updater';
 
 export default class Focus extends React.Component {
     constructor(props) {
@@ -23,6 +25,13 @@ export default class Focus extends React.Component {
             
             buttonsAll: buttonsAll
         };
+
+        const eventEmitter = new NativeEventEmitter(tcpOsc);
+        eventEmitter.addListener('GotMessage', async (oscMessage) => {
+            console.log("focus message: ", oscMessage);
+            await updater.alterSourceData(oscMessage);
+            this.setState(buttonsAll);
+        });
     }
 
 

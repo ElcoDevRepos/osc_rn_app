@@ -18,31 +18,23 @@ import CustomButton from '../components/button';
 // import buttons from '../helpers/buttons';
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
+import updater from '../../services/updater';
 
 export default class Remote extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // buttons: buttons,
             buttonsAll: buttonsAll
           };
         // All Messages from EOS Will come here. 
-        // They still need to be decoded. 
         const eventEmitter = new NativeEventEmitter(tcpOsc);
-        eventEmitter.addListener('GotMessage', (oscMessage) => {
-            console.log("message: ", oscMessage);
-            this.alterButtonData();
+        eventEmitter.addListener('GotMessage', async (oscMessage) => {
+            console.log("remote message: ", oscMessage);
+            await updater.alterSourceData(oscMessage);
+            this.setState(buttonsAll);
         });
     }
 
-    alterButtonData() {
-        // You can alter your buttons data here.
-        // Then call the setState to update the buttons value
-        
-        //buttons[0].title = "Test";
-        this.setState(buttons);
-        this.setState(buttonsAll);
-    }
     /*
     renderButtons() {
         const buttonObjects = [];

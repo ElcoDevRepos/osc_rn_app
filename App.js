@@ -45,12 +45,9 @@ export default function App() {
 
   const hideAllViews = () => {
     const eventEmitter = new NativeEventEmitter(tcpOsc);
-    console.log(eventEmitter.listenerCount('GotMessage'));
     if (eventEmitter.listenerCount('GotMessage') > 0) {
       eventEmitter.removeAllListeners('GotMessage');
     }
-    console.log(eventEmitter.listenerCount('GotMessage'));
-
       setIsRemoteShown(false);
       setIsFocusShown(false);
   }
