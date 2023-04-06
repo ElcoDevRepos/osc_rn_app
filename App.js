@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -10,7 +10,6 @@ import {
   ViewStyle,
   TouchableOpacity
 } from 'react-native';
-import osc from 'react-native-osc';
 import tcpOsc from './services/tcpOsc';
 import { Header as HeaderRNE, HeaderProps, Icon } from '@rneui/themed';
 import LinearGradient from 'react-native-linear-gradient';
@@ -24,6 +23,7 @@ import { CheckBox, Dialog, ListItem } from '@rneui/base';
 import SettingsDialog from './src/components/settingsDialog';
 import Remote from './src/pages/remote';
 import Focus from './src/pages/focus';
+import updater from './services/updater';
 
 export default function App() {
   const [isRemoteShown, setIsRemoteShown] = useState(true);
@@ -51,6 +51,12 @@ export default function App() {
       setIsRemoteShown(false);
       setIsFocusShown(false);
   }
+
+ useEffect(() => {
+  // On App load, read from local storage and store app config/state
+  updater.getAppConfig();
+  updater.getAppState();
+ }, [])
   /**
    * Use these connection methods to connect and send to the EOS Server as preferred
    */
