@@ -37,26 +37,29 @@ export default function App() {
     setIsSettingsVisible(!isSettingsVisible);
   };
 
-  
 
-  const toggleRemoteView = event => {const eventEmitter = new NativeEventEmitter(tcpOsc);
-    console.log(eventEmitter.listenerCount('GotMessage'));setIsRemoteShown(true)};
-  const toggleFocusView = event => {setIsFocusShown(true)};
+
+  const toggleRemoteView = event => {
+    const eventEmitter = new NativeEventEmitter(tcpOsc);
+    console.log(eventEmitter.listenerCount('GotMessage')); setIsRemoteShown(true)
+  };
+  const toggleFocusView = event => { setIsFocusShown(true) };
 
   const hideAllViews = () => {
     const eventEmitter = new NativeEventEmitter(tcpOsc);
     if (eventEmitter.listenerCount('GotMessage') > 0) {
       eventEmitter.removeAllListeners('GotMessage');
     }
-      setIsRemoteShown(false);
-      setIsFocusShown(false);
+    setIsRemoteShown(false);
+    setIsFocusShown(false);
   }
 
- useEffect(() => {
-  // On App load, read from local storage and store app config/state
-  updater.getAppConfig();
-  updater.getAppState();
- }, [])
+  useEffect(() => {
+    // On App load, read from local storage and store app config/state
+    updater.getAppConfig();
+    updater.getAppState();
+  }, [])
+
   /**
    * Use these connection methods to connect and send to the EOS Server as preferred
    */
@@ -68,11 +71,11 @@ export default function App() {
       tcpOsc.startConnection(3037, '192.168.50.119');
       setIsConnected(true);
     } catch (error) {
-      
+
     }
-    
+
   }
-  
+
   /** 
    * UDP Connection and Send 
    * */
@@ -86,7 +89,7 @@ export default function App() {
         backgroundColor='#000'
         centerComponent={{ text: 'OSC', style: styles.heading }}
       />
-      <Toolbar 
+      <Toolbar
         openSettings={openSettings}
         toggleRemoteView={toggleRemoteView}
         toggleFocusView={toggleFocusView}
