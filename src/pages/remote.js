@@ -30,7 +30,7 @@ export default class Remote extends React.Component {
         const eventEmitter = new NativeEventEmitter(tcpOsc);
         eventEmitter.addListener('GotMessage', async (oscMessage) => {
             console.log("remote message: ", oscMessage);
-            await updater.alterSourceData(oscMessage);
+            updater.alterSourceData(oscMessage);
             this.setState(buttonsAll);
         });
     }

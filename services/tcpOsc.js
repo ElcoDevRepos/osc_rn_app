@@ -2,10 +2,11 @@ import TcpSocket from 'react-native-tcp-socket';
 import * as oscLib from './osc';
 import {
     NativeEventEmitter
-  } from 'react-native';
+} from 'react-native';
 const tcpOsc = {};
 
 tcpOsc.startConnection = (port, ip) => {
+    console.log("Starting");
     const eventEmitter = new NativeEventEmitter(tcpOsc);
     const options = {
         port: port,
@@ -17,7 +18,7 @@ tcpOsc.startConnection = (port, ip) => {
     oscLib.default.options.remoteAddress = ip;
     oscLib.default.options.port = port;
     this.client = TcpSocket.createConnection(options, () => { });
-    
+
     this.client.setKeepAlive(true);
     this.client.on('data', function (data) {
         const decode = oscLib.default.decodeSLIP(data);
@@ -30,6 +31,11 @@ tcpOsc.startConnection = (port, ip) => {
 
     this.client.on('close', function () {
     });
+}
+
+tcpOsc.reconnect = () => {
+    this.client.destroy();
+    tcpOsc.startConnection(oscLib.default.options.port, oscLib.default.options.address);
 }
 
 tcpOsc.sendMessage = (address, args) => {

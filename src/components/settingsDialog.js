@@ -1,16 +1,16 @@
 import { Dialog, Icon, ListItem } from '@rneui/base';
 import React from 'react';
+import tcpOsc from '../../services/tcpOsc';
 
 export default class SettingsDialog extends React.Component {
-    constructor(props) {super(props)}
-    
+    constructor(props) { super(props) }
+
     render() {
         return (
             <Dialog
                 isVisible={this.props.isSettingsVisible}
                 onBackdropPress={this.props.openSettings}
             >
-
                 <ListItem.Accordion
                     content={
                         <>
@@ -25,9 +25,9 @@ export default class SettingsDialog extends React.Component {
                         this.props.setIsConsolesExpanded(!this.props.isConsolesExpanded);
                     }}
                 >
-                    <ListItem key={0} onPress={() => { }} bottomDivider>
+                    <ListItem key={0} onPress={tcpOsc.reconnect} bottomDivider>
                         <ListItem.Content>
-                            <ListItem.Title>{"test1"}</ListItem.Title>
+                            <ListItem.Title>Reconnect</ListItem.Title>
                         </ListItem.Content>
                         <ListItem.Chevron />
                     </ListItem>
