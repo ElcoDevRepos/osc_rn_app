@@ -9,6 +9,11 @@ import {
     ViewStyle,
     TouchableOpacity
 } from 'react-native';
+
+
+import buttonsAll from '../helpers/buttonsAll';
+import updater from '../../services/updater';
+
 export default class Toolbar extends React.Component {
     constructor(props) {
         super(props);

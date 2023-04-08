@@ -31,6 +31,7 @@ tcpOsc.startConnection = (port, ip) => {
 
     this.client.on('close', function () {
     });
+
 }
 
 tcpOsc.reconnect = () => {

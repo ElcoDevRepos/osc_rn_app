@@ -17,6 +17,7 @@ import {
 import CustomButton from '../components/button';
 // import buttons from '../helpers/buttons';
 import styles from '../helpers/styles';
+import {renderObject} from '../helpers/utils';
 import buttonsAll from '../helpers/buttonsAll';
 import updater from '../../services/updater';
 
@@ -113,7 +114,11 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col12]} >
                         <View style={[styles.row, styles.height50]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('commandLine')}
+                            <Text>
+                                This is a todays test 7
+                            </Text>
+                                {this.renderObject(buttonsAll['commandLine'].bind(this))}
+                                
                             </View>{/* /button column */}
                         </View>
                         <View style={[styles.row, styles.height50]} >
