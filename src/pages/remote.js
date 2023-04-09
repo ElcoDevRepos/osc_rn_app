@@ -17,7 +17,7 @@ import {
 import CustomButton from '../components/button';
 // import buttons from '../helpers/buttons';
 import styles from '../helpers/styles';
-import {renderObject} from '../helpers/utils';
+import {renderObject, renderText} from '../helpers/utils';
 import buttonsAll from '../helpers/buttonsAll';
 import updater from '../../services/updater';
 
@@ -26,7 +26,8 @@ export default class Remote extends React.Component {
         super(props);
         this.state = {
             buttonsAll: buttonsAll
-          };
+        };
+        this.renderObject = renderObject.bind(this);
         // All Messages from EOS Will come here. 
         const eventEmitter = new NativeEventEmitter(tcpOsc);
         eventEmitter.addListener('GotMessage', async (oscMessage) => {
@@ -53,60 +54,6 @@ export default class Remote extends React.Component {
     }
     */
 
-    renderButton(name) {
-        const buttonObject = [];
-        button = this.state.buttonsAll[name];
-        switch (button.functype) {
-            case 'info':
-                buttonObject.push(
-                    (
-                        <CustomButton
-                            title={button.label}
-                            id={button.label}
-                            key={button.address}
-                            style={[styles.info, styles[button.style]]}
-                            styleText={[styles.infoText, styles[button.styleText]]}
-                            onPress={() => {
-                                
-                            }}
-                            onPressIn={() => {
-
-                            }}
-                            onPressOut={() => {
-
-                            }}>
-                        </CustomButton>
-                    )
-                )
-                break;
-
-            case 'btn':
-                buttonObject.push(
-                    (
-                        <CustomButton
-                            title={button.label}
-                            id={button.label}
-                            key={button.address}
-                            style={[styles.btn, styles[button.style]]}
-                            styleText={[styles.btnText, styles[button.styleText]]}
-                            onPress={() => {
-                                tcpOsc.sendMessage(button.address, button.argvalue);
-                            }}
-                            onPressIn={() => {
-
-                            }}
-                            onPressOut={() => {
-
-                            }}>
-                        </CustomButton>
-                    )
-                )
-                break;
-        }// switch
-        
-        return buttonObject;
-    }
-
     render() {
         return (
             <View style={styles.pageContainer}>
@@ -114,25 +61,21 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col12]} >
                         <View style={[styles.row, styles.height50]} >
                             <View style={[styles.col, styles.col12]} >
-                            <Text>
-                                This is a todays test 7
-                            </Text>
-                                {this.renderObject(buttonsAll['commandLine'].bind(this))}
-                                
-                            </View>{/* /button column */}
+                                {this.renderObject('commandLine')}
+                            </View>{/* /button columns */}
                         </View>
                         <View style={[styles.row, styles.height50]} >
                             <View style={[styles.col, styles.col2]} >
-                                {this.renderButton('info-chan')}
+                                {this.renderObject('info-chan')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col2]} >
-                                {this.renderButton('info-level')}
+                                {this.renderObject('info-level')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col2]} >
-                                {this.renderButton('info-patch')}
+                                {this.renderObject('info-patch')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderButton('info-notes')}
+                                {this.renderObject('info-notes')}
                             </View>{/* /button column */}
                         </View>{/* /row height50 */}
                     </View>{/* /module column */}
@@ -145,18 +88,18 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col2]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderButton('intensity')}   
+                                {this.renderObject('intensity')}   
                             </View> 
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderButton('focus')}
+                                {this.renderObject('focus')}
                             </View>{/* /button column */}                           
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderButton('color')}
+                                {this.renderObject('color')}
                             </View>
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderButton('beam')}
+                                {this.renderObject('beam')}
                             </View>{/* /button column */}
                         </View>{/* /button row */} 
                     </View>{/* /module column */} 
@@ -165,24 +108,24 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col3]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('address')}
+                                {this.renderObject('address')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('learn')}
+                                {this.renderObject('learn')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('macro')}
+                                {this.renderObject('macro')}
                             </View>
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('delete')}
+                                {this.renderObject('delete')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
                                 
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('effect')}
+                                {this.renderObject('effect')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -191,24 +134,24 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col3]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('Live')}
+                                {this.renderObject('Live')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('copy_to')}
+                                {this.renderObject('copy_to')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('recall_from')}
+                                {this.renderObject('recall_from')}
                             </View>
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('go_to_cue')}
+                                {this.renderObject('go_to_cue')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('block')}
+                                {this.renderObject('block')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('assert')}
+                                {this.renderObject('assert')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}  
@@ -217,24 +160,24 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col3]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('flash')}
+                                {this.renderObject('flash')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('check')}
+                                {this.renderObject('check')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('about')}
+                                {this.renderObject('about')}
                             </View>
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('offset')}
+                                {this.renderObject('offset')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('highlight')}
+                                {this.renderObject('highlight')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('fan')}
+                                {this.renderObject('fan')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -243,12 +186,12 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col1]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('park')}
+                                {this.renderObject('park')}
                             </View>
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('capture')}
+                                {this.renderObject('capture')}
                             </View>
                         </View>{/* /button row */}
                     </View>{/* /module column */} 
@@ -264,28 +207,28 @@ export default class Remote extends React.Component {
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderButton('load')}
+                                {this.renderObject('load')}
                             </View>
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderButton('all_nps')}
+                                {this.renderObject('all_nps')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_double_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('Qlist')}
+                                {this.renderObject('Qlist')}
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('back_stop')}
+                                {this.renderObject('back_stop')}
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('go')}
+                                {this.renderObject('go')}
                             </View>
                         </View>{/* /button row */}
                     </View>{/* /module column */} 
@@ -295,61 +238,61 @@ export default class Remote extends React.Component {
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('part')}
+                                {this.renderObject('part')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('cue')}
+                                {this.renderObject('cue')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('record')}
+                                {this.renderObject('record')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('intensity_palette')}
+                                {this.renderObject('intensity_palette')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('focus_palette')}
+                                {this.renderObject('focus_palette')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('record_only')}
+                                {this.renderObject('record_only')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('color_palette')}
+                                {this.renderObject('color_palette')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('beam_palette')}
+                                {this.renderObject('beam_palette')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('update')}
+                                {this.renderObject('update')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('preset')}
+                                {this.renderObject('preset')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('sub')}
+                                {this.renderObject('sub')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('group')}
+                                {this.renderObject('group')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('shift')}
+                                {this.renderObject('shift')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('delay')}
+                                {this.renderObject('delay')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('time')}
+                                {this.renderObject('time')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -359,61 +302,61 @@ export default class Remote extends React.Component {
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('plus')}
+                                {this.renderObject('plus')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('thru')}
+                                {this.renderObject('thru')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('minus')}
+                                {this.renderObject('minus')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('7')}
+                                {this.renderObject('7')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('8')}
+                                {this.renderObject('8')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('9')}
+                                {this.renderObject('9')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('4')}
+                                {this.renderObject('4')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('5')}
+                                {this.renderObject('5')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('6')}
+                                {this.renderObject('6')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('1')}
+                                {this.renderObject('1')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('2')}
+                                {this.renderObject('2')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('3')}
+                                {this.renderObject('3')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('clear_cmd')}
+                                {this.renderObject('clear_cmd')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('0')}
+                                {this.renderObject('0')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('period')}
+                                {this.renderObject('period')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
@@ -424,58 +367,58 @@ export default class Remote extends React.Component {
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('slash')}
+                                {this.renderObject('slash')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('mark')}
+                                {this.renderObject('mark')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('sneak')}
+                                {this.renderObject('sneak')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('rem_dim')}
+                                {this.renderObject('rem_dim')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('plus_percent')}
+                                {this.renderObject('plus_percent')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('home')}
+                                {this.renderObject('home')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('out')}
+                                {this.renderObject('out')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('minus_percent')}
+                                {this.renderObject('minus_percent')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('trace')}
+                                {this.renderObject('trace')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('full')}
+                                {this.renderObject('full')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('level')}
+                                {this.renderObject('level')}
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('track')}
+                                {this.renderObject('track')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('at')}
+                                {this.renderObject('at')}
                             </View>
                             <View style={[styles.col, styles.col8]} >
-                                {this.renderButton('enter')}
+                                {this.renderObject('enter')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -485,31 +428,31 @@ export default class Remote extends React.Component {
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('select_last')}
+                                {this.renderObject('select_last')}
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('select_manual')}
+                                {this.renderObject('select_manual')}
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('select_active')}
+                                {this.renderObject('select_active')}
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('last')}
+                                {this.renderObject('last')}
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('next')}
+                                {this.renderObject('next')}
                             </View>
                         </View>{/* /button row */}
                     </View>{/* /module column */}

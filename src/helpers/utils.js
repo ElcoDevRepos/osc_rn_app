@@ -1,13 +1,15 @@
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
+import CustomButton from '../components/button';
 
-export const renderObject = (whichButton) => {
+export const renderText = (text) => {
+    return text;
+}
+
+export const renderObject = (name) => {
     const buttonObject = [];
 
-    // button = this.state.buttonsAll[name];
-    // renderObject(this.state.buttonsAll[name].bind(this), buttonsAll['commandLine'])
-
-    button = this.state.whichButton;
+    button = buttonsAll[name];
     switch (button.functype) {
         case 'info':
             buttonObject.push(
@@ -18,15 +20,7 @@ export const renderObject = (whichButton) => {
                         key={button.address}
                         style={[styles.info, styles[button.style]]}
                         styleText={[styles.infoText, styles[button.styleText]]}
-                        onPress={() => {
-
-                        }}
-                        onPressIn={() => {
-
-                        }}
-                        onPressOut={() => {
-
-                        }}>
+                        >
                     </CustomButton>
                 )
             )
@@ -50,6 +44,57 @@ export const renderObject = (whichButton) => {
                         onPressOut={() => {
 
                         }}>
+                    </CustomButton>
+                )
+            )
+            break;
+
+        case 'select':
+            // Direct Select "Select" Button.
+            // This does not send OSC - but opens the select window
+            buttonObject.push(
+                (
+                    <CustomButton
+                        title={button.label}
+                        id={button.label}
+                        key={button.address}
+                        style={[styles.btn, styles[button.style]]}
+                        styleText={[styles.btnText, styles[button.styleText]]}
+                        onPress={() => {
+                            // Open Selection Menu Here
+                        }}>
+                    </CustomButton>
+                )
+            )
+            break;
+
+        case 'label':
+            // Direct Select Labels.   Needs no borders, etc
+            buttonObject.push(
+                (
+                    <CustomButton
+                        title={button.label}
+                        id={button.label}
+                        key={button.address}
+                        style={[styles[button.style]]}
+                        styleText={[styles.btnText, styles[button.styleText]]}
+                        >
+                    </CustomButton>
+                )
+            )
+            break;
+
+        case 'encoder_btn':
+            // Direct Select Labels.   Needs no borders, etc
+            buttonObject.push(
+                (
+                    <CustomButton
+                        title={button.label}
+                        id={button.label}
+                        key={button.address}
+                        style={[styles.encoderBtn, styles[button.style]]}
+                        styleText={[styles.encoderBtnText, styles[button.styleText]]}
+                    >
                     </CustomButton>
                 )
             )

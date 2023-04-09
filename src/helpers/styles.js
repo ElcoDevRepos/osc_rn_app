@@ -38,6 +38,52 @@ const styles = StyleSheet.create({
         height: '41%'
     },
 
+    encoder: {
+        width: '100%',
+        height: '100%',
+        borderColor: '#4b5cb0',
+        borderWidth: 2,
+        borderRadius: 0,
+        backgroundColor: '#141630',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+
+    encoderBtn_col: {
+        width: '33.3333%',
+        height: '100%',
+        borderColor: '#4b5cb0',
+        borderTopWidth: 1,
+    },
+
+    encoderBtn_max: {
+        borderColor: '#4b5cb0',
+        borderRightWidth: 1,
+        borderLeftWidth: 1
+    },
+
+    encoderBtn: {
+        width: '100%',
+        height: '100%',
+        
+        borderRadius: 0,
+        backgroundColor: '#141630',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    encoderBtn_focus: {
+        height: '15%',
+        flexDirection: 'row'
+    },
+    encoderBtnText: {
+        color: '#ffffff'
+    },
+    
+
     /* BUTTONS */
     btn: {
         display: 'flex',

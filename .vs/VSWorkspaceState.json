@@ -1,11 +1,15 @@
 {
   "ExpandedNodes": [
     "",
+    "\\android\\app",
+    "\\android\\gradle",
+    "\\android\\gradle\\wrapper",
     "\\services",
     "\\src",
     "\\src\\components",
     "\\src\\helpers",
     "\\src\\pages"
   ],
+  "SelectedNode": "\\src\\components\\toolbar.js",
   "PreviewInSolutionExplorer": false
 }

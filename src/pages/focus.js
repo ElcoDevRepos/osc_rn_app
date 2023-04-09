@@ -16,15 +16,16 @@ import CustomButton from '../components/button';
 import buttons from '../helpers/buttons';
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
+import { renderObject, renderText } from '../helpers/utils';
 import updater from '../../services/updater';
 
 export default class Focus extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            
             buttonsAll: buttonsAll
         };
+        this.renderObject = renderObject.bind(this);
 
         const eventEmitter = new NativeEventEmitter(tcpOsc);
         eventEmitter.addListener('GotMessage', async (oscMessage) => {
@@ -33,69 +34,13 @@ export default class Focus extends React.Component {
             this.setState(buttonsAll);
         });
     }
-
-
-    renderButton(name) {
-        const buttonObject = [];
-        button = this.state.buttonsAll[name];
-        switch (button.functype) {
-            case 'info':
-                buttonObject.push(
-                    (
-                        <CustomButton
-                            title={button.label}
-                            id={button.label}
-                            key={button.address}
-                            style={[styles.info, styles[button.style]]}
-                            styleText={[styles.infoText, styles[button.styleText]]}
-                            onPress={() => {
-
-                            }}
-                            onPressIn={() => {
-
-                            }}
-                            onPressOut={() => {
-
-                            }}>
-                        </CustomButton>
-                    )
-                )
-                break;
-
-            case 'btn':
-                buttonObject.push(
-                    (
-                        <CustomButton
-                            title={button.label}
-                            id={button.label}
-                            key={button.address}
-                            style={[styles.btn, styles[button.style]]}
-                            styleText={[styles.btnText, styles[button.styleText]]}
-                            onPress={() => {
-                                tcpOsc.sendMessage(button.address, button.argvalue);
-                            }}
-                            onPressIn={() => {
-
-                            }}
-                            onPressOut={() => {
-
-                            }}>
-                        </CustomButton>
-                    )
-                )
-                break;
-        }// switch
-
-        return buttonObject;
-    }
-
     
     render() {
         return (
             <View style={styles.pageContainer}>
                 <View style={[styles.row, styles.row_half_focus]} >
                     <View style={[styles.col, styles.col12]} >
-                        {this.renderButton('commandLine')}
+                        {this.renderObject('commandLine')}
                     </View>
                 </View>
                 <View style={[styles.row, styles.height100]} >
@@ -103,67 +48,95 @@ export default class Focus extends React.Component {
                     <View style={[styles.col, styles.enc_col]} >
                         <View style={[styles.row, styles.enc_row_focus]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('1')}
+                                { /* ENCODER */ }
+                                <View style={[styles.encoder]} >
+                                    <View style={[styles.row, styles.encoderBtn_focus]}>
+                                        <View style={[styles.encoderBtn_col]} >
+                                            {this.renderObject('encoder9_min')}
+                                        </View>
+                                        <View style={[styles.encoderBtn_col, styles.encoderBtn_max]} >
+                                            {this.renderObject('encoder9_max')}
+                                        </View>
+                                        <View style={[styles.encoderBtn_col]} >
+                                            {this.renderObject('encoder9_home')}
+                                        </View>
+                                    </View>
+                                </View>
+                                { /* ENCODER */}
                             </View>
                         </View>
                         <View style={[styles.row, styles.row_single_focus]} >
                             <View style={[styles.col, styles.col8]} >
-                                {this.renderButton('0')}
+                                {this.renderObject('last')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('0')}
+                                {this.renderObject('select_manual')}
                             </View>
                         </View>
                         <View style={[styles.row, styles.enc_row_focus]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('0')}
+                                { /* ENCODER */}
+                                <View style={[styles.encoder]} >
+                                    <View style={[styles.row, styles.encoderBtn_focus]}>
+                                        <View style={[styles.encoderBtn_col]} >
+                                            {this.renderObject('encoder11_min')}
+                                        </View>
+                                        <View style={[styles.encoderBtn_col, styles.encoderBtn_max]} >
+                                            {this.renderObject('encoder11_max')}
+                                        </View>
+                                        <View style={[styles.encoderBtn_col]} >
+                                            {this.renderObject('encoder11_home')}
+                                        </View>
+                                    </View>
+                                </View>
+                                { /* ENCODER */}
                             </View>
                         </View>
                     </View>
 
                     <View style={[styles.col, styles.col7]} >
-
+                        { /* DS 5 */  }
                         <View style={[styles.row]} >
 
                             <View style={[styles.col, styles.col10]} >
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_1')}
                                     </View>
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_2')}
                                     </View>
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_3')}
                                     </View>
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_4')}
                                     </View>
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_5')}
                                     </View>
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_select')}
                                     </View>
                                 </View>
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_6')}
                                     </View>
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_7')}
                                     </View>
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_8')}
                                     </View>
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_9')}
                                     </View>
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_10')}
                                     </View>
                                     <View style={[styles.col, styles.col2]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_page')}
                                     </View>
                                 </View>
                                 
@@ -173,12 +146,12 @@ export default class Focus extends React.Component {
                             <View style={[styles.col, styles.col2]} >
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col12]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_up')}
                                     </View>
                                 </View>
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col12]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('ds5_down')}
                                     </View>
                                 </View>
 
@@ -193,61 +166,61 @@ export default class Focus extends React.Component {
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('part')}
+                                        {this.renderObject('part')}
                                     </View>
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('cue')}
+                                        {this.renderObject('cue')}
                                     </View>{/* /button column */}
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('record')}
+                                        {this.renderObject('record')}
                                     </View>{/* /button column */}
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('intensity_palette')}
+                                        {this.renderObject('intensity_palette')}
                                     </View>
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('focus_palette')}
+                                        {this.renderObject('focus_palette')}
                                     </View>{/* /button column */}
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('record_only')}
+                                        {this.renderObject('record_only')}
                                     </View>{/* /button column */}
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('color_palette')}
+                                        {this.renderObject('color_palette')}
                                     </View>
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('beam_palette')}
+                                        {this.renderObject('beam_palette')}
                                     </View>{/* /button column */}
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('update')}
+                                        {this.renderObject('update')}
                                     </View>{/* /button column */}
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('preset')}
+                                        {this.renderObject('preset')}
                                     </View>
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('sub')}
+                                        {this.renderObject('sub')}
                                     </View>{/* /button column */}
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('group')}
+                                        {this.renderObject('group')}
                                     </View>{/* /button column */}
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('shift')}
+                                        {this.renderObject('shift')}
                                     </View>
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('delay')}
+                                        {this.renderObject('delay')}
                                     </View>{/* /button column */}
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('time')}
+                                        {this.renderObject('time')}
                                     </View>{/* /button column */}
                                 </View>{/* /button row */}
                             </View>{/* /module column */}
@@ -256,61 +229,61 @@ export default class Focus extends React.Component {
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('plus')}
+                                        {this.renderObject('plus')}
                                     </View>
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('thru')}
+                                        {this.renderObject('thru')}
                                     </View>{/* /button column */}
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('minus')}
+                                        {this.renderObject('minus')}
                                     </View>{/* /button column */}
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('7')}
+                                        {this.renderObject('7')}
                                     </View>
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('8')}
+                                        {this.renderObject('8')}
                                     </View>{/* /button column */}
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('9')}
+                                        {this.renderObject('9')}
                                     </View>{/* /button column */}
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('4')}
+                                        {this.renderObject('4')}
                                     </View>
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('5')}
+                                        {this.renderObject('5')}
                                     </View>{/* /button column */}
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('6')}
+                                        {this.renderObject('6')}
                                     </View>{/* /button column */}
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('1')}
+                                        {this.renderObject('1')}
                                     </View>
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('2')}
+                                        {this.renderObject('2')}
                                     </View>{/* /button column */}
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('3')}
+                                        {this.renderObject('3')}
                                     </View>{/* /button column */}
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('clear_cmd')}
+                                        {this.renderObject('clear_cmd')}
                                     </View>
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('0')}
+                                        {this.renderObject('0')}
                                     </View>{/* /button column */}
                                     <View style={[styles.col, styles.col4]} >
-                                        {this.renderButton('period')}
+                                        {this.renderObject('period')}
                                     </View>{/* /button column */}
                                 </View>{/* /button row */}
 
@@ -320,31 +293,31 @@ export default class Focus extends React.Component {
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col12]} >
-                                        {this.renderButton('part')}
+                                        {this.renderObject('part')}
                                     </View>
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col12]} >
-                                        {this.renderButton('intensity_palette')}
+                                        {this.renderObject('intensity_palette')}
                                     </View>
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col12]} >
-                                        {this.renderButton('color_palette')}
+                                        {this.renderObject('color_palette')}
                                     </View>
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col12]} >
-                                        {this.renderButton('preset')}
+                                        {this.renderObject('preset')}
                                     </View>
                                 </View>{/* /button row */}
 
                                 <View style={[styles.row, styles.row_single_focus]} >
                                     <View style={[styles.col, styles.col12]} >
-                                        {this.renderButton('shift')}
+                                        {this.renderObject('shift')}
                                     </View>
                                 </View>{/* /button row */}
                             </View>
@@ -356,18 +329,18 @@ export default class Focus extends React.Component {
                                     <View style={[styles.col, styles.col12]} >
                                         <View style={[styles.row, styles.height50]} >
                                             <View style={[styles.col, styles.col4]} >
-                                                {this.renderButton('info-chan')}
+                                                {this.renderObject('info-chan')}
                                             </View>{/* /button column */}
                                             <View style={[styles.col, styles.col4]} >
-                                                {this.renderButton('info-level')}
+                                                {this.renderObject('info-level')}
                                             </View>{/* /button column */}
                                             <View style={[styles.col, styles.col4]} >
-                                                {this.renderButton('info-patch')}
+                                                {this.renderObject('info-patch')}
                                             </View>
                                         </View>
                                         <View style={[styles.row, styles.height50]} >
                                             <View style={[styles.col, styles.col12]} >
-                                                    {this.renderButton('info-notes')}
+                                                    {this.renderObject('info-notes')}
                                             </View>{/* /button column */}
                                         </View>
 
@@ -380,7 +353,7 @@ export default class Focus extends React.Component {
                             <View style={[styles.col, styles.col3]} >
                                 <View style={[styles.row, styles.row_single_focus]}>
                                     <View style={[styles.col, styles.col12]} >
-                                        {this.renderButton('enter')}
+                                        {this.renderObject('enter')}
                                     </View>
                                 </View>
                             </View>{/* /module column */}
@@ -392,20 +365,49 @@ export default class Focus extends React.Component {
                     <View style={[styles.col, styles.enc_col]} >
                         <View style={[styles.row, styles.enc_row_focus]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('0')}
+                                { /* ENCODER */}
+                                <View style={[styles.encoder]} >
+                                    <View style={[styles.row, styles.encoderBtn_focus]}>
+                                        <View style={[styles.encoderBtn_col]} >
+                                            {this.renderObject('encoder10_min')}
+                                        </View>
+                                        <View style={[styles.encoderBtn_col, styles.encoderBtn_max]} >
+                                            {this.renderObject('encoder10_max')}
+                                        </View>
+                                        <View style={[styles.encoderBtn_col]} >
+                                            {this.renderObject('encoder10_home')}
+                                        </View>
+                                    </View>
+                                </View>
+                                { /* ENCODER */}
                             </View>
                         </View>
                         <View style={[styles.row, styles.row_single_focus]} >
-                            <View style={[styles.col, styles.col8]} >
-                                {this.renderButton('0')}
-                            </View>
+                            
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderButton('0')}
+                                {this.renderObject('select_last')}
+                            </View>
+                            <View style={[styles.col, styles.col8]} >
+                                {this.renderObject('next')}
                             </View>
                         </View>
                         <View style={[styles.row, styles.enc_row_focus]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderButton('0')}
+                                { /* ENCODER */}
+                                <View style={[styles.encoder]} >
+                                    <View style={[styles.row, styles.encoderBtn_focus]}>
+                                        <View style={[styles.encoderBtn_col]} >
+                                            {this.renderObject('encoder12_min')}
+                                        </View>
+                                        <View style={[styles.encoderBtn_col, styles.encoderBtn_max]} >
+                                            {this.renderObject('encoder12_max')}
+                                        </View>
+                                        <View style={[styles.encoderBtn_col]} >
+                                            {this.renderObject('encoder12_home')}
+                                        </View>
+                                    </View>
+                                </View>
+                                { /* ENCODER */}
                             </View>
                         </View>
                     </View>
