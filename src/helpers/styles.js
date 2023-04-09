@@ -82,6 +82,22 @@ const styles = StyleSheet.create({
     encoderBtnText: {
         color: '#ffffff'
     },
+
+    oscLogCont: {
+        height: '100%',
+        width: '100%',
+        borderColor: 'red',
+        borderWidth: 1,
+        backgroundColor: 'black',
+        padding: 4,
+        marginLeft: 4
+    },
+    oscLog: {
+
+    },
+    oscLogText: {
+        color: '#ffffff'
+    },
     
 
     /* BUTTONS */

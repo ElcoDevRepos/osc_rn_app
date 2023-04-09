@@ -20,7 +20,6 @@ export default class CustomButton extends React.Component {
             <View>
                 <TouchableOpacity
                     style={this.props.style}
-                    onPress={this.props.onPress}
                     onPressIn={this.props.onPressIn}
                     onPressOut={this.props.onPressOut}
                 >

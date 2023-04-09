@@ -23,11 +23,13 @@ import { CheckBox, Dialog, ListItem } from '@rneui/base';
 import SettingsDialog from './src/components/settingsDialog';
 import Remote from './src/pages/remote';
 import Focus from './src/pages/focus';
+import OscLog from './src/pages/osclog';
 import updater from './services/updater';
 
 export default function App() {
   const [isRemoteShown, setIsRemoteShown] = useState(true);
-  const [isFocusShown, setIsFocusShown] = useState(false);
+    const [isFocusShown, setIsFocusShown] = useState(false);
+    const [isOscLogShown, setIsOscLogShown] = useState(false);
 
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
   const [isConsolesExpanded, setIsConsolesExpanded] = useState(false);
@@ -43,7 +45,8 @@ export default function App() {
     const eventEmitter = new NativeEventEmitter(tcpOsc);
     console.log(eventEmitter.listenerCount('GotMessage')); setIsRemoteShown(true)
   };
-  const toggleFocusView = event => { setIsFocusShown(true) };
+    const toggleFocusView = event => { setIsFocusShown(true) };
+    const toggleOscLogView = event => { setIsOscLogShown(true) };
 
   const hideAllViews = () => {
     const eventEmitter = new NativeEventEmitter(tcpOsc);
@@ -51,7 +54,8 @@ export default function App() {
       eventEmitter.removeAllListeners('GotMessage');
     }
     setIsRemoteShown(false);
-    setIsFocusShown(false);
+      setIsFocusShown(false);
+      setIsOscLogShown(false);
   }
 
   useEffect(() => {
@@ -92,7 +96,8 @@ export default function App() {
       <Toolbar
         openSettings={openSettings}
         toggleRemoteView={toggleRemoteView}
-        toggleFocusView={toggleFocusView}
+              toggleFocusView={toggleFocusView}
+              toggleOscLogView={toggleOscLogView}
         hideAllViews={hideAllViews}
       ></Toolbar>
       {
@@ -104,7 +109,12 @@ export default function App() {
         isFocusShown && (
           <Focus></Focus>
         )
-      }
+          }
+    {
+        isOscLogShown && (
+            <OscLog></OscLog>
+        )
+    }
       <SettingsDialog openSettings={openSettings} isSettingsVisible={isSettingsVisible} isConsolesExpanded={isConsolesExpanded} setIsConsolesExpanded={setIsConsolesExpanded}></SettingsDialog>
     </SafeAreaProvider>
   );

@@ -18,14 +18,16 @@ import CustomButton from '../components/button';
 // import buttons from '../helpers/buttons';
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
+import { renderObject, renderText } from '../helpers/utils';
 import updater from '../../services/updater';
 
-export default class Remote extends React.Component {
+export default class OscLog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             buttonsAll: buttonsAll
-          };
+        };
+        this.renderObject = renderObject.bind(this);
         // All Messages from EOS Will come here. 
         const eventEmitter = new NativeEventEmitter(tcpOsc);
         eventEmitter.addListener('GotMessage', async (oscMessage) => {
@@ -35,63 +37,16 @@ export default class Remote extends React.Component {
         });
     }
 
-    renderButton(name) {
-        const buttonObject = [];
-        button = this.state.buttonsAll[name];
-        switch (button.functype) {
-            case 'info':
-                buttonObject.push(
-                    (
-                        <CustomButton
-                            title={button.label}
-                            id={button.label}
-                            key={button.address}
-                            style={[styles.info, styles[button.style]]}
-                            styleText={[styles.infoText, styles[button.styleText]]}
-                            onPress={() => {
-                                
-                            }}
-                            onPressIn={() => {
-
-                            }}
-                            onPressOut={() => {
-
-                            }}>
-                        </CustomButton>
-                    )
-                )
-                break;
-
-            case 'btn':
-                buttonObject.push(
-                    (
-                        <CustomButton
-                            title={button.label}
-                            id={button.label}
-                            key={button.address}
-                            style={[styles.btn, styles[button.style]]}
-                            styleText={[styles.btnText, styles[button.styleText]]}
-                            onPress={() => {
-                                tcpOsc.sendMessage(button.address, button.argvalue);
-                            }}
-                            onPressIn={() => {
-
-                            }}
-                            onPressOut={() => {
-
-                            }}>
-                        </CustomButton>
-                    )
-                )
-                break;
-        }// switch
-        
-        return buttonObject;
-    }
-
     render() {
         return (
             <View style={styles.pageContainer}>
+                
+                <View style={[styles.col, styles.col12]} >
+                    <View style={[styles.oscLogCont]} >
+                        {this.renderObject('oscLog')}
+                    </View>
+                    </View>
+                
             </View> // pageContainer
 
         );

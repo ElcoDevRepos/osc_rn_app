@@ -421,6 +421,8 @@ const buttonsAll = {
     'encoder12_min': { 'address': '/eos/active/wheel/1', 'style': 'encoder_btn7', 'styleText': 'encoder_btn7Text', 'functype': 'encoder_btn', 'label': 'MIN', 'argtype': 'i', 'argvalue': '1' },
     'encoder12_max': { 'address': '/eos/active/wheel/1', 'style': 'encoder_btn7', 'styleText': 'encoder_btn7Text', 'functype': 'encoder_btn', 'label': 'MAX', 'argtype': 'i', 'argvalue': '1' },
     'encoder12_home': { 'address': '/eos/active/wheel/1', 'style': 'encoder_btn7', 'styleText': 'encoder_btn7Text', 'functype': 'encoder_btn', 'label': 'HOME', 'argtype': 'i', 'argvalue': '1' },
+    'oscLog': { 'address': '/eos/', 'style': 'oscLog', 'styleText': 'oscLogText', 'functype': 'oscLog', 'label': 'OSCLOG', 'argtype': 'i', 'argvalue': '1' },
+
 };
 
 export default buttonsAll;

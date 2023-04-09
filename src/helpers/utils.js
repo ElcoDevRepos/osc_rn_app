@@ -1,6 +1,7 @@
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
 import CustomButton from '../components/button';
+import tcpOsc from '../../services/tcpOsc';
 
 export const renderText = (text) => {
     return text;
@@ -35,14 +36,12 @@ export const renderObject = (name) => {
                         key={button.address}
                         style={[styles.btn, styles[button.style]]}
                         styleText={[styles.btnText, styles[button.styleText]]}
-                        onPress={() => {
-                            tcpOsc.sendMessage(button.address, button.argvalue);
-                        }}
-                        onPressIn={() => {
 
+                        onPressIn={() => {
+                            tcpOsc.sendMessage(button.address, button.argvalue)
                         }}
                         onPressOut={() => {
-
+                            tcpOsc.sendMessage(button.address, button.argvalue)
                         }}>
                     </CustomButton>
                 )
@@ -94,6 +93,22 @@ export const renderObject = (name) => {
                         key={button.address}
                         style={[styles.encoderBtn, styles[button.style]]}
                         styleText={[styles.encoderBtnText, styles[button.styleText]]}
+                    >
+                    </CustomButton>
+                )
+            )
+            break;
+
+        case 'oscLog':
+            // Direct Select Labels.   Needs no borders, etc
+            buttonObject.push(
+                (
+                    <CustomButton
+                        title={button.label}
+                        id={button.label}
+                        key={button.address}
+                        style={[styles[button.style]]}
+                        styleText={[styles[button.styleText]]}
                     >
                     </CustomButton>
                 )

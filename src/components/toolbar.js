@@ -33,6 +33,10 @@ export default class Toolbar extends React.Component {
                 <Text style={styles.text}>Encoders</Text>
                 <Text style={styles.text}>Direct Selects</Text>
                 <Text style={styles.text}>Playback</Text>
+                <Text onPress={() => {
+                    this.props.hideAllViews();
+                    this.props.toggleOscLogView();
+                }} style={styles.text}>oscLog</Text>
                 <Text style={styles.text} onPress={this.props.openSettings}>Settings</Text>
             </View>
         );
