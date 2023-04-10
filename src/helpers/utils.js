@@ -9,7 +9,6 @@ export const renderText = (text) => {
 
 export const renderObject = (name) => {
     const buttonObject = [];
-
     button = buttonsAll[name];
     switch (button.functype) {
         case 'info':
@@ -19,6 +18,8 @@ export const renderObject = (name) => {
                         title={button.label}
                         id={button.label}
                         key={button.address}
+                        address={button.address}
+                        argvalue={button.argvalue}
                         style={[styles.info, styles[button.style]]}
                         styleText={[styles.infoText, styles[button.styleText]]}
                         >
@@ -36,12 +37,13 @@ export const renderObject = (name) => {
                         key={button.address}
                         style={[styles.btn, styles[button.style]]}
                         styleText={[styles.btnText, styles[button.styleText]]}
-
-                        onPressIn={() => {
-                            tcpOsc.sendMessage(button.address, button.argvalue)
+                        address={button.address}
+                        argvalue={button.argvalue}
+                        onPressIn={(data) => {
+                            tcpOsc.sendMessage(data.address, data.argvalue)
                         }}
-                        onPressOut={() => {
-                            tcpOsc.sendMessage(button.address, button.argvalue)
+                        onPressOut={(data) => {
+                            tcpOsc.sendMessage(data.address, data.argvalue)
                         }}>
                     </CustomButton>
                 )
@@ -57,6 +59,8 @@ export const renderObject = (name) => {
                         title={button.label}
                         id={button.label}
                         key={button.address}
+                        address={button.address}
+                        argvalue={button.argvalue}
                         style={[styles.btn, styles[button.style]]}
                         styleText={[styles.btnText, styles[button.styleText]]}
                         onPress={() => {
@@ -75,6 +79,8 @@ export const renderObject = (name) => {
                         title={button.label}
                         id={button.label}
                         key={button.address}
+                        address={button.address}
+                        argvalue={button.argvalue}
                         style={[styles[button.style]]}
                         styleText={[styles.btnText, styles[button.styleText]]}
                         >
@@ -91,6 +97,8 @@ export const renderObject = (name) => {
                         title={button.label}
                         id={button.label}
                         key={button.address}
+                        address={button.address}
+                        argvalue={button.argvalue}
                         style={[styles.encoderBtn, styles[button.style]]}
                         styleText={[styles.encoderBtnText, styles[button.styleText]]}
                     >
@@ -107,6 +115,8 @@ export const renderObject = (name) => {
                         title={button.label}
                         id={button.label}
                         key={button.address}
+                        address={button.address}
+                        argvalue={button.argvalue}
                         style={[styles[button.style]]}
                         styleText={[styles[button.styleText]]}
                     >

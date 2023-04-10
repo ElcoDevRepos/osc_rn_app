@@ -31,7 +31,6 @@ export default class Remote extends React.Component {
         // All Messages from EOS Will come here. 
         const eventEmitter = new NativeEventEmitter(tcpOsc);
         eventEmitter.addListener('GotMessage', async (oscMessage) => {
-            console.log("remote message: ", oscMessage);
             updater.alterSourceData(oscMessage);
             this.setState(buttonsAll);
         });
