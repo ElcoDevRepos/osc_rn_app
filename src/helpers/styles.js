@@ -2,6 +2,10 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    text: {
+        color: '#FFFFFF',
+        fontSize: 20
+    },
     pageContainer: {
         flex: 1,
         flexDirection: 'column',
@@ -12,6 +16,34 @@ const styles = StyleSheet.create({
     },
     height100: {
         height: '100%'
+    },
+    header: {
+        backgroundColor: '#15152d',
+        color: 'white',
+        fontSize: 22,
+        fontWeight: 'bold'
+    },
+    rowHeader: {
+        height: '10%',
+        alignItems: 'flex-end',
+        borderBottomColor: '#297efd',
+        borderBottomWidth: 2,
+    },
+    headerImage: {
+        maxHeight: '90%',
+        maxWidth: '100%',
+        padding: 10,
+        margin: 4,
+        alignSelf: 'center',
+        resizeMode: 'contain'
+        
+    },
+    p0: {
+        padding: 0
+    },
+    appNav: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
     row_single_remote: {
         flexBasis: '12.2%'

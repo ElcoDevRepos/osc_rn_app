@@ -25,6 +25,7 @@ import Remote from './src/pages/remote';
 import Focus from './src/pages/focus';
 import OscLog from './src/pages/osclog';
 import updater from './services/updater';
+import styles from './src/helpers/styles';
 
 export default function App() {
   const [isRemoteShown, setIsRemoteShown] = useState(true);
@@ -78,7 +79,14 @@ export default function App() {
 
     }
 
-  }
+    }
+
+    /*
+          <HeaderRNE
+        backgroundColor='#000'
+        centerComponent={{ text: 'OSC', style: styles.heading }}
+      />
+    */
 
   /** 
    * UDP Connection and Send 
@@ -88,16 +96,14 @@ export default function App() {
   //osc.sendMessage("/eos/ping", ['0']);
 
   return (
-    <SafeAreaProvider>
-      <HeaderRNE
-        backgroundColor='#000'
-        centerComponent={{ text: 'OSC', style: styles.heading }}
-      />
+      <SafeAreaProvider style={styles.header}>
+          
+
       <Toolbar
         openSettings={openSettings}
         toggleRemoteView={toggleRemoteView}
-              toggleFocusView={toggleFocusView}
-              toggleOscLogView={toggleOscLogView}
+        toggleFocusView={toggleFocusView}
+        toggleOscLogView={toggleOscLogView}
         hideAllViews={hideAllViews}
       ></Toolbar>
       {
@@ -116,11 +122,12 @@ export default function App() {
         )
     }
       <SettingsDialog openSettings={openSettings} isSettingsVisible={isSettingsVisible} isConsolesExpanded={isConsolesExpanded} setIsConsolesExpanded={setIsConsolesExpanded}></SettingsDialog>
-    </SafeAreaProvider>
+          
+      </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
+const styles2 = StyleSheet.create({
   heading: {
     color: 'white',
     fontSize: 22,
