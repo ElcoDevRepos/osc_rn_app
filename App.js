@@ -21,6 +21,8 @@ import CustomButton from './src/components/button';
 import Toolbar from './src/components/toolbar';
 import { CheckBox, Dialog, ListItem } from '@rneui/base';
 import SettingsDialog from './src/components/settingsDialog';
+import DrawerContent from './src/components/drawerContent';
+
 import Remote from './src/pages/remote';
 import Focus from './src/pages/focus';
 import OscLog from './src/pages/osclog';
@@ -30,6 +32,7 @@ import FacePanel from './src/pages/facePanel';
 import Encoders from './src/pages/encoders';
 import DirectSelects from './src/pages/directSelects';
 import Playback from './src/pages/playback';
+import Drawer from 'react-native-drawer'
 
 export default function App() {
   const [isRemoteShown, setIsRemoteShown] = useState(true);
@@ -45,8 +48,11 @@ export default function App() {
   const [isConsolesExpanded, setIsConsolesExpanded] = useState(false);
 
   const [isConnected, setIsConnected] = useState(false);
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const openSettings = () => {
-    setIsSettingsVisible(!isSettingsVisible);
+    setIsDrawerOpen(!isDrawerOpen);
   };
 
 
@@ -115,55 +121,61 @@ export default function App() {
 
   return (
     <SafeAreaProvider style={styles.header}>
+      <Drawer
+        ref={(ref) => this._drawer = ref}
+        open={isDrawerOpen}
+        openDrawerOffset={0.7}
+        content={<DrawerContent />}     
+        tapToClose={true} 
+      >
 
-
-      <Toolbar
-        openSettings={openSettings}
-        toggleRemoteView={toggleRemoteView}
-        toggleFocusView={toggleFocusView}
-        toggleOscLogView={toggleOscLogView}
-        toggleFacePanel={toggleFacePanel}
-        toggleDirectSelects={toggleDirectSelects}
-        togglePlayback={togglePlayback}
-        toggleEncoders={toggleEncoders}
-        hideAllViews={hideAllViews}
-      ></Toolbar>
-      {
-        isRemoteShown && (
-          <Remote></Remote>
-        )
-      }
-      {
-        isFocusShown && (
-          <Focus></Focus>
-        )
-      }
-      {
-        isFacePanel && (
-          <FacePanel></FacePanel>
-        )
-      }
-      {
-        isEncodersShown && (
-          <Encoders></Encoders>
-        )
-      }
-      {
-        isDirectSelectsShown && (
-          <DirectSelects></DirectSelects>
-        )
-      }
-      {
-        isPlaybackShown && (
-          <Playback></Playback>
-        )
-      }
-      {
-        isOscLogShown && (
-          <OscLog></OscLog>
-        )
-      }
-      <SettingsDialog openSettings={openSettings} isSettingsVisible={isSettingsVisible} isConsolesExpanded={isConsolesExpanded} setIsConsolesExpanded={setIsConsolesExpanded}></SettingsDialog>
+        <Toolbar
+          openSettings={openSettings}
+          toggleRemoteView={toggleRemoteView}
+          toggleFocusView={toggleFocusView}
+          toggleOscLogView={toggleOscLogView}
+          toggleFacePanel={toggleFacePanel}
+          toggleDirectSelects={toggleDirectSelects}
+          togglePlayback={togglePlayback}
+          toggleEncoders={toggleEncoders}
+          hideAllViews={hideAllViews}
+        ></Toolbar>
+        {
+          isRemoteShown && (
+            <Remote></Remote>
+          )
+        }
+        {
+          isFocusShown && (
+            <Focus></Focus>
+          )
+        }
+        {
+          isFacePanel && (
+            <FacePanel></FacePanel>
+          )
+        }
+        {
+          isEncodersShown && (
+            <Encoders></Encoders>
+          )
+        }
+        {
+          isDirectSelectsShown && (
+            <DirectSelects></DirectSelects>
+          )
+        }
+        {
+          isPlaybackShown && (
+            <Playback></Playback>
+          )
+        }
+        {
+          isOscLogShown && (
+            <OscLog></OscLog>
+          )
+        }
+      </Drawer>
 
     </SafeAreaProvider>
   );

@@ -7,7 +7,7 @@ import {
     StyleProp,
     TextStyle,
     ViewStyle,
-    TouchableOpacity,
+    TouchableWithoutFeedback,
     Image
 } from 'react-native';
 
@@ -17,11 +17,14 @@ import updater from '../../services/updater';
 
 // Placing Images here with some descriptions.  They will need States and Stuff.
 
-const AlienLogo = () => (
-    <Image
-        source={require('../images/eos_remote_icon.png')}
-        style={[styles.headerImage]}
-         />
+const AlienLogo = (props) => (
+    <TouchableWithoutFeedback onPress={props.onPress}>
+        <Image
+            source={require('../images/eos_remote_icon.png')}
+            style={[styles.headerImage]}
+        />
+    </TouchableWithoutFeedback>
+
 )
 
 const ColorPickerIcon = () => (
@@ -56,13 +59,13 @@ export default class Toolbar extends React.Component {
         return (
             <View style={[styles.row, styles.rowHeader]}>
                 <View style={[styles.col, styles.col1]} >
-                    <AlienLogo />
+                    <AlienLogo onPress={this.props.openSettings} />
                 </View>
                 <View style={[styles.col, styles.col9]} >
                     <View style={[styles.row, styles.height50]} >
                         <View style={[styles.col, styles.col12]} >
                             <Text>
-                            OSC RFR 2.0
+                                OSC RFR 2.0
                             </Text>
                         </View>{/* /button columns */}
                     </View>
@@ -102,8 +105,6 @@ export default class Toolbar extends React.Component {
                                 this.props.hideAllViews();
                                 this.props.toggleOscLogView();
                             }} style={styles.text}>oscLog</Text>
-                            <Text style={styles.text}> | </Text>
-                            <Text style={styles.text} onPress={this.props.openSettings}>Settings</Text>
                         </View>{/* /button columns */}
                     </View>
                 </View>
@@ -119,9 +120,9 @@ export default class Toolbar extends React.Component {
                             <SettingsIcon />
                         </View>
                     </View>
-                    
+
                 </View>
-                
+
             </View>
         );
     }

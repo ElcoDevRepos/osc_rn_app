@@ -19,6 +19,7 @@
     "react": "^18.2.0",
     "react-native": "0.71.4",
     "react-native-dial": "^1.0.12",
+    "react-native-drawer": "^2.5.1",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-knob": "^2.3.2",
     "react-native-linear-gradient": "^2.6.2",
