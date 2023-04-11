@@ -13,11 +13,11 @@ import {
 import tcpOsc from '../../services/tcpOsc';
 import {
     NativeEventEmitter
-  } from 'react-native';
+} from 'react-native';
 import CustomButton from '../components/button';
 // import buttons from '../helpers/buttons';
 import styles from '../helpers/styles';
-import {renderObject, renderText} from '../helpers/utils';
+import { renderObject, renderText } from '../helpers/utils';
 import buttonsAll from '../helpers/buttonsAll';
 import updater from '../../services/updater';
 
@@ -78,7 +78,7 @@ export default class Remote extends React.Component {
                             </View>{/* /button column */}
                         </View>{/* /row height50 */}
                     </View>{/* /module column */}
-                </View>{/* /module row */}  
+                </View>{/* /module row */}
 
                 {/* /PAGE ROW 2 */}
                 <View style={styles.row} >
@@ -87,11 +87,11 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col2]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderObject('intensity')}   
-                            </View> 
+                                {this.renderObject('intensity')}
+                            </View>
                             <View style={[styles.col, styles.col6]} >
                                 {this.renderObject('focus')}
-                            </View>{/* /button column */}                           
+                            </View>{/* /button column */}
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col6]} >
@@ -100,8 +100,8 @@ export default class Remote extends React.Component {
                             <View style={[styles.col, styles.col6]} >
                                 {this.renderObject('beam')}
                             </View>{/* /button column */}
-                        </View>{/* /button row */} 
-                    </View>{/* /module column */} 
+                        </View>{/* /button row */}
+                    </View>{/* /module column */}
 
                     {/* /MODULE 2 */}
                     <View style={[styles.col, styles.col3]} >
@@ -121,7 +121,7 @@ export default class Remote extends React.Component {
                                 {this.renderObject('delete')}
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                
+
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
                                 {this.renderObject('effect')}
@@ -153,7 +153,7 @@ export default class Remote extends React.Component {
                                 {this.renderObject('assert')}
                             </View>{/* /button column */}
                         </View>{/* /button row */}
-                    </View>{/* /module column */}  
+                    </View>{/* /module column */}
 
                     {/* /MODULE 4 */}
                     <View style={[styles.col, styles.col3]} >
@@ -193,7 +193,7 @@ export default class Remote extends React.Component {
                                 {this.renderObject('capture')}
                             </View>
                         </View>{/* /button row */}
-                    </View>{/* /module column */} 
+                    </View>{/* /module column */}
 
                 </View>{/* /PAGE ROW 2 */}
 
@@ -230,7 +230,7 @@ export default class Remote extends React.Component {
                                 {this.renderObject('go')}
                             </View>
                         </View>{/* /button row */}
-                    </View>{/* /module column */} 
+                    </View>{/* /module column */}
 
                     {/* /ROW 3 MODULE 2 */}
                     <View style={[styles.col, styles.col3]} >
@@ -473,7 +473,7 @@ export default class Remote extends React.Component {
                 </View>
                     */}
             </View> // pageContainer
-                
+
 
         );
     }

@@ -78,13 +78,25 @@ export default class Toolbar extends React.Component {
                                 this.props.toggleFocusView();
                             }} style={styles.text}>FOCUS</Text>
                             <Text style={styles.text}> | </Text>
-                            <Text style={styles.text}>FACE PANEL</Text>
+                            <Text style={styles.text} onPress={() => {
+                                this.props.hideAllViews();
+                                this.props.toggleFacePanel();
+                            }}>FACE PANEL</Text>
                             <Text style={styles.text}> | </Text>
-                            <Text style={styles.text}>ENCODERS</Text>
+                            <Text style={styles.text} onPress={() => {
+                                this.props.hideAllViews();
+                                this.props.toggleEncoders();
+                            }}>ENCODERS</Text>
                             <Text style={styles.text}> | </Text>
-                            <Text style={styles.text}>DIRECT SELECTS</Text>
+                            <Text style={styles.text} onPress={() => {
+                                this.props.hideAllViews();
+                                this.props.toggleDirectSelects();
+                            }}>DIRECT SELECTS</Text>
                             <Text style={styles.text}> | </Text>
-                            <Text style={styles.text}>PLAYBACK</Text>
+                            <Text style={styles.text} onPress={() => {
+                                this.props.hideAllViews();
+                                this.props.togglePlayback();
+                            }}>PLAYBACK</Text>
                             <Text style={styles.text}> | </Text>
                             <Text onPress={() => {
                                 this.props.hideAllViews();

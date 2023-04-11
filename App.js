@@ -26,11 +26,20 @@ import Focus from './src/pages/focus';
 import OscLog from './src/pages/osclog';
 import updater from './services/updater';
 import styles from './src/helpers/styles';
+import FacePanel from './src/pages/facePanel';
+import Encoders from './src/pages/encoders';
+import DirectSelects from './src/pages/directSelects';
+import Playback from './src/pages/playback';
 
 export default function App() {
   const [isRemoteShown, setIsRemoteShown] = useState(true);
-    const [isFocusShown, setIsFocusShown] = useState(false);
-    const [isOscLogShown, setIsOscLogShown] = useState(false);
+  const [isFocusShown, setIsFocusShown] = useState(false);
+  const [isFacePanel, setIsFacePanelShown] = useState(false);
+  const [isEncodersShown, setIsEncodersShown] = useState(false);
+  const [isDirectSelectsShown, setIsDirectSelectsShown] = useState(false);
+  const [isPlaybackShown, setIsPlaybackShown] = useState(false);
+
+  const [isOscLogShown, setIsOscLogShown] = useState(false);
 
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
   const [isConsolesExpanded, setIsConsolesExpanded] = useState(false);
@@ -46,8 +55,13 @@ export default function App() {
     const eventEmitter = new NativeEventEmitter(tcpOsc);
     console.log(eventEmitter.listenerCount('GotMessage')); setIsRemoteShown(true)
   };
-    const toggleFocusView = event => { setIsFocusShown(true) };
-    const toggleOscLogView = event => { setIsOscLogShown(true) };
+  const toggleFocusView = event => { setIsFocusShown(true) };
+  const toggleFacePanel = event => { setIsFacePanelShown(true) };
+  const toggleEncoders = event => { setIsEncodersShown(true) };
+  const toggleDirectSelects = event => { setIsDirectSelectsShown(true) };
+  const togglePlayback = event => { setIsPlaybackShown(true) };
+
+  const toggleOscLogView = event => { setIsOscLogShown(true) };
 
   const hideAllViews = () => {
     const eventEmitter = new NativeEventEmitter(tcpOsc);
@@ -55,8 +69,12 @@ export default function App() {
       eventEmitter.removeAllListeners('GotMessage');
     }
     setIsRemoteShown(false);
-      setIsFocusShown(false);
-      setIsOscLogShown(false);
+    setIsFocusShown(false);
+    setIsOscLogShown(false);
+    setIsFacePanelShown(false);
+    setIsEncodersShown(false);
+    setIsDirectSelectsShown(false);
+    setIsPlaybackShown(false);
   }
 
   useEffect(() => {
@@ -79,14 +97,14 @@ export default function App() {
 
     }
 
-    }
+  }
 
-    /*
-          <HeaderRNE
-        backgroundColor='#000'
-        centerComponent={{ text: 'OSC', style: styles.heading }}
-      />
-    */
+  /*
+        <HeaderRNE
+      backgroundColor='#000'
+      centerComponent={{ text: 'OSC', style: styles.heading }}
+    />
+  */
 
   /** 
    * UDP Connection and Send 
@@ -96,14 +114,18 @@ export default function App() {
   //osc.sendMessage("/eos/ping", ['0']);
 
   return (
-      <SafeAreaProvider style={styles.header}>
-          
+    <SafeAreaProvider style={styles.header}>
+
 
       <Toolbar
         openSettings={openSettings}
         toggleRemoteView={toggleRemoteView}
         toggleFocusView={toggleFocusView}
         toggleOscLogView={toggleOscLogView}
+        toggleFacePanel={toggleFacePanel}
+        toggleDirectSelects={toggleDirectSelects}
+        togglePlayback={togglePlayback}
+        toggleEncoders={toggleEncoders}
         hideAllViews={hideAllViews}
       ></Toolbar>
       {
@@ -115,15 +137,35 @@ export default function App() {
         isFocusShown && (
           <Focus></Focus>
         )
-          }
-    {
-        isOscLogShown && (
-            <OscLog></OscLog>
+      }
+      {
+        isFacePanel && (
+          <FacePanel></FacePanel>
         )
-    }
+      }
+      {
+        isEncodersShown && (
+          <Encoders></Encoders>
+        )
+      }
+      {
+        isDirectSelectsShown && (
+          <DirectSelects></DirectSelects>
+        )
+      }
+      {
+        isPlaybackShown && (
+          <Playback></Playback>
+        )
+      }
+      {
+        isOscLogShown && (
+          <OscLog></OscLog>
+        )
+      }
       <SettingsDialog openSettings={openSettings} isSettingsVisible={isSettingsVisible} isConsolesExpanded={isConsolesExpanded} setIsConsolesExpanded={setIsConsolesExpanded}></SettingsDialog>
-          
-      </SafeAreaProvider>
+
+    </SafeAreaProvider>
   );
 }
 
