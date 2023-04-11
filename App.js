@@ -84,6 +84,7 @@ export default function App() {
   }
 
   useEffect(() => {
+    console.log(isDrawerOpen);
     // On App load, read from local storage and store app config/state
     updater.getAppConfig();
     updater.getAppState();
@@ -126,7 +127,13 @@ export default function App() {
         open={isDrawerOpen}
         openDrawerOffset={0.7}
         content={<DrawerContent />}     
-        tapToClose={true} 
+        tapToClose={true}
+        onClose={() => {
+          setIsDrawerOpen(false);
+        }}
+        onOpen={() => {
+          setIsDrawerOpen(true);
+        }}
       >
 
         <Toolbar
