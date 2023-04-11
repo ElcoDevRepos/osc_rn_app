@@ -42,7 +42,7 @@ export default class DrawerContent extends React.Component {
                 <ListItem.Accordion
                     content={
                         <>
-                            <Icon name="computer" size={30} />
+                            <Icon name="image" size={30} />
                             <ListItem.Content style={{ marginLeft: 15 }}>
                                 <ListItem.Title>LAYOUTS</ListItem.Title>
                             </ListItem.Content>
@@ -63,7 +63,7 @@ export default class DrawerContent extends React.Component {
                 <ListItem.Accordion
                     content={
                         <>
-                            <Icon name="computer" size={30} />
+                            <Icon name="people" size={30} />
                             <ListItem.Content style={{ marginLeft: 15 }}>
                                 <ListItem.Title>USER</ListItem.Title>
                             </ListItem.Content>
