@@ -1190,6 +1190,8 @@ osc.decodeOSC = function (data, packetInfo) {
     data = osc.byteArray(data);
     try {
         var packet = osc.readPacket(data, osc.options);
+        console.log("2.5 decodeOSC Reading the packet");
+        console.log(packet);
         return packet;
     } catch (err) {
         return err;
@@ -1225,6 +1227,8 @@ osc.decodeSLIP =  (data) =>  {
             slip.handleMessageMaxError();
         }
     }
+    //console.log(msg);
+    console.log('2.This is decode slip');
     return msg;
 };
 
