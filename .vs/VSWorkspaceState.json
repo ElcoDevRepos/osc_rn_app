@@ -5,8 +5,9 @@
     "\\src",
     "\\src\\components",
     "\\src\\helpers",
+    "\\src\\images",
     "\\src\\pages"
   ],
-  "SelectedNode": "\\src\\helpers\\utils.js",
+  "SelectedNode": "\\App.js",
   "PreviewInSolutionExplorer": false
 }

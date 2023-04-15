@@ -4,6 +4,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const updater = {};
 
 updater.alterSourceData = async (osc_message) => {
+
+    let address = osc_message.address;
+    let argType = "";
+    let argValue = "";
+    let hasArgs = true;
+    let fullArgArr = [];
+    let logText = buttonsAll['oscLog']['label'];
+
+    buttonsAll['oscLog']['label'] = address + '\n' + logText;
+
     return new Promise((resolve, reject) => {
         resolve();
     })

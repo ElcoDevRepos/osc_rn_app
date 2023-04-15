@@ -31,8 +31,9 @@ export default class OscLog extends React.Component {
         // All Messages from EOS Will come here. 
         const eventEmitter = new NativeEventEmitter(tcpOsc);
         eventEmitter.addListener('GotMessage', async (oscMessage) => {
-            updater.alterSourceData(oscMessage);
-            this.setState(buttonsAll);
+            updater.alterSourceData(oscMessage)
+                .then(this.setState(buttonsAll));                ;
+            
         });
     }
 

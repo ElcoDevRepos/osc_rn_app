@@ -1,6 +1,7 @@
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
 import CustomButton from '../components/button';
+import CustomScrollView from '../components/scrollview';
 import tcpOsc from '../../services/tcpOsc';
 
 export const renderText = (text) => {
@@ -111,16 +112,13 @@ export const renderObject = (name) => {
             // Direct Select Labels.   Needs no borders, etc
             buttonObject.push(
                 (
-                    <CustomButton
+                    <CustomScrollView
                         title={button.label}
                         id={button.label}
-                        key={button.address}
-                        address={button.address}
-                        argvalue={button.argvalue}
                         style={[styles[button.style]]}
                         styleText={[styles[button.styleText]]}
                     >
-                    </CustomButton>
+                    </CustomScrollView>
                 )
             )
             break;
