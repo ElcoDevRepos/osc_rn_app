@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
 
     },
     oscLogText: {
-        color: '#ffffff'
+        color: '#ffffff',
+        fontSize: 30
     },
     
 

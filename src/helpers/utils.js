@@ -41,10 +41,10 @@ export const renderObject = (name) => {
                         address={button.address}
                         argvalue={button.argvalue}
                         onPressIn={(data) => {
-                            tcpOsc.sendMessage(data.address, data.argvalue)
+                            tcpOsc.sendMessage(data.address, [{type: "i", value: 1}])
                         }}
                         onPressOut={(data) => {
-                            tcpOsc.sendMessage(data.address, data.argvalue)
+                            tcpOsc.sendMessage(data.address, [{ type: "i", value: 0 }])
                         }}>
                     </CustomButton>
                 )

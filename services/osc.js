@@ -1132,18 +1132,6 @@ slip.sliceByteArray =  (arr, start, end) => {
     return new Uint8Array(sliced);
 };
 
-slip.handleEnd = () => {
-    if (this.msgBufferIdx === 0) {
-        return; // Toss opening END byte and carry on.
-    }
-    var msg = slip.sliceByteArray(this.msgBuffer, 0, this.msgBufferIdx);
-
-    // Clear our pointer into the message buffer.
-    this.msgBufferIdx = 0;
-
-    return msg;
-};
-
 osc.encode = function (data, o) {
     o = o || {};
     o.bufferPadding = o.bufferPadding || 4; // Will be rounded to the nearest 4 bytes.
@@ -1229,6 +1217,19 @@ osc.decodeSLIP =  (data) =>  {
     }
     //console.log(msg);
     console.log('2.This is decode slip');
+    return msg;
+};
+
+
+slip.handleEnd = () => {
+    if (this.msgBufferIdx === 0) {
+        return; // Toss opening END byte and carry on.
+    }
+    var msg = slip.sliceByteArray(this.msgBuffer, 0, this.msgBufferIdx);
+
+    // Clear our pointer into the message buffer.
+    this.msgBufferIdx = 0;
+
     return msg;
 };
 
