@@ -1,7 +1,16 @@
 import buttonsAll from '../src/helpers/buttonsAll';
+import appState from '../src/helpers/appState';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const updater = {};
+
+const addConsoletoLog = (consoleMessage) => {
+    return (
+      <View>
+        <Text>{consoleMessage}</Text>
+      </View>
+    );
+  };
 
 updater.alterSourceData = async (osc_message) => {
 
@@ -11,7 +20,6 @@ updater.alterSourceData = async (osc_message) => {
     let argValue = "";
     let hasArgs = true;
     let fullArgArr = [];
-    
 
     if(osc_message.args.length > 0) {
       argType = osc_message.args[1];
@@ -24,6 +32,7 @@ updater.alterSourceData = async (osc_message) => {
       hasArgs = false;
     }
 
+    // LOG THE OSC
     let logText = buttonsAll['oscLog']['label'];
     let updateMessage = "CONSOLE :: " + address +  " : " + argValue + " ";
 

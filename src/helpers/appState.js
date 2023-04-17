@@ -70,7 +70,7 @@
 
   }
 
-  const appState = {
+const appState = {
   "console": "0",
   "currentPage": "encoderPage",
   "currentMasterLayout": 0,
@@ -78,36 +78,43 @@
   "editEnabled": true,
   "activeChan": "1  ",
   "preActiveChan": "1  ",
-  "ds": [
+  "ds1" : 
     {
-      "dsID": "1",
+      "dsID": 1,
       "type": "none",
       "enabled": false,
       "flexi": "off",
       "page": "1",
       "label": "SELECT"
     },
+  "ds2" : 
     {
       "dsID": 2,
       "type": "none",
       "enabled": false,
       "flexi": "off",
-      "page": "1"
+      "page": "1",
+      "label": "SELECT"
     },
+  "ds3" : 
     {
       "dsID": 3,
       "type": "none",
       "enabled": false,
       "flexi": "off",
-      "page": "1"
+      "page": "1",
+      "label": "SELECT"
     },
+  "ds4" : 
     {
       "dsID": 4,
       "type": "none",
       "enabled": false,
       "flexi": "off",
-      "page": "1"
+      "page": "1",
+      "label": "SELECT"
     },
+  "ds5" : 
     {
       "dsID": "5",
       "type": "none",
@@ -115,9 +122,8 @@
       "flexi": "off",
       "page": "1",
       "label": "SELECT"
-    }
-  ],
-  "encoders": [
+    },
+  "encoder1" :
     {
       "encoderID": 1,
       "wheel": "",
@@ -130,6 +136,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+  "encoder2" :
     {
       "encoderID": 2,
       "wheel": "",
@@ -142,6 +149,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+  "encoder3" :
     {
       "encoderID": 3,
       "wheel": "",
@@ -154,6 +162,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+   "encoder4" :
     {
       "encoderID": 4,
       "wheel": "",
@@ -166,6 +175,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+  "encoder5" :
     {
       "encoderID": 5,
       "wheel": "",
@@ -178,6 +188,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+  "encoder6" :
     {
       "encoderID": 6,
       "wheel": "",
@@ -190,6 +201,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+  "encoder7" :
     {
       "encoderID": 7,
       "wheel": "",
@@ -202,6 +214,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+  "encoder8" :
     {
       "encoderID": 8,
       "wheel": "",
@@ -214,6 +227,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+  "encoder9" :
     {
       "encoderID": 9,
       "wheel": "",
@@ -226,6 +240,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+  "encoder10" :
     {
       "encoderID": 10,
       "wheel": "",
@@ -238,6 +253,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+  "encoder11" :
     {
       "encoderID": 11,
       "wheel": "",
@@ -250,6 +266,7 @@
       "argType": "f",
       "address": "/eos/active/wheel/2"
     },
+ "encoder12" :
     {
       "encoderID": 12,
       "wheel": "",
@@ -261,52 +278,57 @@
       "decValue": -8,
       "argType": "f",
       "address": "/eos/active/wheel/2"
+    },
+"fader1" : 
+    {
+        "level": 0,
+        "enabled": false
+    },
+"fader2" : 
+    {
+        "level": 0,
+        "enabled": false
+    },
+"fader3" : 
+    {
+        "level": 0,
+        "enabled": false
+    },
+"fader4" : 
+    {
+        "level": 0,
+        "enabled": false
+    },
+"fader5" : 
+    {
+        "level": 0,
+        "enabled": false
+    },
+"fader6" : 
+    {
+        "level": 0,
+        "enabled": false
     }
-  ],
-  "faders": [
-    [
-      {
+"fader7" : 
+    {
         "level": 0,
         "enabled": false
-      },
-      {
+    },
+"fader8" : 
+    {
         "level": 0,
         "enabled": false
-      },
-      {
+    },
+"fader9" : 
+    {
         "level": 0,
         "enabled": false
-      },
-      {
+    },
+"fader10" : 
+    {
         "level": 0,
         "enabled": false
-      },
-      {
-        "level": 0,
-        "enabled": false
-      },
-      {
-        "level": 0,
-        "enabled": false
-      },
-      {
-        "level": 0,
-        "enabled": false
-      },
-      {
-        "level": 0,
-        "enabled": false
-      },
-      {
-        "level": 0,
-        "enabled": false
-      },
-      {
-        "level": 0,
-        "enabled": false
-      }
-    ]
-  ],
+    },
   "faderPage": {
     "page": 1
   },
@@ -328,7 +350,9 @@
   ],
   "remotePage": {},
   "facepanelPage": {}
-}
+};
+
+
 
 
 
@@ -434,3 +458,5 @@ const defaultConsole = {
         "faderCount" : 10,
       }
     };// JavaScript source code
+
+    export default appState;
