@@ -37,22 +37,7 @@ export default class Remote extends React.Component {
         });
     }
 
-    /*
-    renderButtons() {
-        const buttonObjects = [];
-        this.state.buttons.forEach((button) => {
-            buttonObjects.push(
-                (
-                    <CustomButton title={button.title} id={button.attribute} key={button.attribute} onPress={() => {
-                        tcpOsc.sendMessage(button.attribute, button.arguments);
-                    }}></CustomButton>
-                )
-            )
-        })
 
-        return buttonObjects;
-    }
-    */
 
     render() {
         return (

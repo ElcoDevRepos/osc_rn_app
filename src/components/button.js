@@ -18,6 +18,15 @@ export default class CustomButton extends React.Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextState != this.state) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     render() {
         return (
             <View>

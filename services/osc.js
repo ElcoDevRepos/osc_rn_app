@@ -1178,8 +1178,6 @@ osc.decodeOSC = function (data, packetInfo, eventEmitter) {
     data = osc.byteArray(data);
     try {
         var packet = osc.readPacket(data, osc.options);
-        console.log("2.5 decodeOSC Reading the packet");
-        console.log(packet);
         eventEmitter.emit("GotMessage", packet);
         return packet;
     } catch (err) {
@@ -1217,7 +1215,6 @@ osc.decodeSLIP =  (data, eventEmitter) =>  {
         }
     }
     //console.log(msg);
-    console.log('2.This is decode slip');
     return msg;
 };
 

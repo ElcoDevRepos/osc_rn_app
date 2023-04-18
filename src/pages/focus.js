@@ -29,7 +29,6 @@ export default class Focus extends React.Component {
 
         const eventEmitter = new NativeEventEmitter(tcpOsc);
         eventEmitter.addListener('GotMessage', async (oscMessage) => {
-            console.log("focus message: ", oscMessage);
             updater.alterSourceData(oscMessage);
             this.setState(buttonsAll);
         });

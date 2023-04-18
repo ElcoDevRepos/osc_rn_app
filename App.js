@@ -58,8 +58,7 @@ export default function App() {
 
 
   const toggleRemoteView = event => {
-    const eventEmitter = new NativeEventEmitter(tcpOsc);
-    console.log(eventEmitter.listenerCount('GotMessage')); setIsRemoteShown(true)
+    setIsRemoteShown(true)
   };
   const toggleFocusView = event => { setIsFocusShown(true) };
   const toggleFacePanel = event => { setIsFacePanelShown(true) };
@@ -84,7 +83,6 @@ export default function App() {
   }
 
   useEffect(() => {
-    console.log(isDrawerOpen);
     // On App load, read from local storage and store app config/state
     updater.getAppConfig();
     updater.getAppState();

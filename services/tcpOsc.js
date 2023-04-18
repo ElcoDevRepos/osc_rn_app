@@ -3,10 +3,10 @@ import * as oscLib from './osc';
 import {
     NativeEventEmitter
 } from 'react-native';
+
 const tcpOsc = {};
 
 tcpOsc.startConnection = (port, ip) => {
-    console.log("Starting");
     const eventEmitter = new NativeEventEmitter(tcpOsc);
     const options = {
         port: port,
@@ -22,8 +22,7 @@ tcpOsc.startConnection = (port, ip) => {
     this.client.setKeepAlive(true);
 
     this.client.on('data', function (data) {
-        console.log('1. tcpOSC has recieved data');
-        const decode = oscLib.default.decodeSLIP(data, eventEmitter);
+        oscLib.default.decodeSLIP(data, eventEmitter);
         //const finalDecode = oscLib.default.decodeOSC(decode, null, eventEmitter);
         //eventEmitter.emit("GotMessage", finalDecode);
         //console.log("3. " + finalDecode.address);
