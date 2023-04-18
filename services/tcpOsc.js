@@ -23,10 +23,10 @@ tcpOsc.startConnection = (port, ip) => {
 
     this.client.on('data', function (data) {
         console.log('1. tcpOSC has recieved data');
-        const decode = oscLib.default.decodeSLIP(data);
-        const finalDecode = oscLib.default.decodeOSC(decode);
-        eventEmitter.emit("GotMessage", finalDecode);
-        console.log("3. " + finalDecode.address);
+        const decode = oscLib.default.decodeSLIP(data, eventEmitter);
+        //const finalDecode = oscLib.default.decodeOSC(decode, null, eventEmitter);
+        //eventEmitter.emit("GotMessage", finalDecode);
+        //console.log("3. " + finalDecode.address);
     });
 
     this.client.on('error', function (error) {

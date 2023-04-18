@@ -37,7 +37,6 @@ updater.alterSourceData = async (osc_message) => {
     let updateMessage = "CONSOLE :: " + address +  " : " + argValue + " ";
 
     buttonsAll['oscLog']['label'] = updateMessage + '\n' + logText;
-
     
     
     // PARSE THE ADDRESS
@@ -57,6 +56,11 @@ updater.alterSourceData = async (osc_message) => {
       // This is more or less the TODO List
       // connected = true;
       // sidebarCollapse();
+      buttonsAll['commandLine']['label'] = "";
+      buttonsAll['info-chan']['label'] = "Chan :: ";
+      buttonsAll['info-level']['label'] = "Level :: ";
+      buttonsAll['info-patch']['label'] = "Patch :: ";
+      buttonsAll['info-notes']['label'] = "Notes :: ";
       // $('[data-asc-id="commandLine"]').text("");
       // $('[data-asc-id="info-chan"]').text("Chan : ");
       // $('[data-asc-id="info-level"]').text("Level : ");
@@ -105,7 +109,8 @@ updater.alterSourceData = async (osc_message) => {
        // $('[data-asc-id="commandLine"]').removeClass('info-blind info-live');
       
       }
-
+      buttonsAll['commandLine']['label'] = argValue;
+    
      // $('[data-asc-id="commandLine"]').text(argValue);
 
    } else if (address.includes('/eos/out/softkey')) {
@@ -171,6 +176,7 @@ updater.alterSourceData = async (osc_message) => {
           {
             app.appState.activeChan = argArr[0];
             // console.log("Active Chan :" + app.appState.activeChan);
+            buttonsAll['info-chan']['label'] = "Chan :: " + argArr[0];
             // $('[data-asc-id="info-chan"]').text("Chan : " + argArr[0]);
           }
 
@@ -478,10 +484,11 @@ updater.alterSourceData = async (osc_message) => {
         if(typeof argArr[0] !== "undefined") {
 
             centerText = argArr[0].trim();
-
+            /*
             if (!wheels.includes(centerText)) {
               wheels[wheelNumber] = centerText;
             }
+            */
           // console.log(wheels);
           }
 

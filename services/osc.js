@@ -1174,19 +1174,20 @@ osc.nativeBuffer = function (obj) {
     return osc.isTypedArrayView(obj) ? obj : new Uint8Array(obj);
 };
 
-osc.decodeOSC = function (data, packetInfo) {
+osc.decodeOSC = function (data, packetInfo, eventEmitter) {
     data = osc.byteArray(data);
     try {
         var packet = osc.readPacket(data, osc.options);
         console.log("2.5 decodeOSC Reading the packet");
         console.log(packet);
+        eventEmitter.emit("GotMessage", packet);
         return packet;
     } catch (err) {
         return err;
     }
 };
 
-osc.decodeSLIP =  (data) =>  {
+osc.decodeSLIP =  (data, eventEmitter) =>  {
     data = osc.byteArray(data);
     this.msgBuffer = data;
     var msg;
@@ -1206,7 +1207,7 @@ osc.decodeSLIP =  (data) =>  {
             }
 
             if (val === slip.END) {
-                msg = slip.handleEnd();
+                msg = slip.handleEnd(eventEmitter);
                 continue;
             }
         }
@@ -1221,11 +1222,21 @@ osc.decodeSLIP =  (data) =>  {
 };
 
 
-slip.handleEnd = () => {
+
+slip.onMessage = (msg, eventEmitter) => {
+    osc.decodeOSC(msg, null, eventEmitter);
+};
+
+
+slip.handleEnd = (eventEmitter) => {
     if (this.msgBufferIdx === 0) {
         return; // Toss opening END byte and carry on.
     }
     var msg = slip.sliceByteArray(this.msgBuffer, 0, this.msgBufferIdx);
+
+    if (slip.onMessage) {
+        slip.onMessage(msg, eventEmitter);
+    }
 
     // Clear our pointer into the message buffer.
     this.msgBufferIdx = 0;

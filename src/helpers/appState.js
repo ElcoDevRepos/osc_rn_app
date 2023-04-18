@@ -308,7 +308,7 @@ const appState = {
     {
         "level": 0,
         "enabled": false
-    }
+    },
 "fader7" : 
     {
         "level": 0,
