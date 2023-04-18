@@ -16,6 +16,7 @@ export const renderObject = (name) => {
             buttonObject.push(
                 (
                     <CustomButton
+                        functype={button.functype}
                         title={button.label}
                         id={button.label}
                         key={button.address}

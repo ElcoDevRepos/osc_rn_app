@@ -14,12 +14,15 @@ export default class CustomButton extends React.Component {
         super(props);
         this.state = {
             address: props.address,
-            argvalue: props.argvalue
+            argvalue: props.argvalue,
+            title: props.title,
         }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (nextState != this.state) {
+        if (nextProps.title !== this.state.title || 
+            nextProps.address !== this.state.address || 
+            nextProps.argvalue !== this.state.argvalue) {
             return true;
         }
         else {
@@ -33,10 +36,10 @@ export default class CustomButton extends React.Component {
                 <TouchableOpacity
                     style={this.props.style}
                     onPressIn={() => {
-                        this.props.onPressIn({address: this.state.address, argvalue: this.state.argvalue});
+                        this.props.onPressIn({ address: this.state.address, argvalue: this.state.argvalue });
                     }}
                     onPressOut={() => {
-                        this.props.onPressOut({address: this.state.address, argvalue: this.state.argvalue});
+                        this.props.onPressOut({ address: this.state.address, argvalue: this.state.argvalue });
                     }}
                 >
                     <Text style={this.props.styleText}>{this.props.title}</Text>
