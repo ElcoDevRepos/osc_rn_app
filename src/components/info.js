@@ -13,24 +13,23 @@ export default class InfoText extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: props.text,
-            style: props.style
+            ttitle: props.title
         }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log(nextState);
-        if (nextState !== this.state) {
+        if (nextProps.title !== this.state.title ) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
 
     render() {
         return (
-            <View>
-                <Text style={this.state.style}>{this.state.text}</Text>
+            <View style={this.props.style}>
+                <Text style={this.props.styleText}>{this.props.title}</Text>
             </View>
         );
     }

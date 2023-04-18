@@ -34,7 +34,8 @@ updater.alterSourceData = async (osc_message) => {
 
     // LOG THE OSC
     let logText = buttonsAll['oscLog']['label'];
-    let updateMessage = "CONSOLE :: " + address +  " : " + argValue + " ";
+    let updateMessage = "CONSOLE :: " + address + " : " + argValue + " ";
+    //console.log(updateMessage);
 
     buttonsAll['oscLog']['label'] = updateMessage + '\n' + logText;
     
@@ -174,7 +175,7 @@ updater.alterSourceData = async (osc_message) => {
         if(typeof argArr[0] !== "undefined")
 
           {
-            app.appState.activeChan = argArr[0];
+            appState.activeChan = argArr[0];
             // console.log("Active Chan :" + app.appState.activeChan);
             buttonsAll['info-chan']['label'] = "Chan :: " + argArr[0];
             // $('[data-asc-id="info-chan"]').text("Chan : " + argArr[0]);
@@ -194,14 +195,14 @@ updater.alterSourceData = async (osc_message) => {
 
       } else {
         // we have a blank channel
-        app.appState.activeChan = "";
+        appState.activeChan = "";
       }
 
       // Is this a new channel?
-      if (app.appState.activeChan != app.appState.preActiveChan || app.appState.activeChan == "") {
+      if (appState.activeChan != appState.preActiveChan || appState.activeChan == "") {
         newChannel = true;
-        app.appState.preActiveChan = app.appState.activeChan;
-        disableAllEncoders();
+        appState.preActiveChan = appState.activeChan;
+        //disableAllEncoders();
       } else {
         newChannel = false;
       }
@@ -470,6 +471,10 @@ updater.alterSourceData = async (osc_message) => {
       let centerText = "------";
       let encoderValue = "-";
       let encNum = 1;
+
+        if (typeof newChannel === "undefined") {
+            newChannel = true;
+        }
 
       if ((address === "/eos/out/active/wheel/1") && newChannel) {
         // There has been a channel change

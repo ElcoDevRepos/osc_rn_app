@@ -23,7 +23,7 @@ export default class CustomButton extends React.Component {
         if (nextProps.title !== this.state.title || 
             nextProps.address !== this.state.address || 
             nextProps.argvalue !== this.state.argvalue) {
-            return true;
+            return false;
         }
         else {
             return false;

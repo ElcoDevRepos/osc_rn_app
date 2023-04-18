@@ -37,6 +37,14 @@ export default class Remote extends React.Component {
         });
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps !== this.state) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 
     render() {

@@ -1,6 +1,7 @@
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
 import CustomButton from '../components/button';
+import InfoText from '../components/info';
 import CustomScrollView from '../components/scrollview';
 import tcpOsc from '../../services/tcpOsc';
 
@@ -15,17 +16,15 @@ export const renderObject = (name) => {
         case 'info':
             buttonObject.push(
                 (
-                    <CustomButton
+                    <InfoText
                         functype={button.functype}
                         title={button.label}
                         id={button.label}
-                        key={button.address}
-                        address={button.address}
-                        argvalue={button.argvalue}
+                        key={button.label}
                         style={[styles.info, styles[button.style]]}
                         styleText={[styles.infoText, styles[button.styleText]]}
                         >
-                    </CustomButton>
+                    </InfoText>
                 )
             )
             break;
