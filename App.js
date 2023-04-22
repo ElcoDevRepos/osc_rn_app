@@ -120,7 +120,8 @@ export default function App() {
 
   return (
     <SafeAreaProvider style={styles.header}>
-      <Drawer
+          <Drawer
+              type="overlay"
         ref={(ref) => this._drawer = ref}
         open={isDrawerOpen}
         openDrawerOffset={0.7}

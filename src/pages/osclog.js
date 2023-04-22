@@ -24,9 +24,7 @@ import updater from '../../services/updater';
 export default class OscLog extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            buttonsAll: buttonsAll
-        };
+
         this.renderObject = renderObject.bind(this);
         // All Messages from EOS Will come here. 
         const eventEmitter = new NativeEventEmitter(tcpOsc);

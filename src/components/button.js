@@ -7,7 +7,10 @@ import {
     StyleProp,
     TextStyle,
     ViewStyle,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableHighlight,
+    Button,
+    Pressable
 } from 'react-native';
 export default class CustomButton extends React.Component {
     constructor(props) {
@@ -33,17 +36,18 @@ export default class CustomButton extends React.Component {
     render() {
         return (
             <View>
-                <TouchableOpacity
+                <Pressable
+                    title={this.props.title}
                     style={this.props.style}
                     onPressIn={() => {
-                        this.props.onPressIn({ address: this.state.address, argvalue: this.state.argvalue });
+                        this.props.onPressIn({ address: this.props.address, argvalue: this.props.argvalue });
                     }}
                     onPressOut={() => {
-                        this.props.onPressOut({ address: this.state.address, argvalue: this.state.argvalue });
+                        this.props.onPressOut({ address: this.props.address, argvalue: this.props.argvalue });
                     }}
                 >
                     <Text style={this.props.styleText}>{this.props.title}</Text>
-                </TouchableOpacity>
+                </Pressable>
             </View>
         );
     }

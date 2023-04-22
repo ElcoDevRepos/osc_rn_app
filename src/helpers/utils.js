@@ -1,6 +1,9 @@
+import React from 'react';
+import useState from 'react-native';
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
 import CustomButton from '../components/button';
+import StaticButton from '../components/staticButton';
 import InfoText from '../components/info';
 import CustomScrollView from '../components/scrollview';
 import tcpOsc from '../../services/tcpOsc';
@@ -10,6 +13,7 @@ export const renderText = (text) => {
 }
 
 export const renderObject = (name) => {
+
     const buttonObject = [];
     button = buttonsAll[name];
     switch (button.functype) {
@@ -30,10 +34,12 @@ export const renderObject = (name) => {
             break;
 
         case 'btn':
+
             buttonObject.push(
                 (
-                    <CustomButton
+                    <StaticButton
                         title={button.label}
+                        isPressed={false}
                         id={button.label}
                         key={button.address}
                         style={[styles.btn, styles[button.style]]}
@@ -41,12 +47,12 @@ export const renderObject = (name) => {
                         address={button.address}
                         argvalue={button.argvalue}
                         onPressIn={(data) => {
-                            tcpOsc.sendMessage(data.address, [{type: "i", value: 1}])
+                            tcpOsc.sendMessage(data.address, [{ type: "i", value: 1 }])
                         }}
                         onPressOut={(data) => {
                             tcpOsc.sendMessage(data.address, [{ type: "i", value: 0 }])
                         }}>
-                    </CustomButton>
+                    </StaticButton>
                 )
             )
             break;
@@ -126,3 +132,6 @@ export const renderObject = (name) => {
 
     return buttonObject;
 };
+
+
+// export const renderObject = React.memo(renderObjectImpl);

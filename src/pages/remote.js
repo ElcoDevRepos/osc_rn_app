@@ -21,20 +21,29 @@ import { renderObject, renderText } from '../helpers/utils';
 import buttonsAll from '../helpers/buttonsAll';
 import updater from '../../services/updater';
 
+
+
 export default class Remote extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            buttonsAll: buttonsAll
-        };
+
         this.renderObject = renderObject.bind(this);
         // All Messages from EOS Will come here. 
+        const pageName = 'remote';
         const eventEmitter = new NativeEventEmitter(tcpOsc);
 
         eventEmitter.addListener('GotMessage', async (oscMessage) => {
-            updater.alterSourceData(oscMessage);
-            this.setState(buttonsAll);
+            const rerenderArray = await updater.alterSourceData(oscMessage);
+                
+            console.log(rerenderArray);
+
+            if (Array.isArray(rerenderArray) && rerenderArray.includes(pageName)) {
+                this.setState(buttonsAll);
+            }
+                
         });
+
+        
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -46,8 +55,8 @@ export default class Remote extends React.Component {
         }
     }
 
-
     render() {
+        console.log("REMOTE PAGE IS RERENDERING");
         return (
             <View style={styles.pageContainer}>
                 <View style={[styles.row, styles.row_single_remote]} >
