@@ -10,7 +10,7 @@ import {
     TouchableOpacity,
     NativeEventEmitter
 } from 'react-native';
-
+import SliderHandle from '../components/slider';
 
 
 export default class Encoders extends React.Component {
@@ -22,7 +22,7 @@ export default class Encoders extends React.Component {
     render() {
         return (
             <View>
-
+                <SliderHandle></SliderHandle>
             </View> 
            
         );
