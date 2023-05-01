@@ -146,10 +146,10 @@ const buttonsAll = {
     'stop_effect': { 'address': '/eos/key/stopeffect', 'style': 'btn7', 'stylePressed': 'btn7Pressed', 'styleText': 'btn7Text', 'functype': 'btn', 'label': 'StopFX', 'argtype': 'i', 'argvalue': '0' },
 
     'commandLine': { 'address': '', 'style': 'info3', 'stylePressed': 'info3Pressed', 'styleText': 'info3Text', 'functype': 'info', 'label': 'LIVE: CMD LINE', 'argtype': 'i', 'argvalue': '0' },
-    'info-chan': { 'address': '', 'style': 'info1', 'stylePressed': 'info1Pressed', 'styleText': 'info1Text', 'functype': 'info', 'label': 'Chan : ', 'argtype': 'i', 'argvalue': '0' },
-    'info-patch': { 'address': '', 'style': 'info1', 'stylePressed': 'info1Pressed', 'styleText': 'info1Text', 'functype': 'info', 'label': 'Patch : ', 'argtype': 'i', 'argvalue': '0' },
-    'info-level': { 'address': '', 'style': 'info1', 'stylePressed': 'info1Pressed', 'styleText': 'info1Text', 'functype': 'info', 'label': 'Level : ', 'argtype': 'i', 'argvalue': '0' },
-    'info-notes': { 'address': '', 'style': 'info1', 'stylePressed': 'info1Pressed', 'styleText': 'info1Text', 'functype': 'info', 'label': 'Notes : ', 'argtype': 'i', 'argvalue': '0' },
+    'info_chan': { 'address': '', 'style': 'info1', 'stylePressed': 'info1Pressed', 'styleText': 'info1Text', 'functype': 'info', 'label': 'Chan : ', 'argtype': 'i', 'argvalue': '0' },
+    'info_patch': { 'address': '', 'style': 'info1', 'stylePressed': 'info1Pressed', 'styleText': 'info1Text', 'functype': 'info', 'label': 'Patch : ', 'argtype': 'i', 'argvalue': '0' },
+    'info_level': { 'address': '', 'style': 'info1', 'stylePressed': 'info1Pressed', 'styleText': 'info1Text', 'functype': 'info', 'label': 'Level : ', 'argtype': 'i', 'argvalue': '0' },
+    'info_notes': { 'address': '', 'style': 'info1', 'stylePressed': 'info1Pressed', 'styleText': 'info1Text', 'functype': 'info', 'label': 'Notes : ', 'argtype': 'i', 'argvalue': '0' },
 
     'ds1_1': { 'address': '/eos/ds/1/1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': '-', 'argtype': 's', 'argvalue': '1' },
     'ds1_2': { 'address': '/eos/ds/1/2', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': '-', 'argtype': 's', 'argvalue': '1' },
@@ -174,7 +174,9 @@ const buttonsAll = {
     'ds1_select': { 'address': '', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'select', 'label': 'SELECT', 'argtype': 's', 'argvalue': '1' },
     'ds1_up': { 'address': '/eos/ds/1/page/-1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'UP', 'argtype': 's', 'argvalue': '1' },
     'ds1_down': { 'address': '/eos/ds/1/page/1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'DOWN', 'argtype': 's', 'argvalue': '1' },
-    'ds1_page': { 'address': '', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'label12Text', 'functype': 'label', 'label': '', 'argtype': 's', 'argvalue': '' },
+    'ds1_page': { 'address': '', 'style': 'btnlabel', 'stylePressed': 'label12Pressed', 'styleText': 'labeltext', 'functype': 'label', 'label': 'PAGE #', 'argtype': 's', 'argvalue': '' },
+    'ds1_request': { 'address': 'eos/ds/1/group/1/20', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'btn12Text', 'functype': 'label', 'label': '', 'argtype': 's', 'argvalue': '' },
+
 
     'ds2_1': { 'address': '/eos/ds/2/1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': '-', 'argtype': 's', 'argvalue': '1' },
     'ds2_2': { 'address': '/eos/ds/2/2', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': '-', 'argtype': 's', 'argvalue': '1' },
@@ -199,7 +201,8 @@ const buttonsAll = {
     'ds2_select': { 'address': '', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'select', 'label': 'SELECT', 'argtype': 's', 'argvalue': '1' },
     'ds2_up': { 'address': '/eos/ds/2/page/-1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'UP', 'argtype': 's', 'argvalue': '1' },
     'ds2_down': { 'address': '/eos/ds/2/page/1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'DOWN', 'argtype': 's', 'argvalue': '1' },
-    'ds2_page': { 'address': '', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'label12Text', 'functype': 'label', 'label': '', 'argtype': 's', 'argvalue': '' },
+    'ds2_page': { 'address': '', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'labeltext', 'functype': 'label', 'label': 'PAGE #', 'argtype': 's', 'argvalue': '' },
+    'ds2_request': { 'address': 'eos/ds/2/preset/1/20', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'btn12Text', 'functype': 'label', 'label': '', 'argtype': 's', 'argvalue': '' },
 
     'ds3_1': { 'address': '/eos/ds/3/1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': '-', 'argtype': 's', 'argvalue': '1' },
     'ds3_2': { 'address': '/eos/ds/3/2', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': '-', 'argtype': 's', 'argvalue': '1' },
@@ -224,7 +227,8 @@ const buttonsAll = {
     'ds3_select': { 'address': '', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'select', 'label': 'SELECT', 'argtype': 's', 'argvalue': '1' },
     'ds3_up': { 'address': '/eos/ds/3/page/-1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'UP', 'argtype': 's', 'argvalue': '1' },
     'ds3_down': { 'address': '/eos/ds/3/page/1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'DOWN', 'argtype': 's', 'argvalue': '1' },
-    'ds3_page': { 'address': '', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'label12Text', 'functype': 'label', 'label': '', 'argtype': 's', 'argvalue': '' },
+    'ds3_page': { 'address': '', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'labeltext', 'functype': 'label', 'label': 'PAGE #', 'argtype': 's', 'argvalue': '' },
+    'ds3_request': { 'address': 'eos/ds/3/bp/1/20', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'btn12Text', 'functype': 'label', 'label': '', 'argtype': 's', 'argvalue': '' },
 
     'ds4_1': { 'address': '/eos/ds/4/1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': '-', 'argtype': 's', 'argvalue': '1' },
     'ds4_2': { 'address': '/eos/ds/4/2', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': '-', 'argtype': 's', 'argvalue': '1' },
@@ -249,7 +253,8 @@ const buttonsAll = {
     'ds4_select': { 'address': '', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'select', 'label': 'SELECT', 'argtype': 's', 'argvalue': '1' },
     'ds4_up': { 'address': '/eos/ds/4/page/-1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'UP', 'argtype': 's', 'argvalue': '1' },
     'ds4_down': { 'address': '/eos/ds/4/page/1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'DOWN', 'argtype': 's', 'argvalue': '1' },
-    'ds4_page': { 'address': '', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'label12Text', 'functype': 'label', 'label': '', 'argtype': 's', 'argvalue': '' },
+    'ds4_page': { 'address': '', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'labeltext', 'functype': 'label', 'label': 'PAGE #', 'argtype': 's', 'argvalue': '' },
+    'ds4_request': { 'address': 'eos/ds/4/macro/1/20', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'btn12Text', 'functype': 'label', 'label': '', 'argtype': 's', 'argvalue': '' },
 
     'ds5_1': { 'address': '/eos/ds/5/1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': '-', 'argtype': 's', 'argvalue': '1' },
     'ds5_2': { 'address': '/eos/ds/5/2', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': '-', 'argtype': 's', 'argvalue': '1' },
@@ -264,22 +269,23 @@ const buttonsAll = {
     'ds5_select': { 'address': '', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'select', 'label': 'SELECT', 'argtype': 's', 'argvalue': '1' },
     'ds5_up': { 'address': '/eos/ds/5/page/-1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'UP', 'argtype': 's', 'argvalue': '1' },
     'ds5_down': { 'address': '/eos/ds/5/page/1', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'DOWN', 'argtype': 's', 'argvalue': '1' },
-    'ds5_page': { 'address': '', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'label12Text', 'functype': 'label', 'label': '', 'argtype': 's', 'argvalue': '' },
+    'ds5_page': { 'address': '', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'labeltext', 'functype': 'label', 'label': 'PAGE #', 'argtype': 's', 'argvalue': '' },
+    'ds5_request': { 'address': 'eos/ds/5/fx/1/10', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'btn12Text', 'functype': 'label', 'label': '', 'argtype': 's', 'argvalue': '' },
 
-    'ds_Channels': { 'address': '/eos/ds/', 'style': 'dsselect5', 'stylePressed': 'dsselect5Pressed', 'styleText': 'dsselect5Text', 'functype': 'dsselect', 'label': 'Chan', 'argtype': 's', 'argvalue': '1' },
-    'ds_Groups': { 'address': '/eos/ds/', 'style': 'dsselect6', 'stylePressed': 'dsselect6Pressed', 'styleText': 'dsselect6Text', 'functype': 'dsselect', 'label': 'Group', 'argtype': 's', 'argvalue': '1' },
-    'ds-_ntensity_Palettes': { 'address': '/eos/ds/', 'style': 'dsselect3', 'stylePressed': 'dsselect3Pressed', 'styleText': 'dsselect3Text', 'functype': 'dsselect', 'label': 'IP', 'argtype': 's', 'argvalue': '1' },
-    'ds_Color_Palettes': { 'address': '/eos/ds/', 'style': 'dsselect12', 'stylePressed': 'dsselect12Pressed', 'styleText': 'dsselect12Text', 'functype': 'dsselect', 'label': 'CP', 'argtype': 's', 'argvalue': '1' },
-    'ds_Focus_Palettes': { 'address': '/eos/ds/', 'style': 'dsselect4', 'stylePressed': 'dsselect4Pressed', 'styleText': 'dsselect4Text', 'functype': 'dsselect', 'label': 'FP', 'argtype': 's', 'argvalue': '1' },
-    'ds_Beam_Palettes': { 'address': '/eos/ds/', 'style': 'dsselect8', 'stylePressed': 'dsselect8Pressed', 'styleText': 'dsselect8Text', 'functype': 'dsselect', 'label': 'BP', 'argtype': 's', 'argvalue': '1' },
-    'ds_Presets': { 'address': '/eos/ds/', 'style': 'dsselect7', 'stylePressed': 'dsselect7Pressed', 'styleText': 'dsselect7Text', 'functype': 'dsselect', 'label': 'Preset', 'argtype': 's', 'argvalue': '1' },
-    'ds_Effects': { 'address': '/eos/ds/', 'style': 'dsselect9', 'stylePressed': 'dsselect9Pressed', 'styleText': 'dsselect9Text', 'functype': 'dsselect', 'label': 'FX', 'argtype': 's', 'argvalue': '1' },
-    'ds_Macros': { 'address': '/eos/ds/', 'style': 'dsselect11', 'stylePressed': 'dsselect11Pressed', 'styleText': 'dsselect11Text', 'functype': 'dsselect', 'label': 'Macro', 'argtype': 's', 'argvalue': '1' },
-    'ds_Snapshots': { 'address': '/eos/ds/', 'style': 'dsselect1', 'stylePressed': 'dsselect1Pressed', 'styleText': 'dsselect1Text', 'functype': 'dsselect', 'label': 'Snap', 'argtype': 's', 'argvalue': '1' },
-    'ds_Magic_Sheets': { 'address': '/eos/ds/', 'style': 'dsselect10', 'stylePressed': 'dsselect10Pressed', 'styleText': 'dsselect10Text', 'functype': 'dsselect', 'label': 'MS', 'argtype': 's', 'argvalue': '1' },
-    'ds_Scenes': { 'address': '/eos/ds/', 'style': 'dsselect4', 'stylePressed': 'dsselect4Pressed', 'styleText': 'dsselect4Text', 'functype': 'dsselect', 'label': 'Scene', 'argtype': 's', 'argvalue': '1' },
-    'ds_Flexi': { 'address': '/eos/ds/', 'style': 'dsselect12', 'stylePressed': 'dsselect12Pressed', 'styleText': 'dsselect12Text', 'functype': 'dsselect', 'label': 'Flexi Off', 'argtype': 's', 'argvalue': '1' },
-    'ds_Clear': { 'address': '/eos/ds/', 'style': 'dsselect1', 'stylePressed': 'dsselect1Pressed', 'styleText': 'dsselect1Text', 'functype': 'dsselect', 'label': 'Clear', 'argtype': 's', 'argvalue': '1' },
+    'ds_Channels': { 'address': '/eos/ds/', 'style': 'btn5', 'stylePressed': 'dsselect5Pressed', 'styleText': 'dsselect5Text', 'functype': 'dsselect', 'label': 'Chan', 'argtype': 's', 'argvalue': '1' },
+    'ds_Groups': { 'address': '/eos/ds/', 'style': 'btn6', 'stylePressed': 'dsselect6Pressed', 'styleText': 'dsselect6Text', 'functype': 'dsselect', 'label': 'Group', 'argtype': 's', 'argvalue': '1' },
+    'ds_Intensity_Palettes': { 'address': '/eos/ds/', 'style': 'btn3', 'stylePressed': 'dsselect3Pressed', 'styleText': 'dsselect3Text', 'functype': 'dsselect', 'label': 'IP', 'argtype': 's', 'argvalue': '1' },
+    'ds_Color_Palettes': { 'address': '/eos/ds/', 'style': 'btn12', 'stylePressed': 'dsselect12Pressed', 'styleText': 'dsselect12Text', 'functype': 'dsselect', 'label': 'CP', 'argtype': 's', 'argvalue': '1' },
+    'ds_Focus_Palettes': { 'address': '/eos/ds/', 'style': 'btn4', 'stylePressed': 'dsselect4Pressed', 'styleText': 'dsselect4Text', 'functype': 'dsselect', 'label': 'FP', 'argtype': 's', 'argvalue': '1' },
+    'ds_Beam_Palettes': { 'address': '/eos/ds/', 'style': 'btn8', 'stylePressed': 'dsselect8Pressed', 'styleText': 'dsselect8Text', 'functype': 'dsselect', 'label': 'BP', 'argtype': 's', 'argvalue': '1' },
+    'ds_Presets': { 'address': '/eos/ds/', 'style': 'btn7', 'stylePressed': 'dsselect7Pressed', 'styleText': 'dsselect7Text', 'functype': 'dsselect', 'label': 'Preset', 'argtype': 's', 'argvalue': '1' },
+    'ds_Effects': { 'address': '/eos/ds/', 'style': 'btn9', 'stylePressed': 'dsselect9Pressed', 'styleText': 'dsselect9Text', 'functype': 'dsselect', 'label': 'FX', 'argtype': 's', 'argvalue': '1' },
+    'ds_Macros': { 'address': '/eos/ds/', 'style': 'btn11', 'stylePressed': 'dsselect11Pressed', 'styleText': 'dsselect11Text', 'functype': 'dsselect', 'label': 'Macro', 'argtype': 's', 'argvalue': '1' },
+    'ds_Snapshots': { 'address': '/eos/ds/', 'style': 'btn1', 'stylePressed': 'dsselect1Pressed', 'styleText': 'dsselect1Text', 'functype': 'dsselect', 'label': 'Snap', 'argtype': 's', 'argvalue': '1' },
+    'ds_Magic_Sheets': { 'address': '/eos/ds/', 'style': 'btn10', 'stylePressed': 'dsselect10Pressed', 'styleText': 'dsselect10Text', 'functype': 'dsselect', 'label': 'MS', 'argtype': 's', 'argvalue': '1' },
+    'ds_Scenes': { 'address': '/eos/ds/', 'style': 'btn4', 'stylePressed': 'dsselect4Pressed', 'styleText': 'dsselect4Text', 'functype': 'dsselect', 'label': 'Scene', 'argtype': 's', 'argvalue': '1' },
+    'ds_Flexi': { 'address': '/eos/ds/', 'style': 'btn12', 'stylePressed': 'dsselect12Pressed', 'styleText': 'dsselect12Text', 'functype': 'dsselect', 'label': 'Flexi Off', 'argtype': 's', 'argvalue': '1' },
+    'ds_Clear': { 'address': '/eos/ds/', 'style': 'btn1', 'stylePressed': 'dsselect1Pressed', 'styleText': 'dsselect1Text', 'functype': 'dsselect', 'label': 'Clear', 'argtype': 's', 'argvalue': '1' },
 
 
     'colorStore': { 'address': '', 'style': 'btn12', 'stylePressed': 'btn12Pressed', 'styleText': 'btn12Text', 'functype': 'btn', 'label': 'STORE', 'argtype': '', 'argvalue': '' },
@@ -379,7 +385,7 @@ const buttonsAll = {
     'fader_up': { 'address': '/eos/fader/1/page/-1', 'style': 'btn7', 'stylePressed': 'btn7Pressed', 'styleText': 'btn7Text', 'functype': 'btn', 'label': 'UP', 'argtype': 's', 'argvalue': '1' },
     'fader_down': { 'address': '/eos/fader/1/page/1', 'style': 'btn7', 'stylePressed': 'btn7Pressed', 'styleText': 'btn7Text', 'functype': 'btn', 'label': 'DOWN', 'argtype': 's', 'argvalue': '1' },
     'fader_page': { 'address': '', 'style': 'label7', 'stylePressed': 'label7Pressed', 'styleText': 'label7Text', 'functype': 'label', 'label': 'PAGE #', 'argtype': 's', 'argvalue': '1' },
-    'ds1_page': { 'address': '', 'style': 'label12', 'stylePressed': 'label12Pressed', 'styleText': 'label12Text', 'functype': 'label', 'label': 'PAGE #', 'argtype': 's', 'argvalue': '' },
+    
     'load': { 'address': '/eos/key/fader_ab', 'style': 'btn7', 'stylePressed': 'btn7Pressed', 'styleText': 'btn7Text', 'functype': 'btn', 'label': 'LOAD', 'argtype': 's', 'argvalue': '1' },
     'back_stop': { 'address': '/eos/key/stop', 'style': 'btn7', 'stylePressed': 'btn7Pressed', 'styleText': 'btn7Text', 'functype': 'btn', 'label': 'STOP ', 'argtype': 's', 'argvalue': '1' },
     'go': { 'address': '/eos/key/go_0', 'style': 'btn7', 'stylePressed': 'btn7Pressed', 'styleText': 'btn7Text', 'functype': 'btn', 'label': 'GO', 'argtype': 's', 'argvalue': '1' },
@@ -423,6 +429,7 @@ const buttonsAll = {
     'encoder12_home': { 'address': '/eos/active/wheel/1', 'style': 'encoder_btn7', 'stylePressed': 'encoder_btn7Pressed', 'styleText': 'encoder_btn7Text', 'functype': 'encoder_btn', 'label': 'HOME', 'argtype': 'i', 'argvalue': '1' },
 
     'oscLog': { 'address': '/eos/', 'style': 'oscLog', 'stylePressed': 'oscLogPressed', 'styleText': 'oscLogText', 'functype': 'oscLog', 'label': 'OSCLOG', 'argtype': 'i', 'argvalue': '1' },
+    'showName': { 'address': '', 'style': 'showName', 'stylePressed': 'showNamePressed', 'styleText': 'showNameText', 'functype': 'showName', 'label': 'PLEASE CONNECT EOS', 'argtype': '', 'argvalue': '' },
 };
 
 export default buttonsAll;

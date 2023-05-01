@@ -6,10 +6,19 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 20
     },
+
     pageContainer: {
         flex: 1,
-        flexDirection: 'column',
+        flexDirection: 'column'
+    },
+    pageContainerLive: {
         backgroundColor: '#1e1e28'
+    },
+    pageContainerBlind: {
+        backgroundColor: '#141630'
+    },
+    pageContainerPatch: {
+        backgroundColor: '#290703'
     },
     height50: {
         flexBasis: '50%'
@@ -51,6 +60,9 @@ const styles = StyleSheet.create({
     row_double_remote: {
         flexBasis: '24.4%'
     },
+    row_half_remote: {
+        flexBasis: '6.1%'
+    },
 
     row_half_focus: {
         flexBasis: '5.75%'
@@ -61,7 +73,24 @@ const styles = StyleSheet.create({
     row_double_focus: {
         flexBasis: '23%'
     },
-
+    row_half_facepanel: {
+        flexBasis: '5.4%'
+    },
+    row_single_facepanel: {
+        flexBasis: '10.8%'
+    },
+    row_double_facepanel: {
+        flexBasis: '21.6%'
+    },
+    row_single_ds: {
+        flexBasis: '11.2%'
+    },
+    row_double_ds: {
+        flexBasis: '22%'
+    },
+    row_half_ds: {
+        flexBasis: '5.6%'
+    },
 
     enc_col: {
         width: '20.833333%'
@@ -146,6 +175,17 @@ const styles = StyleSheet.create({
     },
     btnText: {
         fontSize: 16
+    },
+    labeltext: {
+        color: '#FFFFFF'
+    },
+    btnlabel: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%'
     },
 
     /* style 1 - RED */
@@ -450,6 +490,32 @@ const styles = StyleSheet.create({
     info3Text: {
         color: '#cccccc'
     },
+    infoBlind: {
+        borderColor: '#4b5cb0',
+        backgroundColor: '#141630' 
+    },
+    infoPatch: {
+        borderColor: '#dd0000',
+        backgroundColor: '#290703'
+    },
+    showNameView: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%'
+    },
+    showNameText: {
+        fontSize: 20,
+        color: '#ffffff',
+        fontWeight: 'bold'
+    },
+    showNameText_Alert: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#ff0000'
+    },
 
 
     /* BOOTSTRAP FOR DUMMIES */
@@ -463,6 +529,9 @@ const styles = StyleSheet.create({
     },
     col1: {
         width: '8.3333333%',
+    },
+    colds5: {
+        width: '14.2857143%',
     },
     col2: {
         width: '16.666666%',

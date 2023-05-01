@@ -7,46 +7,38 @@ import {
     StyleProp,
     TextStyle,
     ViewStyle,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 
-import tcpOsc from '../../services/tcpOsc';
-import {
-    NativeEventEmitter
-  } from 'react-native';
-import CustomButton from '../components/button';
-// import buttons from '../helpers/buttons';
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
-import { renderObject, renderText } from '../helpers/utils';
-import updater from '../../services/updater';
+import { useSelector, useDispatch } from 'react-redux';
 
-export default class OscLog extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.renderObject = renderObject.bind(this);
-        // All Messages from EOS Will come here. 
-        const eventEmitter = new NativeEventEmitter(tcpOsc);
-        eventEmitter.addListener('GotMessage', async (oscMessage) => {
-            updater.alterSourceData(oscMessage);
-            this.setState(buttonsAll);                ;
-            
-        });
-    }
+export default OscLog = () => {
 
-    render() {
+    const oscLogLabel = useSelector(state => state.buttonsReducer.oscLog.label);
+    const pageContainerStyle = useSelector(state => state.buttonsReducer.pageContainer.style);
+
+    //console.log("OSC LOG LABEL", oscLogLabel);
+
+    console.log("OSC LOG IS RERENDERING");
         return (
-            <View style={styles.pageContainer}>
+            <View style={[styles.pageContainer, styles[pageContainerStyle]]}>
                 
                 <View style={[styles.col, styles.col12]} >
                     <View style={[styles.oscLogCont]} >
-                        {this.renderObject('oscLog')}
+                        <ScrollView
+                            style={[styles[buttonsAll['oscLog'].style]]}
+                            
+                        ><Text style={[styles[buttonsAll['oscLog'].styleText]]} >{oscLogLabel}</Text>
+                        </ScrollView>
                     </View>
-                    </View>
+                </View>
                 
             </View> // pageContainer
 
         );
-    }
+    
 }

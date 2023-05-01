@@ -1,67 +1,40 @@
 import React from 'react';
+import { memo } from 'react';
 import {
-    StyleSheet,
     View,
     Text,
-    Linking,
-    StyleProp,
-    TextStyle,
-    ViewStyle,
-    TouchableOpacity,
-    TouchableHighlight,
-    Button,
-    Pressable,
-    useState
 } from 'react-native';
-export default class StaticButton extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isPressed: false
-        }
-
-    }
-    /*
-    handleDown = () => {
-        this.setState({ isPressed: true });
-    };
-
-    handleUp = () => {
-        this.setState({ isPressed: false });
-    };
-       */
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextState.isPressed !== this.state.isPressed) {
-            return false;
-        }
-        else {
-            return false;
-        }
-    }
  
 
-    render() {
-        console.log("STATIC BUTTON IS RERENDERING");
-        // const { isPressed } = this.state.isPressed;
-        return (
-            <View>
-                <Pressable
-                    isPressed={false}
-                    title={this.props.title}
-                    style={[this.props.style]}
-                    onPressIn={() =>
-                    {
-                         //this.handleDown,
-                         this.props.onPressIn({ address: this.props.address, argvalue: this.props.argvalue, style: this.props.sylePressed });
-                    }}
-                    onPressOut={() => {
-                        //this.handleUp,
-                        this.props.onPressOut({ address: this.props.address, argvalue: this.props.argvalue, style: this.props.style });
-                    }}
-                >
-                    <Text style={this.props.styleText}>{this.props.title}</Text>
-                </Pressable>
-            </View>
-        );
-    }
-}
+import styles from '../helpers/styles';
+import buttonsAll from '../helpers/buttonsAll';
+import tcpOsc from '../../services/tcpOsc';
+import { Pressable } from 'react-native';
+
+function StaticButtonBase({ name }){
+
+    const button = buttonsAll[name];
+
+    console.log("STATIC BUTTON IS RENDERING : " + name);
+
+    return (
+        <Pressable
+            style={[styles.btn, styles[button.style]]}
+            address={button.address}
+            argvalue={button.argvalue}
+            onPressIn={() => {
+                tcpOsc.sendMessage(button.address, [{ type: "i", value: 1 }])
+            }}
+            onPressOut={() => {
+                tcpOsc.sendMessage(button.address, [{ type: "i", value: 0 }])
+            }}>
+            <Text style={[styles.btnText, styles[button.styleText]]}>{button.label}</Text>
+        </Pressable>
+
+    );
+
+};
+
+export default StaticButton = memo(StaticButtonBase);
+
+

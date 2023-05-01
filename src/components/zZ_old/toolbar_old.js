@@ -53,8 +53,6 @@ export default class Toolbar extends React.Component {
         super(props);
     }
 
-
-
     render() {
         return (
             <View style={[styles.row, styles.rowHeader]}>

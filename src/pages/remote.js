@@ -1,83 +1,48 @@
 import React from 'react';
 import {
-    StyleSheet,
-    View,
-    Text,
-    Linking,
-    StyleProp,
-    TextStyle,
-    ViewStyle,
-    TouchableOpacity
+    View
 } from 'react-native';
 
-import tcpOsc from '../../services/tcpOsc';
-import {
-    NativeEventEmitter
-} from 'react-native';
-import CustomButton from '../components/button';
-// import buttons from '../helpers/buttons';
 import styles from '../helpers/styles';
-import { renderObject, renderText } from '../helpers/utils';
-import buttonsAll from '../helpers/buttonsAll';
-import updater from '../../services/updater';
+import { renderObject } from '../helpers/utils';
+import { useSelector, useDispatch } from 'react-redux';
+
+import CommandLine from '../components/infopanels/commandLine';
+import InfoChan from '../components/infopanels/infoChan';
+import InfoLevel from '../components/infopanels/infoLevel';
+import InfoPatch from '../components/infopanels/infoPatch';
+import InfoNotes from '../components/infopanels/infoNotes';
+import StaticButton from '../components/staticButton';
 
 
 
-export default class Remote extends React.Component {
-    constructor(props) {
-        super(props);
+export default Remote = () => {
 
-        this.renderObject = renderObject.bind(this);
-        // All Messages from EOS Will come here. 
-        const pageName = 'remote';
-        const eventEmitter = new NativeEventEmitter(tcpOsc);
+console.log("REMOTE PAGE IS RENDERING");
 
-        eventEmitter.addListener('GotMessage', async (oscMessage) => {
-            const rerenderArray = await updater.alterSourceData(oscMessage);
-                
-            console.log(rerenderArray);
+    const pageContainerStyle = useSelector(state => state.buttonsReducer.pageContainer.style);
 
-            if (Array.isArray(rerenderArray) && rerenderArray.includes(pageName)) {
-                this.setState(buttonsAll);
-            }
-                
-        });
-
-        
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextProps !== this.state) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    render() {
-        console.log("REMOTE PAGE IS RERENDERING");
-        return (
-            <View style={styles.pageContainer}>
+    return (
+            <View style={[styles.pageContainer, styles[pageContainerStyle]]}>
                 <View style={[styles.row, styles.row_single_remote]} >
                     <View style={[styles.col, styles.col12]} >
                         <View style={[styles.row, styles.height50]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('commandLine')}
+                                <CommandLine></CommandLine>                              
                             </View>{/* /button columns */}
                         </View>
                         <View style={[styles.row, styles.height50]} >
                             <View style={[styles.col, styles.col2]} >
-                                {this.renderObject('info-chan')}
+                                <InfoChan></InfoChan>
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col2]} >
-                                {this.renderObject('info-level')}
+                                <InfoLevel></InfoLevel>
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col2]} >
-                                {this.renderObject('info-patch')}
+                                <InfoPatch></InfoPatch>
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderObject('info-notes')}
+                                <InfoNotes></InfoNotes>
                             </View>{/* /button column */}
                         </View>{/* /row height50 */}
                     </View>{/* /module column */}
@@ -90,18 +55,18 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col2]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderObject('intensity')}
+                                <StaticButton name={ 'intensity' } />
                             </View>
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderObject('focus')}
+                                <StaticButton name={ 'focus' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderObject('color')}
+                                <StaticButton name={ 'color' } />
                             </View>
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderObject('beam')}
+                                <StaticButton name={ 'beam' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -110,24 +75,24 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col3]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('address')}
+                                <StaticButton name={ 'address' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('learn')}
+                                <StaticButton name={ 'learn' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('macro')}
+                                <StaticButton name={ 'macro' } />
                             </View>
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('delete')}
+                                <StaticButton name={ 'delete' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
 
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('effect')}
+                                <StaticButton name={ 'effect' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -136,24 +101,24 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col3]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('Live')}
+                                <StaticButton name={ 'Live' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('copy_to')}
+                                <StaticButton name={ 'copy_to' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('recall_from')}
+                                <StaticButton name={ 'recall_from' } />
                             </View>
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('go_to_cue')}
+                                <StaticButton name={ 'go_to_cue' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('block')}
+                                <StaticButton name={ 'block' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('assert')}
+                                <StaticButton name={ 'assert' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -162,24 +127,24 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col3]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('flash')}
+                                <StaticButton name={ 'flash' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('check')}
+                                <StaticButton name={ 'check' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('about')}
+                                <StaticButton name={ 'about' } />
                             </View>
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('offset')}
+                                <StaticButton name={ 'offset' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('highlight')}
+                                <StaticButton name={ 'highlight' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('fan')}
+                                <StaticButton name={ 'fan' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -188,12 +153,12 @@ export default class Remote extends React.Component {
                     <View style={[styles.col, styles.col1]} >
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('park')}
+                                <StaticButton name={ 'park' } />
                             </View>
                         </View>{/* /button row */}
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('capture')}
+                                <StaticButton name={ 'capture' } />
                             </View>
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -209,28 +174,28 @@ export default class Remote extends React.Component {
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderObject('load')}
+                                <StaticButton name={ 'load' } />
                             </View>
                             <View style={[styles.col, styles.col6]} >
-                                {this.renderObject('all_nps')}
+                                <StaticButton name={ 'all_nps' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_double_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('Qlist')}
+                                <StaticButton name={ 'Qlist' } />
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('back_stop')}
+                                <StaticButton name={ 'back_stop' } />
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('go')}
+                                <StaticButton name={ 'go' } />
                             </View>
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -240,61 +205,61 @@ export default class Remote extends React.Component {
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('part')}
+                                <StaticButton name={ 'part' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('cue')}
+                                <StaticButton name={ 'cue' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('record')}
+                                <StaticButton name={ 'record' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('intensity_palette')}
+                                <StaticButton name={ 'intensity_palette' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('focus_palette')}
+                                <StaticButton name={ 'focus_palette' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('record_only')}
+                                <StaticButton name={ 'record_only' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('color_palette')}
+                                <StaticButton name={ 'color_palette' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('beam_palette')}
+                                <StaticButton name={ 'beam_palette' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('update')}
+                                <StaticButton name={ 'update' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('preset')}
+                                <StaticButton name={ 'preset' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('sub')}
+                                <StaticButton name={ 'sub' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('group')}
+                                <StaticButton name={ 'group' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('shift')}
+                                <StaticButton name={ 'shift' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('delay')}
+                                <StaticButton name={ 'delay' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('time')}
+                                <StaticButton name={ 'time' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -304,61 +269,61 @@ export default class Remote extends React.Component {
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('plus')}
+                                <StaticButton name={ 'plus' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('thru')}
+                                <StaticButton name={ 'thru' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('minus')}
+                                <StaticButton name={ 'minus' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('7')}
+                                <StaticButton name={ '7' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('8')}
+                                <StaticButton name={ '8' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('9')}
+                                <StaticButton name={ '9' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('4')}
+                                <StaticButton name={ '4' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('5')}
+                                <StaticButton name={ '5' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('6')}
+                                <StaticButton name={ '6' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('1')}
+                                <StaticButton name={ '1' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('2')}
+                                <StaticButton name={ '2' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('3')}
+                                <StaticButton name={ '3' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('clear_cmd')}
+                                <StaticButton name={ 'clear_cmd' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('0')}
+                                <StaticButton name={ '0' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('period')}
+                                <StaticButton name={ 'period' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
@@ -369,58 +334,58 @@ export default class Remote extends React.Component {
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('slash')}
+                                <StaticButton name={ 'slash' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('mark')}
+                                <StaticButton name={ 'mark' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('sneak')}
+                                <StaticButton name={ 'sneak' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('rem_dim')}
+                                <StaticButton name={ 'rem_dim' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('plus_percent')}
+                                <StaticButton name={ 'plus_percent' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('home')}
+                                <StaticButton name={ 'home' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('out')}
+                                <StaticButton name={ 'out' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('minus_percent')}
+                                <StaticButton name={ 'minus_percent' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('trace')}
+                                <StaticButton name={ 'trace' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('full')}
+                                <StaticButton name={ 'full' } />
                             </View>
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('level')}
+                                <StaticButton name={ 'level' } />
                             </View>{/* /button column */}
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('track')}
+                                <StaticButton name={ 'track' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col4]} >
-                                {this.renderObject('at')}
+                                <StaticButton name={ 'at' } />
                             </View>
                             <View style={[styles.col, styles.col8]} >
-                                {this.renderObject('enter')}
+                                <StaticButton name={ 'enter' } />
                             </View>{/* /button column */}
                         </View>{/* /button row */}
                     </View>{/* /module column */}
@@ -430,54 +395,39 @@ export default class Remote extends React.Component {
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('select_last')}
+                                <StaticButton name={ 'select_last' } />
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('select_manual')}
+                                <StaticButton name={ 'select_manual' } />
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('select_active')}
+                                <StaticButton name={ 'select_active' } />
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('last')}
+                                <StaticButton name={ 'last' } />
                             </View>
                         </View>{/* /button row */}
 
                         <View style={[styles.row, styles.row_single_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                {this.renderObject('next')}
+                                <StaticButton name={ 'next' } />
                             </View>
                         </View>{/* /button row */}
                     </View>{/* /module column */}
 
                 </View>{/* /PAGE ROW 3 */}
 
-                {/*
-                <View style={{ flex: 1, backgroundColor: 'red' }} >
-
-                        <Text>
-                            This is a todays test 7
-                        </Text>
-                    </View>
-                <View style={{ flex: 1, backgroundColor: 'blue' }} >
-                    {this.renderButtons()}
-                        <Text>
-                            This is a another test
-                        </Text>
-                </View>
-                    */}
-            </View> // pageContainer
-
+            </View> 
 
         );
-    }
+    
 }

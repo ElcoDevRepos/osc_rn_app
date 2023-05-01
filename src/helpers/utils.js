@@ -1,25 +1,30 @@
 import React from 'react';
+import {
+    StyleSheet,
+    View,
+    Text,
+    Linking,
+    StyleProp,
+    TextStyle,
+    ViewStyle,
+    TouchableOpacity
+} from 'react-native';
 import useState from 'react-native';
 import styles from '../helpers/styles';
 import buttonsAll from '../helpers/buttonsAll';
-import CustomButton from '../components/button';
-import StaticButton from '../components/staticButton';
-import InfoText from '../components/info';
-import CustomScrollView from '../components/scrollview';
+import CustomButton from '../components/zZ_old/button';
+import StaticButton from '../components/zZ_old/staticButton_old';
+import InfoText from '../components/zZ_old/info';
+import CustomScrollView from '../components/zZ_old/scrollview';
 import tcpOsc from '../../services/tcpOsc';
+import { useSelector, useDispatch } from 'react-redux';
 
 export const renderText = (text) => {
+
     return text;
 }
+/*
 
-export const renderObject = (name) => {
-
-    const buttonObject = [];
-    button = buttonsAll[name];
-    switch (button.functype) {
-        case 'info':
-            buttonObject.push(
-                (
                     <InfoText
                         functype={button.functype}
                         title={button.label}
@@ -29,8 +34,29 @@ export const renderObject = (name) => {
                         styleText={[styles.infoText, styles[button.styleText]]}
                         >
                     </InfoText>
-                )
-            )
+*/
+
+export const renderObject = (name) => {
+
+    const buttonObject = [];
+    button = buttonsAll[name];
+    switch (button.functype) {
+        case 'info':
+
+            switch (name) {
+                
+                default:
+                     buttonObject.push(
+                        (
+
+                        <View style={[styles.info, styles[button.style]]}>
+                            <Text style={[styles.infoText, styles[button.styleText]]}>DEFAULT TEXT</Text>
+                        </View>
+
+                        )
+                    )
+                } // end switch name
+
             break;
 
         case 'btn':

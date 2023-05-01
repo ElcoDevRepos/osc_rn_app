@@ -12,7 +12,7 @@ const addConsoletoLog = (consoleMessage) => {
     );
   };
 
-updater.alterSourceData = (osc_message) => {
+updater.alterSourceData = (osc_message, dispatch = null) => {
 
     let address = osc_message.address;
     let fullMessage = JSON.stringify(osc_message);
@@ -21,6 +21,9 @@ updater.alterSourceData = (osc_message) => {
     let hasArgs = true;
     let fullArgArr = [];
     const rerenderArray = [];
+
+    console.log("UPDATER :  " , osc_message);
+
 
     try {
         if (osc_message.args.length > 0) {
@@ -37,11 +40,12 @@ updater.alterSourceData = (osc_message) => {
         // LOG THE OSC
         let logText = buttonsAll['oscLog']['label'];
         let updateMessage = "CONSOLE :: " + address + " : " + argValue + " ";
-        //console.log(updateMessage);
+        //console.log("UpdateMessage", updateMessage);
 
         buttonsAll['oscLog']['label'] = updateMessage + '\n' + logText;
+        dispatch({ type: "oscLog", payload: { label: updateMessage + '\n' + logText } });
 
-        rerenderArray.push('oscLog');
+        //rerenderArray.push('oscLog');
 
 
         // PARSE THE ADDRESS
@@ -63,11 +67,12 @@ updater.alterSourceData = (osc_message) => {
             // This is more or less the TODO List
             // connected = true;
             // sidebarCollapse();
+            //dispatch(commandLine, { label: 'COMMANDLINE DISPATCH', style: "DISPATCH STYLE" });
             buttonsAll['commandLine']['label'] = "";
-            buttonsAll['info-chan']['label'] = "Chan :: ";
-            buttonsAll['info-level']['label'] = "Level :: ";
-            buttonsAll['info-patch']['label'] = "Patch :: ";
-            buttonsAll['info-notes']['label'] = "Notes :: ";
+            buttonsAll['info_chan']['label'] = "Chan :: ";
+            buttonsAll['info_level']['label'] = "Level :: ";
+            buttonsAll['info_patch']['label'] = "Patch :: ";
+            buttonsAll['info_notes']['label'] = "Notes :: ";
             // $('[data-asc-id="commandLine"]').text("");
             // $('[data-asc-id="info-chan"]').text("Chan : ");
             // $('[data-asc-id="info-level"]').text("Level : ");
@@ -91,6 +96,13 @@ updater.alterSourceData = (osc_message) => {
 
             if (argValue.includes("LIVE:")) {
 
+                dispatch({ type: "commandLine", payload: { label: argValue, style: buttonsAll['commandLine']['style'] } });
+                dispatch({ type: "info_chan_style", payload: { style: buttonsAll['info_chan']['style'] } });
+                dispatch({ type: "info_patch_style", payload: { style: buttonsAll['info_patch']['style'] } });
+                dispatch({ type: "info_level_style", payload: { style: buttonsAll['info_level']['style'] } });
+                dispatch({ type: "info_notes_style", payload: { style: buttonsAll['info_notes']['style'] } });
+                dispatch({ type: "pageContainer", payload: { style: "pageContainerLive" } });
+
                 // $('.app-header').addClass('app-header-live');
                 // $('.app-wrapper').addClass('app-wrapper-live');
                 // $('[data-asc-id="commandLine"]').addClass('info-live');
@@ -101,6 +113,14 @@ updater.alterSourceData = (osc_message) => {
 
             } if (argValue.includes("BLIND:")) {
 
+                dispatch({ type: "commandLine", payload: { label: argValue, style: "infoBlind" } });
+                dispatch({ type: "info_chan_style", payload: { style: "infoBlind" } });
+                dispatch({ type: "info_patch_style", payload: { style: "infoBlind" } });
+                dispatch({ type: "info_level_style", payload: { style: "infoBlind" } });
+                dispatch({ type: "info_notes_style", payload: { style: "infoBlind" } });
+                dispatch({ type: "pageContainer", payload: { style: "pageContainerBlind" } });
+
+
                 // $('.app-header').addClass('app-header-blind');
                 // $('.app-wrapper').addClass('app-wrapper-blind');
                 // $('[data-asc-id="commandLine"]').addClass('info-blind');
@@ -110,6 +130,14 @@ updater.alterSourceData = (osc_message) => {
 
             } if (argValue.includes("Patch Channel:")) {
 
+
+                dispatch({ type: "commandLine", payload: { label: argValue, style: "infoPatch" } });
+                dispatch({ type: "info_chan_style", payload: { style: "infoPatch" } });
+                dispatch({ type: "info_patch_style", payload: { style: "infoPatch" } });
+                dispatch({ type: "info_level_style", payload: { style: "infoPatch" } });
+                dispatch({ type: "info_notes_style", payload: { style: "infoPatch" } });
+                dispatch({ type: "pageContainer", payload: { style: "pageContainerPatch" } });
+
                 // $('.app-header').addClass('app-header-patch');
                 // $('.app-wrapper').addClass('app-wrapper-patch');
                 // $('[data-asc-id="commandLine"]').addClass('info-patch');
@@ -118,7 +146,11 @@ updater.alterSourceData = (osc_message) => {
                 // $('[data-asc-id="commandLine"]').removeClass('info-blind info-live');
 
             }
-            buttonsAll['commandLine']['label'] = argValue;
+            
+            
+
+
+            //buttonsAll['commandLine']['label'] = argValue;
 
             // $('[data-asc-id="commandLine"]').text(argValue);
 
@@ -138,10 +170,15 @@ updater.alterSourceData = (osc_message) => {
 
             let softkeyNumber = textArr[textArr.length - 1];
 
+            // console.log("SOFTKEY NUMBER : ", softkeyNumber, address);
+
+            dispatch({ type: "softkey_" + softkeyNumber, payload: { label: argValue } });
+
+
             // $('[data-asc-id="softkey_'+ softkeyNumber +'"]').text(argValue);
 
         } else if (address.includes('/eos/out/active/chan')) {
-
+            console.log("UPDATER INPUT ACTIVE CHAN", osc_message);
             rerenderArray.push('remote', 'focus', 'facePanel');
 
             // //////////  ADDRESS  /////////// //
@@ -155,10 +192,10 @@ updater.alterSourceData = (osc_message) => {
             //wheels = [];
             // Check if Value is empty
             if (argValue == "") {
-                buttonsAll['info-chan']['label'] = "Chan : ";
-                buttonsAll['info-level']['label'] = "Level : ";
-                buttonsAll['info-patch']['label'] = "Patch : ";
-                buttonsAll['info-notes']['label'] = "Notes : ";
+                dispatch({ type: "info_chan", payload: { label: "Chan : " } });
+                dispatch({ type: "info_patch", payload: { label: "Patch : " } });
+                dispatch({ type: "info_level", payload: { label: "Level : " } });
+                dispatch({ type: "info_notes", payload: { label: "Notes : " } });
                 // $('[data-asc-id="info-chan"]').text("Chan : ");
                 // $('[data-asc-id="info-level"]').text("Level : ");
                 // $('[data-asc-id="info-patch"]').text("Patch : ");
@@ -174,7 +211,7 @@ updater.alterSourceData = (osc_message) => {
 
                 
                 if (typeof argArr[1] !== "undefined") {
-                    buttonsAll['info-patch']['label'] = "Patch : " + argArr[argArr.length - 1];
+                    dispatch({ type: "info_patch", payload: { label: "Patch : " + argArr[argArr.length - 1] } });
                     // $('[data-asc-id="info-patch"]').text("Patch : " + argArr[argArr.length - 1]);
                 }
 
@@ -182,6 +219,8 @@ updater.alterSourceData = (osc_message) => {
                 value = argArr[0];
 
             }
+
+            console.log("NEW VALUE : " + value);
 
 
             if (value.includes('[')) {
@@ -191,22 +230,29 @@ updater.alterSourceData = (osc_message) => {
                 if (typeof argArr[0] !== "undefined") {
                     appState.activeChan = argArr[0];
                     // console.log("Active Chan :" + app.appState.activeChan);
-                    buttonsAll['info-chan']['label'] = "Chan : " + argArr[0];
+                    dispatch({ type: "info_chan", payload: { label: "Chan : " + argArr[0] } });
+                    //buttonsAll['info_chan']['label'] = "Chan : " + argArr[0];
                     // $('[data-asc-id="info-chan"]').text("Chan : " + argArr[0]);
+                    
                 }
 
                 value = argArr[1];
+
+                console.log("NEW VALUE : " + value);
 
                 argArr = value.split(']');
 
                 if (typeof argArr[0] !== "undefined") {
 
-                    buttonsAll['info-level']['label'] = "Level : " + argArr[0];
+                    // buttonsAll['info-level']['label'] = "Level : " + argArr[0];
+                    dispatch({ type: "info_level", payload: { label: "Level : " + argArr[0] } });
 
                     // $('[data-asc-id="info-level"]').text("Level : " + argArr[0]);
                 }
 
                 value = argArr[1];
+
+                console.log("NEW VALUE : " + value);
 
             } else {
                 // we have a blank channel
@@ -222,7 +268,8 @@ updater.alterSourceData = (osc_message) => {
                 newChannel = false;
             }
 
-            buttonsAll['info-notes']['label'] = "Notes : " + value;
+            // buttonsAll['info-notes']['label'] = "Notes : " + value;
+            dispatch({ type: "info_notes", payload: { label: "Notes : " + value } });
 
             // $('[data-asc-id="info-notes"]').text("Notes : " + value);
 
@@ -241,7 +288,9 @@ updater.alterSourceData = (osc_message) => {
             let line1 = "";
             let line2 = "";
 
-            if (hasArgs) {
+            console.log("This is cue/text", argValue);
+
+            if (hasArgs && argValue != "") {
 
                 let argArr = argValue.split(" ");
                 //console.log(argArr);
@@ -287,6 +336,8 @@ updater.alterSourceData = (osc_message) => {
 
             console.log("SHOW NAME");
             console.log(argValue);
+
+            dispatch({ type: "showName", payload: { label: argValue, style : "showNameText" } });
 
             // $('#header-title').text(argValue);
 
@@ -552,7 +603,8 @@ updater.alterSourceData = (osc_message) => {
             //
             //          DIRECT SELECTS
             // EXAMPLE
-            // /eos/out/
+            // /eos/out/ds/modulenumber/buttonnumber, label [pagenumber] 
+            // /eos/out/ds/modulenumber, Beam_Palettes [pagenumber]
             // ////////////////////////////////
 
             //
@@ -568,14 +620,14 @@ updater.alterSourceData = (osc_message) => {
                 dsModule = addArr[0];
                 btnNum = addArr[1];
 
-                // data-asc-id="ds1-1"
-                // $('[data-asc-id="ds'+ dsModule +'-'+ btnNum +'"]').text(argValue);
+                dispatch({ type: "ds" + dsModule + '_' + btnNum, payload: { label: argValue } });
 
             } else {
                 // This is a DS Label and Page Number
                 dsModule = address;
 
                 let label = "SELECT";
+                let moduleStyle = "btn1";
                 let pageNum = 1;
 
                 if (argValue.includes('[')) {
@@ -588,35 +640,49 @@ updater.alterSourceData = (osc_message) => {
                 // console.log("I HAVE A PAGE NUMBER " + pageNum, argArr);
                 if (argValue.includes("Channels")) {
                     label = "CHAN";
+                    moduleStyle = buttonsAll['ds_Channels']['style'];
                 } else if (argValue.includes("Groups")) {
                     label = "GROUPS";
+                    moduleStyle = buttonsAll['ds_Groups']['style'];
                 } else if (argValue.includes("Intensity Palettes")) {
                     label = "IP";
+                    moduleStyle = buttonsAll['ds_Intensity_Palettes']['style'];
                 } else if (argValue.includes("Color Palettes")) {
                     label = "CP";
+                    moduleStyle = buttonsAll['ds_Color_Palettes']['style'];
                 } else if (argValue.includes("Beam Palettes")) {
                     label = "BP";
+                    moduleStyle = buttonsAll['ds_Beam_Palettes']['style'];
                 } else if (argValue.includes("Focus Palettes")) {
                     label = "FP";
+                    moduleStyle = buttonsAll['ds_Focus_Palettes']['style'];
                 } else if (argValue.includes("Presets")) {
                     label = "PRESET";
+                    moduleStyle = buttonsAll['ds_Presets']['style'];
                 } else if (argValue.includes("Effects")) {
                     label = "FX";
+                    moduleStyle = buttonsAll['ds_Effects']['style'];
                 } else if (argValue.includes("Macros")) {
                     label = "MACRO";
+                    moduleStyle = buttonsAll['ds_Macros']['style'];
                 } else if (argValue.includes("Snapshots")) {
                     label = "SNAP";
+                    moduleStyle = buttonsAll['ds_Snapshots']['style'];
                 } else if (argValue.includes("Magic Sheets")) {
                     label = "MS";
+                    moduleStyle = buttonsAll['ds_Magic_Sheets']['style'];
                 } else if (argValue.includes("Scene")) {
                     label = "SCENE";
+                    moduleStyle = buttonsAll['ds_Scenes']['style'];
                 }
 
-                // $('[data-asc-id="ds'+ dsModule +'-select"]').text(label);
+                dispatch({ type: "ds" + dsModule + '_select', payload: { label: label } });
+                dispatch({ type: "ds" + dsModule + '_request', payload: { label: label } });
+                dispatch({ type: "ds" + dsModule + '_page', payload: { label: pageNum } });
+                dispatch({ type: "ds" + dsModule + '_style', payload: { style: moduleStyle } });
+
                 // app.appState.ds[dsModule - 1].label = label;
                 // app.appState.ds[dsModule - 1].page = pageNum;
-
-                // $('[data-asc-id="ds'+ dsModule +'-page').text("Page " + app.appState.ds[dsModule - 1].page);
 
                 // This is the last thing to happen with DS
                 // We can Store the App State
