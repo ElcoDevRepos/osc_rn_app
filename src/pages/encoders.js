@@ -2,9 +2,13 @@ import React from 'react';
 import {
     View
 } from 'react-native';
+<<<<<<< HEAD
 
 import styles from '../helpers/styles';
 import { useSelector, useDispatch } from 'react-redux';
+=======
+import SliderHandle from '../components/slider';
+>>>>>>> fc87df155e6e0f3c76ff259055a37942c2c38256
 
 import CommandLine from '../components/infopanels/commandLine';
 import InfoChan from '../components/infopanels/infoChan';
@@ -20,6 +24,7 @@ console.log("ENCODER PAGE IS RERENDERING");
     const pageContainerStyle = useSelector(state => state.buttonsReducer.pageContainer.style);
 
         return (
+<<<<<<< HEAD
             <View style={[styles.pageContainer, styles[pageContainerStyle]]}>
                 <View style={[styles.row, styles.row_single_remote]} >
                     <View style={[styles.col, styles.col12]} >
@@ -47,6 +52,12 @@ console.log("ENCODER PAGE IS RERENDERING");
 
             </View> // pageContainer
 
+=======
+            <View>
+                <SliderHandle></SliderHandle>
+            </View> 
+           
+>>>>>>> fc87df155e6e0f3c76ff259055a37942c2c38256
         );
     
 }
