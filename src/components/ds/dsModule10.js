@@ -8,10 +8,11 @@ import styles from '../../helpers/styles';
 import buttonsAll from '../../helpers/buttonsAll';
 import { useSelector, useDispatch } from 'react-redux';
 import { Pressable } from 'react-native';
-import DirectSelectButton from './directselectBTN';
-import DirectSelectPage from './directselectPageBTN';
+import DSButton from './dsButton';
+import DSSelectButton from './dsSelectButton';
+import DSPageButton from './dsPageButton';
 
-export default DirectSelectModule = ({ module }) => {
+export default DSModule10 = ({ module }) => {
 
     console.log("DS MODULE::" + module);
 
@@ -19,49 +20,49 @@ export default DirectSelectModule = ({ module }) => {
         <View>
             <View style={[styles.row, styles.row_single_ds]} >
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={1} />
+                    <DSButton module={module} name={1} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={2} />
+                    <DSButton module={module} name={2} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={3} />
+                    <DSButton module={module} name={3} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={4} />
+                    <DSButton module={module} name={4} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={5} />
+                    <DSButton module={module} name={5} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={'request'} />
+                    <DSSelectButton module={module} name={'select'} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={'up'} />
+                    <DSButton module={module} name={'up'} />
                 </View>
             </View>
             
             <View style={[styles.row, styles.row_single_ds]} >
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={6} />
+                    <DSButton module={module} name={6} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={7} />
+                    <DSButton module={module} name={7} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={8} />
+                    <DSButton module={module} name={8} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={9} />
+                    <DSButton module={module} name={9} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={10} />
+                    <DSButton module={module} name={10} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectPage module={module} num={'page'} />
+                    <DSPageButton module={module} name={'page'} />
                 </View>
                 <View style={[styles.col, styles.colds5]} >
-                    <DirectSelectButton module={module} num={'down'} />
+                    <DSButton module={module} name={'down'} />
                 </View>
             </View>
         </View>

@@ -12,7 +12,6 @@ import tcpOsc from '../../services/tcpOsc';
 import { Pressable } from 'react-native';
 import { createSelector } from 'reselect'
 
-
 export default DisplaysButton = memo(() => {
 
     const button = buttonsAll['displays'];

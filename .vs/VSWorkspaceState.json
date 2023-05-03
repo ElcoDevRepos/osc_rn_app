@@ -1,16 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\android\\app",
-    "\\android\\app\\src",
-    "\\android\\app\\src\\main",
-    "\\android\\app\\src\\main\\java",
-    "\\android\\app\\src\\main\\java\\com",
-    "\\android\\app\\src\\main\\java\\com\\oscrnapp",
+    "\\services",
     "\\src",
     "\\src\\components",
-    "\\src\\components\\header"
+    "\\src\\components\\ds",
+    "\\src\\functions",
+    "\\src\\helpers",
+    "\\src\\pages"
   ],
-  "SelectedNode": "\\src\\components\\staticButton.js",
+  "SelectedNode": "\\services\\updater.js",
   "PreviewInSolutionExplorer": false
 }

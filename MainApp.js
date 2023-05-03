@@ -14,7 +14,7 @@ import tcpOsc from './services/tcpOsc';
 import { Header as HeaderRNE, HeaderProps, Icon } from '@rneui/themed';
 
 // REACT NAVIGATION
-import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Drawer from 'react-native-drawer';
@@ -43,22 +43,28 @@ import OscLog from './src/pages/osclog';
 // MODALS AND POPUPS
 import ColorPicker from './src/pages/colorPicker';
 import EncoderEdit from './src/pages/encoderEdit';
+import DSSelectionScreen from './src/components/ds/dsSelectionScreen';
 
-// HELPERS
-import updater from './services/updater';
+// APPLICATION
+import './src/functions/app';
 
 // STYLES
 import styles from './src/helpers/styles';
 
-
-
+import './src/helpers/appState';
 
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import app from './src/functions/app';
+
 export default function MainApp() {
+
+    const dispatch = useDispatch();
+
+    app.dispatch = dispatch;
     /*
   const [isRemoteShown, setIsRemoteShown] = useState(true);
   const [isFocusShown, setIsFocusShown] = useState(false);
@@ -81,6 +87,7 @@ export default function MainApp() {
   };
 
 
+
   /*
   const toggleRemoteView = event => {
     setIsRemoteShown(true)
@@ -96,6 +103,9 @@ export default function MainApp() {
 
   }
   */
+
+    //console.log("This is MAIN APP ", app.appState);
+
     const hideAllViews = () => {
         setIsRemoteShown(false);
         setIsFocusShown(false);
@@ -105,12 +115,80 @@ export default function MainApp() {
         setIsDirectSelectsShown(false);
         setIsPlaybackShown(false);
     }
+    
+    //console.log("ATTEMPTING TO UPDATE APP STATE");
+    const initApp = () => {
 
-  useEffect(() => {
+        // FOR DEVELOPEMENT ONLY.  REMOVE FOR PRODUCTION
+       // app.appState.console = 1;
+       // app.updateAppState(app.appState);
+
+        // On App load, read from local storage and store app config/state
+        app.getAppState().then(
+            function (appStateFromStorage) {
+                /* code if successful */
+                console.log("MainApp : Returned from Storage" + appStateFromStorage)
+
+                console.log("Updated App State", app.appState)
+
+            },
+            function (error) {
+                /* code if some error */
+            }
+        );
+
+
+        // Wait for App to catch up 
+        setTimeout(() => {
+            // Get Direct Selects 
+            app.ds.requestDS();
+            app.faders.requestFaders();
+            }, 2000);
+        
+
+    }
+
+    if (!isConnected) {
+        
+
+        //app.dispatch = dispatch;
+
+        const eventEmitter = new NativeEventEmitter(tcpOsc);
+        try {
+            tcpOsc.startConnection(3037, '192.168.50.119');
+
+            setIsConnected(true);
+
+
+            if (eventEmitter.listenerCount('GotMessage') > 0) {
+
+                eventEmitter.removeAllListeners('GotMessage');
+            }
+
+            eventEmitter.addListener('GotMessage', async (oscMessage) => {
+
+                app.updater(oscMessage, dispatch);
+
+            })
+
+        } catch (error) {
+
+        }
+
+    }
+
+    useEffect(() => {
+    // useEffect waits for the component to be mounted before running
     // On App load, read from local storage and store app config/state
-    updater.getAppConfig();
-    updater.getAppState();
+      app.getAppConfig();
+      initApp();
+
   }, [])
+
+
+
+    
+
 
   /**
    * Use these connection methods to connect and send to the EOS Server as preferred
@@ -120,31 +198,7 @@ export default function MainApp() {
    */
 
 
-    if (!isConnected) {
-        const dispatch = useDispatch();
-        const eventEmitter = new NativeEventEmitter(tcpOsc);
-    try {
-        tcpOsc.startConnection(3037, '192.168.50.119');
 
-        setIsConnected(true);
-
-
-        if (eventEmitter.listenerCount('GotMessage') > 0) {
-
-            eventEmitter.removeAllListeners('GotMessage');
-        }
-
-        eventEmitter.addListener('GotMessage', async (oscMessage) => {
-
-            updater.alterSourceData(oscMessage, dispatch);
-
-        })
-
-    } catch (error) {
-
-    }
-
-  }
 
   /*
         <HeaderRNE
@@ -163,8 +217,20 @@ export default function MainApp() {
   
     const PageStack = createBottomTabNavigator();
 
+    const MyTheme = {
+        dark: true,
+        colors: {
+            primary: 'rgb(255, 45, 85)',
+            background: 'rgba(0, 0, 0, 0)',
+            card: 'rgb(0, 0, 0, 0.3)',
+            text: 'rgb(28, 28, 30)',
+            border: 'rgb(199, 199, 204)',
+            notification: 'rgb(255, 69, 58)',
+        },
+    };
+
     return (
-        <NavigationContainer>
+        <NavigationContainer theme={ MyTheme }>
             <SafeAreaProvider style={styles.header}>
             
                 <Drawer
@@ -184,7 +250,33 @@ export default function MainApp() {
 
                     <Header openSettings={openSettings} />
 
-                    <PageStack.Navigator initialRouteName="Remote" screenOptions={{ headerShown: false, animation: 'none', tabBarVisible: false, tabBarStyle: { display: 'none' } }}>
+                    <PageStack.Navigator initialRouteName="Remote" screenOptions={{
+                        headerShown: false, animation: 'none', tabBarVisible: false, tabBarStyle: { display: 'none' }
+                    }}
+                        screenListeners={{
+                            state: (e) => {
+                                // Do something with the state
+                                //console.log('state changed', e.data);
+                                let currentPage = e.data.state.routeNames[e.data.state.index];
+                                
+                                switch (currentPage) {
+                                    case "Remote":
+                                    case "Focus":
+                                    case "FacePanel":
+                                    case "Encoders":
+                                    case "DirectSelects":
+                                    case "Playback":
+                                    case "OscLog":
+
+                                        app.appState.currentPage = currentPage;
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                            },
+                        }}
+                    >
                         <PageStack.Group>
                             <PageStack.Screen name="Remote" component={Remote} />
                             <PageStack.Screen name="Focus" component={Focus} />
@@ -194,9 +286,14 @@ export default function MainApp() {
                             <PageStack.Screen name="Playback" component={Playback} />
                             <PageStack.Screen name="OscLog" component={OscLog} />
                         </PageStack.Group>
-                        <PageStack.Group screenOptions={{ presentation: 'modal' }}>
-                            <PageStack.Screen name="ColorPicker" component={ColorPicker} />
+                        <PageStack.Group screenOptions={{
+                            presentation: 'transparentModal'
+}}>
+                            <PageStack.Screen name="ColorPicker" component={ColorPicker} screenOptions={{
+                                presentation: 'transparentModal'
+                            }} />
                             <PageStack.Screen name="EncoderEdit" component={EncoderEdit} />
+                            <PageStack.Screen name="DSSelectionScreen" component={DSSelectionScreen} options={{ presentation: 'transparentModal' }} />
                         </PageStack.Group>
                     </PageStack.Navigator>
 

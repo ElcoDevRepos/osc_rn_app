@@ -395,6 +395,10 @@ const initialState = {
     ds5_10: {
         label: buttonsAll['ds5_10']['label']
     },
+    ds_Flexi: {
+        label: buttonsAll['ds_Flexi']['label'],
+        style: buttonsAll['ds_Flexi']['style']
+    },
 
     };
 
@@ -406,6 +410,18 @@ const initialState = {
 export default (state = initialState, action) => {
 
     switch (action.type) {
+
+        case 'ds_Flexi':
+            return {
+                ...state,
+                ds_Flexi: {
+                    ...state.ds_Flexi,
+                    style: action.payload.style,
+                    label: action.payload.label
+                }
+            }
+
+            break;
 
         case 'ds1_style':
             return {

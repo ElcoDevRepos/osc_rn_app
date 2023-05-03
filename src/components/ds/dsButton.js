@@ -10,13 +10,13 @@ import tcpOsc from '../../../services/tcpOsc';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Pressable } from 'react-native';
 
-export default DirectSelectButton = ({ module, num }) => {
+export default DSButton = ({ name, module }) => {
 
     const dsstyle = useSelector(state => state.directSelectReducer['ds' + module + '_style'].style, shallowEqual);
-    const label = useSelector(state => state.directSelectReducer['ds' + module + "_" + num].label, shallowEqual);
-    const button = buttonsAll['ds' + module + "_" + num];
+    const label = useSelector(state => state.directSelectReducer['ds' + module + "_" + name].label, shallowEqual);
+    const button = buttonsAll['ds' + module + "_" + name];
 
-    console.log("DS MODULE: " + module + " NUM: " + num + " IS RERENDERING");
+    console.log("DS MODULE: " + module + " NUM: " + name + " IS RERENDERING");
 
     return (
 

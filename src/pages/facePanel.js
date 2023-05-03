@@ -19,6 +19,7 @@ import StaticButton from '../components/staticButton';
 
 export default FacePanel = () => {
 
+
     console.log("FACEPANEL PAGE IS RERENDERING");
 
     const pageContainerStyle = useSelector(state => state.buttonsReducer.pageContainer.style);

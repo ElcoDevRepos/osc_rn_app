@@ -11,11 +11,12 @@ import InfoChan from '../components/infopanels/infoChan';
 import InfoLevel from '../components/infopanels/infoLevel';
 import InfoPatch from '../components/infopanels/infoPatch';
 import InfoNotes from '../components/infopanels/infoNotes';
-import DirectSelectModule from '../components/ds/directselect5';
+import DSModule10 from '../components/ds/dsModule10';
 import StaticButton from '../components/staticButton';
 import EncoderModule from '../components/encoders/encoderModule';
 
 export default Focus = () => {
+
 
 console.log("FOCUS PAGE IS RERENDERING");
 
@@ -61,7 +62,7 @@ console.log("FOCUS PAGE IS RERENDERING");
 
                             <View style={[styles.col, styles.col12]} >
 
-                                <DirectSelectModule module={5}></DirectSelectModule>
+                                <DSModule10 module={5}></DSModule10>
 
                             </View>
 

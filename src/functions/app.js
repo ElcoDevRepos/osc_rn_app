@@ -1,18 +1,26 @@
-import buttonsAll from '../src/helpers/buttonsAll';
-import appState from '../src/helpers/appState';
+import buttonsAll from '../helpers/buttonsAll';
+
+import tcpOsc from '../../services/tcpOsc';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const updater = {};
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
-const addConsoletoLog = (consoleMessage) => {
-    return (
-      <View>
-        <Text>{consoleMessage}</Text>
-      </View>
-    );
-  };
+import './appState';
 
-updater.alterSourceData = (osc_message, dispatch = null) => {
+
+global.app = {};
+
+require('./dsFunctions.js');
+require('./faderFunctions.js');
+
+app.test = "This is a test";
+
+// SET APP STATE TO THE DEFAULTS
+app.appState = { ...appState };
+
+export default app;
+
+app.updater = (osc_message, dispatch = null) => {
 
     let address = osc_message.address;
     let fullMessage = JSON.stringify(osc_message);
@@ -22,8 +30,7 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
     let fullArgArr = [];
     const rerenderArray = [];
 
-    console.log("UPDATER :  " , osc_message);
-
+    console.log("UPDATER :  ", osc_message);
 
     try {
         if (osc_message.args.length > 0) {
@@ -43,7 +50,7 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
         //console.log("UpdateMessage", updateMessage);
 
         buttonsAll['oscLog']['label'] = updateMessage + '\n' + logText;
-        dispatch({ type: "oscLog", payload: { label: updateMessage + '\n' + logText } });
+        app.dispatch({ type: "oscLog", payload: { label: updateMessage + '\n' + logText } });
 
         //rerenderArray.push('oscLog');
 
@@ -96,12 +103,12 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
 
             if (argValue.includes("LIVE:")) {
 
-                dispatch({ type: "commandLine", payload: { label: argValue, style: buttonsAll['commandLine']['style'] } });
-                dispatch({ type: "info_chan_style", payload: { style: buttonsAll['info_chan']['style'] } });
-                dispatch({ type: "info_patch_style", payload: { style: buttonsAll['info_patch']['style'] } });
-                dispatch({ type: "info_level_style", payload: { style: buttonsAll['info_level']['style'] } });
-                dispatch({ type: "info_notes_style", payload: { style: buttonsAll['info_notes']['style'] } });
-                dispatch({ type: "pageContainer", payload: { style: "pageContainerLive" } });
+                app.dispatch({ type: "commandLine", payload: { label: argValue, style: buttonsAll['commandLine']['style'] } });
+                app.dispatch({ type: "info_chan_style", payload: { style: buttonsAll['info_chan']['style'] } });
+                app.dispatch({ type: "info_patch_style", payload: { style: buttonsAll['info_patch']['style'] } });
+                app.dispatch({ type: "info_level_style", payload: { style: buttonsAll['info_level']['style'] } });
+                app.dispatch({ type: "info_notes_style", payload: { style: buttonsAll['info_notes']['style'] } });
+                app.dispatch({ type: "pageContainer", payload: { style: "pageContainerLive" } });
 
                 // $('.app-header').addClass('app-header-live');
                 // $('.app-wrapper').addClass('app-wrapper-live');
@@ -113,12 +120,12 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
 
             } if (argValue.includes("BLIND:")) {
 
-                dispatch({ type: "commandLine", payload: { label: argValue, style: "infoBlind" } });
-                dispatch({ type: "info_chan_style", payload: { style: "infoBlind" } });
-                dispatch({ type: "info_patch_style", payload: { style: "infoBlind" } });
-                dispatch({ type: "info_level_style", payload: { style: "infoBlind" } });
-                dispatch({ type: "info_notes_style", payload: { style: "infoBlind" } });
-                dispatch({ type: "pageContainer", payload: { style: "pageContainerBlind" } });
+                app.dispatch({ type: "commandLine", payload: { label: argValue, style: "infoBlind" } });
+                app.dispatch({ type: "info_chan_style", payload: { style: "infoBlind" } });
+                app.dispatch({ type: "info_patch_style", payload: { style: "infoBlind" } });
+                app.dispatch({ type: "info_level_style", payload: { style: "infoBlind" } });
+                app.dispatch({ type: "info_notes_style", payload: { style: "infoBlind" } });
+                app.dispatch({ type: "pageContainer", payload: { style: "pageContainerBlind" } });
 
 
                 // $('.app-header').addClass('app-header-blind');
@@ -131,12 +138,12 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
             } if (argValue.includes("Patch Channel:")) {
 
 
-                dispatch({ type: "commandLine", payload: { label: argValue, style: "infoPatch" } });
-                dispatch({ type: "info_chan_style", payload: { style: "infoPatch" } });
-                dispatch({ type: "info_patch_style", payload: { style: "infoPatch" } });
-                dispatch({ type: "info_level_style", payload: { style: "infoPatch" } });
-                dispatch({ type: "info_notes_style", payload: { style: "infoPatch" } });
-                dispatch({ type: "pageContainer", payload: { style: "pageContainerPatch" } });
+                app.dispatch({ type: "commandLine", payload: { label: argValue, style: "infoPatch" } });
+                app.dispatch({ type: "info_chan_style", payload: { style: "infoPatch" } });
+                app.dispatch({ type: "info_patch_style", payload: { style: "infoPatch" } });
+                app.dispatch({ type: "info_level_style", payload: { style: "infoPatch" } });
+                app.dispatch({ type: "info_notes_style", payload: { style: "infoPatch" } });
+                app.dispatch({ type: "pageContainer", payload: { style: "pageContainerPatch" } });
 
                 // $('.app-header').addClass('app-header-patch');
                 // $('.app-wrapper').addClass('app-wrapper-patch');
@@ -146,8 +153,8 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
                 // $('[data-asc-id="commandLine"]').removeClass('info-blind info-live');
 
             }
-            
-            
+
+
 
 
             //buttonsAll['commandLine']['label'] = argValue;
@@ -172,7 +179,7 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
 
             // console.log("SOFTKEY NUMBER : ", softkeyNumber, address);
 
-            dispatch({ type: "softkey_" + softkeyNumber, payload: { label: argValue } });
+            app.dispatch({ type: "softkey_" + softkeyNumber, payload: { label: argValue } });
 
 
             // $('[data-asc-id="softkey_'+ softkeyNumber +'"]').text(argValue);
@@ -192,10 +199,10 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
             //wheels = [];
             // Check if Value is empty
             if (argValue == "") {
-                dispatch({ type: "info_chan", payload: { label: "Chan : " } });
-                dispatch({ type: "info_patch", payload: { label: "Patch : " } });
-                dispatch({ type: "info_level", payload: { label: "Level : " } });
-                dispatch({ type: "info_notes", payload: { label: "Notes : " } });
+                app.dispatch({ type: "info_chan", payload: { label: "Chan : " } });
+                app.dispatch({ type: "info_patch", payload: { label: "Patch : " } });
+                app.dispatch({ type: "info_level", payload: { label: "Level : " } });
+                app.dispatch({ type: "info_notes", payload: { label: "Notes : " } });
                 // $('[data-asc-id="info-chan"]').text("Chan : ");
                 // $('[data-asc-id="info-level"]').text("Level : ");
                 // $('[data-asc-id="info-patch"]').text("Patch : ");
@@ -209,9 +216,9 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
                 // get patch info
                 argArr = value.split('@');
 
-                
+
                 if (typeof argArr[1] !== "undefined") {
-                    dispatch({ type: "info_patch", payload: { label: "Patch : " + argArr[argArr.length - 1] } });
+                    app.dispatch({ type: "info_patch", payload: { label: "Patch : " + argArr[argArr.length - 1] } });
                     // $('[data-asc-id="info-patch"]').text("Patch : " + argArr[argArr.length - 1]);
                 }
 
@@ -230,10 +237,10 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
                 if (typeof argArr[0] !== "undefined") {
                     appState.activeChan = argArr[0];
                     // console.log("Active Chan :" + app.appState.activeChan);
-                    dispatch({ type: "info_chan", payload: { label: "Chan : " + argArr[0] } });
+                    app.dispatch({ type: "info_chan", payload: { label: "Chan : " + argArr[0] } });
                     //buttonsAll['info_chan']['label'] = "Chan : " + argArr[0];
                     // $('[data-asc-id="info-chan"]').text("Chan : " + argArr[0]);
-                    
+
                 }
 
                 value = argArr[1];
@@ -245,7 +252,7 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
                 if (typeof argArr[0] !== "undefined") {
 
                     // buttonsAll['info-level']['label'] = "Level : " + argArr[0];
-                    dispatch({ type: "info_level", payload: { label: "Level : " + argArr[0] } });
+                    app.dispatch({ type: "info_level", payload: { label: "Level : " + argArr[0] } });
 
                     // $('[data-asc-id="info-level"]').text("Level : " + argArr[0]);
                 }
@@ -269,7 +276,7 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
             }
 
             // buttonsAll['info-notes']['label'] = "Notes : " + value;
-            dispatch({ type: "info_notes", payload: { label: "Notes : " + value } });
+            app.dispatch({ type: "info_notes", payload: { label: "Notes : " + value } });
 
             // $('[data-asc-id="info-notes"]').text("Notes : " + value);
 
@@ -319,14 +326,17 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
                 cueLabel = cueLabel.trim();
 
                 if (cueLabel != "") {
-                    line1 = '<span class="active-number">Q' + cueNum + '</span> "' + cueLabel + '"';
+                    line1 = 'Q' + cueNum + ' "' + cueLabel + '" ';
                 } else {
-                    line1 = '<span class="active-number">Q' + cueNum;
+                    line1 = 'Q' + cueNum;
                 }
 
                 line2 = cueTime + 'sec ' + completion;
 
             } // end if hasArgs
+
+            app.dispatch({ type: "CURRENT_Q_LABEL", payload: { label: line1 } });
+            app.dispatch({ type: "CURRENT_Q_TIME", payload: { label: line2 } });
 
             // $('[data-asc-id="active-cue"]').html(line1);
             // $('[data-asc-id="active-time"]').text(line2);
@@ -337,7 +347,7 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
             console.log("SHOW NAME");
             console.log(argValue);
 
-            dispatch({ type: "showName", payload: { label: argValue, style : "showNameText" } });
+            app.dispatch({ type: "showName", payload: { label: argValue, style: "showNameText" } });
 
             // $('#header-title').text(argValue);
 
@@ -379,9 +389,9 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
                     cueLabel = cueLabel.trim();
 
                     if (cueLabel != "") {
-                        line1 = '<span class="nonactive-number">Q' + cueNum + '</span> "' + cueLabel + '"';
+                        line1 = 'Q' + cueNum + ' "' + cueLabel + '"';
                     } else {
-                        line1 = '<span class="nonactive-number">Q' + cueNum;
+                        line1 = 'Q' + cueNum;
                     }
 
                     line2 = cueTime + 'sec ' + completion;
@@ -389,6 +399,9 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
                 } // end argArr.length > 0
 
             }// end if hasArgs
+
+            app.dispatch({ type: "PENDING_Q_LABEL", payload: { label: line1 } });
+            app.dispatch({ type: "PENDING_Q_TIME", payload: { label: line2 } });
 
             // $('[data-asc-id="pending-cue"]').html(line1);
             // $('[data-asc-id="pending-time"]').text(line2);
@@ -493,11 +506,18 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
             let addArr = addWorking.split('/');
             let bankNum = addArr[0];
             let faderNum = addArr[1];
-            let value = Math.round(argValue * 100) / 100;
+            let value = 100 - Math.round(argValue * 100);
             let percentage = Math.round(argValue * 100) + "%";
 
+
+            app.appState['fader' + faderNum].enabled = true;
+           
+            app.dispatch({ type: "FADER" + faderNum + "_PERCENTAGE", payload: { label: percentage } });
+            app.dispatch({ type: "FADER" + faderNum + "_VALUE", payload: { value: value } });
             /*
             app.appState.faders[bankNum-1][faderNum-1].enabled = true;
+
+            
       
             $('#fader'+faderNum).val(value).change();
             $('[data-asc-id="fader'+faderNum+'-level"]').text(percentage);
@@ -525,8 +545,10 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
             }
 
             if (value != "") {
+                app.dispatch({ type: "FADER"+faderNum+"_LABEL", payload: { label: value} });
                 //  $('[data-asc-id="fader'+faderNum+'-load"]').text(value);
             } else {
+                app.dispatch({ type: "FADER" + faderNum + "_LABEL", payload: { label: faderNum } });
                 //  $('[data-asc-id="fader'+faderNum+'-load"]').text("Load \n" + faderNum);
             }
 
@@ -620,7 +642,7 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
                 dsModule = addArr[0];
                 btnNum = addArr[1];
 
-                dispatch({ type: "ds" + dsModule + '_' + btnNum, payload: { label: argValue } });
+                app.dispatch({ type: "ds" + dsModule + '_' + btnNum, payload: { label: argValue } });
 
             } else {
                 // This is a DS Label and Page Number
@@ -676,10 +698,10 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
                     moduleStyle = buttonsAll['ds_Scenes']['style'];
                 }
 
-                dispatch({ type: "ds" + dsModule + '_select', payload: { label: label } });
-                dispatch({ type: "ds" + dsModule + '_request', payload: { label: label } });
-                dispatch({ type: "ds" + dsModule + '_page', payload: { label: pageNum } });
-                dispatch({ type: "ds" + dsModule + '_style', payload: { style: moduleStyle } });
+                app.dispatch({ type: "ds" + dsModule + '_select', payload: { label: label } });
+                app.dispatch({ type: "ds" + dsModule + '_request', payload: { label: label } });
+                app.dispatch({ type: "ds" + dsModule + '_page', payload: { label: pageNum } });
+                app.dispatch({ type: "ds" + dsModule + '_style', payload: { style: moduleStyle } });
 
                 // app.appState.ds[dsModule - 1].label = label;
                 // app.appState.ds[dsModule - 1].page = pageNum;
@@ -692,13 +714,74 @@ updater.alterSourceData = (osc_message, dispatch = null) => {
 
             // END '/eos/out/ds/'
 
-            
+
         } // END updater
     } catch (e) {
-      console.log(e);
+        console.log(e);
     }
     return rerenderArray;
-     
+
 }
 
-export default updater;
+
+
+app.getAppState = async () => {
+
+    try {
+        const appStateFromStorage = await AsyncStorage.getItem('app_state');
+
+        if (appStateFromStorage !== null) {
+            // value previously stored
+            app.appState = JSON.parse(appStateFromStorage);
+        } else {
+            // There was no appState in storage - so we'll continue to use the default
+        }
+
+        return app.appState;
+
+    } catch (e) {
+        // error reading value
+    }
+
+}
+
+app.getAppConfig = async () => {
+    try {
+        const appConfig = await AsyncStorage.getItem('app_config');
+        console.log(appConfig);
+        if (appConfig !== null) {
+            // value previously stored
+        }
+    } catch (e) {
+        // error reading value
+    }
+}
+
+app.updateAppState = async () => {
+
+    console.log("UPDATER  updateAppState");
+
+    let stateToStore = JSON.stringify(app.appState);
+
+    console.log("State to Store : " + stateToStore);
+
+    try {
+        const storeAppState = await AsyncStorage.setItem('app_state', stateToStore);
+
+        console.log("This is the Store Return" + storeAppState);
+
+    } catch (e) {
+        // error reading value
+    }
+
+    return stateToStore
+
+}
+
+app.updateAppConfig = async () => {
+    try {
+        const appConfig = await AsyncStorage.setItem('app_config', {});
+    } catch (e) {
+        // error reading value
+    }
+}

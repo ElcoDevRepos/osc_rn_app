@@ -19,7 +19,10 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default ColorPicker = ({ }) => {
+
     const navigation = useNavigation();
+
+    console.log("This is ColorPicker ", app.appState);
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

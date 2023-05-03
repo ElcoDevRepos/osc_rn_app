@@ -7,7 +7,7 @@ import styles from '../helpers/styles';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CommandLine from '../components/infopanels/commandLine';
-import DirectSelectModule from '../components/ds/directselect10';
+import DSModule20 from '../components/ds/dsModule20';
 import StaticButton from '../components/staticButton';
 
 export default DirectSelects = () => {
@@ -28,22 +28,22 @@ console.log("DS PAGE IS RERENDERING");
 
                         <View style={[styles.row]} >
                             <View style={[styles.col, styles.col12]} >
-                                <DirectSelectModule module={1}></DirectSelectModule>
+                                <DSModule20 module={1}></DSModule20>
                             </View>
                         </View>{/* /module row */}
                         <View style={[styles.row]} >
                             <View style={[styles.col, styles.col12]} >
-                                <DirectSelectModule module={2}></DirectSelectModule>
+                                <DSModule20 module={2}></DSModule20>
                             </View>
                         </View>{/* /module row */}
                         <View style={[styles.row]} >
                             <View style={[styles.col, styles.col12]} >
-                                <DirectSelectModule module={3}></DirectSelectModule>
+                                <DSModule20 module={3}></DSModule20>
                             </View>
                         </View>{/* /module row */}
                         <View style={[styles.row]} >
                             <View style={[styles.col, styles.col12]} >
-                                <DirectSelectModule module={4}></DirectSelectModule>
+                                <DSModule20 module={4}></DSModule20>
                             </View>
                         </View>{/* /module row */}
                     </View>

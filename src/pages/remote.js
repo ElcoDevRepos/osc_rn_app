@@ -13,8 +13,7 @@ import InfoLevel from '../components/infopanels/infoLevel';
 import InfoPatch from '../components/infopanels/infoPatch';
 import InfoNotes from '../components/infopanels/infoNotes';
 import StaticButton from '../components/staticButton';
-
-
+import QList from '../components/qList/qList';
 
 export default Remote = () => {
 
@@ -183,7 +182,7 @@ console.log("REMOTE PAGE IS RENDERING");
 
                         <View style={[styles.row, styles.row_double_remote]} >
                             <View style={[styles.col, styles.col12]} >
-                                <StaticButton name={ 'Qlist' } />
+                                <QList name={ 'Qlist' } />
                             </View>
                         </View>{/* /button row */}
 

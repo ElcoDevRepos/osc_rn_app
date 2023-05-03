@@ -92,6 +92,24 @@ const styles = StyleSheet.create({
         flexBasis: '5.6%'
     },
 
+
+    row_half_playback: {
+        flexBasis: '5.4%'
+    },
+    row_single_playback: {
+        flexBasis: '12%'
+    },
+    row_top_playback: {
+        flexBasis: '15%'
+    },
+    row_double_playback: {
+        flexBasis: '24%'
+    },
+    row_fader_playback: {
+        flexBasis: '48%'
+    },
+
+
     enc_col: {
         width: '20.833333%'
     },
@@ -144,6 +162,42 @@ const styles = StyleSheet.create({
         color: '#ffffff'
     },
 
+    faderContainer: {
+        width: '100%',
+        flexDirection: 'column',
+        alignContent: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#15152d',
+    },
+
+    faderHandle: {
+        alignSelf: 'center',
+        resizeMode: 'contain'
+    },
+
+    faderPercentageContainer: {
+        width: "100%",
+        height: "100%",
+        flexDirection: 'column',
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+
+    faderPercentageText: {
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: 'center',
+        color: '#ffffff'
+    },
+    faderPageLabel: {
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: 'center',
+        color: '#ffffff',
+        width: '100%',
+    },
+
+
     oscLogCont: {
         height: '100%',
         width: '100%',
@@ -171,10 +225,12 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         borderWidth: 2,
-        borderRadius: 5
+        borderRadius: 5,
+        padding: 5
     },
     btnText: {
-        fontSize: 16
+        fontSize: 16,
+        textAlign: 'center'
     },
     labeltext: {
         color: '#FFFFFF'
@@ -498,6 +554,58 @@ const styles = StyleSheet.create({
         borderColor: '#dd0000',
         backgroundColor: '#290703'
     },
+
+
+
+    qListContainer: {
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        borderWidth: 2,
+        borderColor: '#4b5cb0',
+    },
+    qListCurrentContainer: {
+        display: 'flex',
+        width: '100%',
+        height: '50%',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        backgroundColor: '#000000',
+        padding: 10
+    },
+    qListPendingContainer: {
+        display: 'flex',
+        width: '100%',
+        height: '50%',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        padding: 10
+    },
+    qListCurrentLabel: {
+        fontSize: 18,
+        color: '#ffffff',
+        fontWeight: 'bold'
+    },
+    qListPendingLabel: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#aaaaaa'
+    },
+    qListCurrentTime: {
+        fontSize: 16,
+        color: '#cccccc'
+    },
+    qListPendingTime: {
+        fontSize: 16,
+        color: '#aaaaaa'
+    },
+
     showNameView: {
         display: 'flex',
         flexDirection: 'column',
@@ -517,6 +625,52 @@ const styles = StyleSheet.create({
         color: '#ff0000'
     },
 
+    modal: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    modalContainer: {
+        backgroundColor: '#00000010',
+        borderColor: '#297efd',
+        borderWidth: 2,
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    w80: {
+        width: '80%'
+    },
+
+    w10: {
+        width: '10%'
+    },
+
+    h100: {
+        height: '100%'
+    },
+    h50: {
+        height: '50%'
+    },
+    h25: {
+        height: '25%'
+    },
+    h20: {
+        height: '20%'
+    },
+    h80: {
+        height: '80%'
+    },
+    h10: {
+        height: '10%'
+    },
+    h90: {
+        height: '90%'
+    },
+
+
 
     /* BOOTSTRAP FOR DUMMIES */
     row: {
@@ -532,6 +686,9 @@ const styles = StyleSheet.create({
     },
     colds5: {
         width: '14.2857143%',
+    },
+    coldsSelect: {
+        width: '12.5%',
     },
     col2: {
         width: '16.666666%',

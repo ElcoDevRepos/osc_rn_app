@@ -15,6 +15,9 @@ import store from './src/redux/configureStore';
 
 import MainApp from './MainApp';
 
+
+
+
 const globalTest = () => {
     console.log("GLOBAL TEST");
 }

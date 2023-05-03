@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-    View
+    View, 
+    StyleSheet
 } from 'react-native';
 
 import styles from '../helpers/styles';
@@ -8,13 +9,17 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SliderHandle from '../components/faders/sliderHandle';
 
-
 import CommandLine from '../components/infopanels/commandLine';
 import InfoChan from '../components/infopanels/infoChan';
 import InfoLevel from '../components/infopanels/infoLevel';
 import InfoPatch from '../components/infopanels/infoPatch';
 import InfoNotes from '../components/infopanels/infoNotes';
 import StaticButton from '../components/staticButton';
+
+//import { EncoderWheel } from '../components/encoders/encoderWheel';
+//import EncoderWheel from '../components/encoders/encoderWheel2';
+import EncoderWheel from '../components/encoders/text';
+import MovingCircle from '../components/encoders/movingCircle';
 
 export default Encoders = () => {
 
@@ -49,14 +54,37 @@ console.log("ENCODER PAGE IS RERENDERING");
                     </View>{/* /module column */}
                 </View>{/* /module row */}
 
-                <View>
-                    <SliderHandle></SliderHandle>
-                </View> 
+                <View style={[styles.row, styles.row_fader_playback]} >
+                    <View style={[styles.col, styles.col6]} >
+                        <EncoderWheel />
+                    </View>
+                    <View style={[styles.col, styles.col6]} >
+                        <EncoderWheel />
+                    </View>
+                </View>
+
             </View> // pageContainer
-
-
-           
 
         );
     
 }
+const localStyles = StyleSheet.create({
+    responderStyle: {
+        backgroundColor: 'blue',
+        elevation: 3,
+        shadowColor: 'rgba(0,0,0,.7)',
+        shadowOffset: { width: 1, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 1,
+    },
+    wheelWrapper: {
+        borderRadius: 120,
+        elevation: 5,
+        padding: 0,
+        shadowColor: 'rgba(100,0,0,1)',
+        shadowOffset: { width: 1, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 1,
+        zIndex: 1,
+    },
+})
