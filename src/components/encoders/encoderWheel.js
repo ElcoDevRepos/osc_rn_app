@@ -1,80 +1,81 @@
 
-import React, { Component } from 'react'
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
+import { useEffect, useRef, useState } from 'react';
 import {
-    Dimensions,
+    Animated,
+    TouchableHighlight,
+    SafeAreaView,
+    TouchableOpacity,
+    Image,
+    Button,
     PanResponder,
-    StyleSheet,
-    View,
-    Image
-} from 'react-native'
-//import { throttle } from 'lodash'
+    Dimensions,
+} from 'react-native';
 
-const GREY_LIGHT = '#eeeeee'
+import dial from '../../images/dial_full.png';
 
-export class EncoderWheel extends Component {
-    static defaultProps = {
-        initialRadius: 1,
-        initialAngle: 0,
-        precision: 0,
+// You can import from local files
+//import AssetExample from './components/AssetExample';
+
+// or any pure javascript modules available in npm
+//import { Card } from 'react-native-paper';
+
+const rotateValueHolder = new Animated.Value(0);
+
+const { width, height } = Dimensions.get('window');
+
+export default function EncoderWheel() {
+
+    const [angle, setAngle] = useState(360);
+    // const [oldAngle, setOldAngle] = useState(0);
+    // const x = useRef(0);
+    // const y = useRef(0);
+    // const [viewX, setViewX] = useState(1);
+    // const [viewY, setViewY] = useState(1);
+
+    const pan = useState(new Animated.ValueXY())[0];
+    const prevCountRef = useRef();
+
+    // let radius = 1;
+    // let deg = 1;
+
+
+    let offset = {};
+
+    let previousAngle = 0;
+    let currentAngle = 0;
+    let startAngle = 0;
+    let releaseAngle = 0;
+    let precision = 0.2;
+
+    useEffect(() => {
+        prevCountRef.current = angle;
+    }, [angle]);
+
+    useEffect(() => console.log(angle), [angle]);
+
+    useEffect(() => updateCurrent(angle), [angle]);
+
+    const updateCurrent = (angle) => {
+
+        currentAngle = angle;
+
+        console.log("This is the current angle: " + currentAngle);
+
     }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            startingAngle: this.props.initialAngle,
-            startingRadius: this.props.initialRadius,
-            releaseAngle: this.props.initialAngle,
-            releaseRadius: this.props.initialRadius,
-            angle: this.props.initialAngle,
-            radius: this.props.initialRadius,
-        }
-        this.offset = { x: 0, y: 0 }
-        this.updateState = this.updateState.bind(this);
-    }
-
-    componentWillMount() {
-        this._panResponder = PanResponder.create({
-            onStartShouldSetPanResponder: (e, gestureState) => true,
-            onStartShouldSetPanResponderCapture: (e, gestureState) => {
-                this.measureOffset() // measure again
-                const { deg, radius } = this.calcAngle(e.nativeEvent)
-                this.setState({ startingAngle: deg, startingRadius: radius })
-                return true
-            },
-            onMoveShouldSetPanResponder: (e, g) => true,
-            onMoveShouldSetPanResponderCapture: (e, gestureState) => true,
-            onPanResponderGrant: (e, gestureState) => true,
-            onPanResponderMove: (e, gestureState) => {
-                this.updateAngle(gestureState)
-            },
-            onPanResponderRelease: (e, gestureState) => {
-                const {
-                    angle,
-                    radius,
-                    releaseAngle,
-                    releaseRadius,
-                } = this.state
-
-                if (angle !== releaseAngle || radius !== releaseRadius) {
-                    this.setState({
-                        releaseAngle: angle,
-                        releaseRadius: radius,
-                    })
-                }
-            },
-        })
-    }
-
-    onLayout(nativeEvent) {
+    const onLayout = (nativeEvent) => {
         /*
         * Multiple measures to avoid the gap between animated
         * and not animated views
         */
-        this.measureOffset()
-        setTimeout(() => this.measureOffset(), 200)
+        measureOffset()
+        setTimeout(() => measureOffset(), 200)
     }
 
-    measureOffset() {
+    const measureOffset = () => {
         /*
         * const {x, y, width, height} = nativeEvent.layout
         * onlayout values are different than measureInWindow
@@ -83,120 +84,151 @@ export class EncoderWheel extends Component {
         */
         const { width: screenWidth } = Dimensions.get('window')
 
-        this.self.measureInWindow((x, y, width, height) => {
-            this.offset = {
+        self.measureInWindow((x, y, width, height) => {
+            offset = {
                 x: x % screenWidth + width / 2,
                 y: y + height / 2,
             }
-            this.radius = width / 2
+            radius = width / 2
         })
+
+        //console.log(offset);
     }
 
-    updateAngle(gestureState) {
-        let { deg, radius } = this.calcAngle(gestureState)
-        if (deg < 0) deg += 360
-        if (Math.abs(this.state.angle - deg) > this.props.precision) {
-            this.updateState({ deg, radius })
+    const updateAngle = (gestureState) => {
+        let newAngle = calcAngle(gestureState);
+        if (newAngle < 0) newAngle += 360;
+
+        if (newAngle > previousAngle) {
+            console.log('Clockwise Tick');
+            console.log('current angle : ' + previousAngle + " new angle : " + newAngle);
+        } else if (newAngle < previousAngle) {
+            console.log('Counter-clockwise Tick');
+        }
+
+        if (Math.abs(previousAngle - newAngle) > precision) {
+            updateState(newAngle);
         }
     }
 
-    calcAngle(gestureState) {
-        const { pageX, pageY, moveX, moveY } = gestureState
-        const [x, y] = [pageX || moveX, pageY || moveY]
-        const [dx, dy] = [x - this.offset.x, y - this.offset.y]
-        return {
-            deg: Math.atan2(dy, dx) * 180 / Math.PI + 120,
-            radius: Math.sqrt(dy * dy + dx * dx) / this.radius, // pitagoras r^2 = x^2 + y^2 normalizado
+    const calcAngle = (gestureState) => {
+
+        measureOffset();
+
+        //console.log(gestureState);
+        if (!(-0.01 < gestureState.vx && gestureState.vx < 0.01)) {
+
+            // Set these 4 variables from gestureState IF gestureState has those properties.
+            const { pageX, pageY, moveX, moveY } = gestureState
+            // In Android at least, pageX and pageY are undefined.
+            // So here we use moveX and moveY instead.
+            const [xNew, yNew] = [pageX || moveX, pageY || moveY]
+            // Calculate Delta X and Delta Y from the original Position.
+            const [dx, dy] = [xNew - offset.x, yNew - offset.y]
+
+            let newAngle = (Math.atan2(dy, dx)) * 180 / Math.PI + 120;
+
+            return newAngle;
+
         }
     }
 
-    updateState({ deg, radius = this.state.radius }) {
-        radius = this.state.releaseRadius + radius - this.state.startingRadius
-        if (radius < this.props.radiusMin) radius = this.props.radiusMin
-        else if (radius > this.props.radiusMax) radius = this.props.radiusMax
+    const updateState = (newAngle) => {
 
-        const angle = deg + this.state.releaseAngle - this.state.startingAngle
-        if (deg < 0) deg += 360
+        const finalAngle = newAngle + releaseAngle - startingAngle;
 
-        if (angle !== this.state.angle || radius !== this.state.radius) {
-            this.setState({ angle, radius })
-            if (this.props.onValueChange) this.props.onValueChange(angle, radius)
+        if (finalAngle != newAngle) {
+
+            previousAngle = newAngle;
+
+            setAngle(finalAngle);
+
         }
     }
 
-    forceUpdate = (deg: number, radius: number) => {
-        this.setState({
-            angle: deg === undefined ? this.state.angle : deg,
-            radius: radius === undefined ? this.state.radius : radius,
+    const panResponder = useState(
+        PanResponder.create({
+            onMoveShouldSetPanResponder: () => true,
+            onStartShouldSetPanResponderCapture: (e, gestureState) => {
+                measureOffset() // measure again
+                const deg = calcAngle(e.nativeEvent);
+                startingAngle = currentAngle;
+                return true
+            },
+            onPanResponderGrant: (event, gestureState) => {
+               // console.log("ON PAN RESPONDER GRANT", gestureState);
+            },
+
+            onPanResponderMove: (event, gestureState) => {
+
+                updateAngle(gestureState);
+                
+
+            },
+            onPanResponderRelease: (event, gestureState) => {
+
+                console.log("ON PAN RESPONDER RELEASE");
+
+                releaseAngle = angle;
+},
         })
-    }
+    )[0];
 
-    render() {
-        const rotate = this.props.fixed ? '0deg' : `${this.state.angle}deg`
-        const scale = this.props.elastic ? this.state.radius : 1
-
-        return (
+    return (
+        <View style={localstyles.container}>
             <View
-                onLayout={(nativeEvent) => this.onLayout(nativeEvent)}
-                ref={(node) => { this.self = node }}
-                style={[styles.coverResponder, this.props.responderStyle]}
-                {...this._panResponder.panHandlers}
-            >
-                {this.props.children
-                    ? <View style={[this.props.wrapperStyle, { transform: [{ rotate }, { scale }] }]}>
-                        {this.props.children}
-                    </View>
-                    : <DefaultDial style={this.props.style} rotate={rotate} scale={scale} />
-                }
+                style={localstyles.imageView}
+                ref={(node) => { self = node }}
+                onLayout={(nativeEvent) => onLayout(nativeEvent)}
+                {...panResponder.panHandlers}>
+                <Animated.Image
+                    style={{
+                        maxHeight: '100%',
+                        maxWidth: '100%',
+                        resizeMode: 'contain',
+                        alignSelf: 'center',
+                        transform: [
+                            {
+                                rotate: `${angle}deg`,
+                            },
+                        ],
+                    }}
+                    source={dial}
+                />
             </View>
-        )
-    }
+        </View>
+    );
 }
 
-export const DefaultDial = ({ style = {}, rotate = '0rad', scale = 1 }) => (
+const localstyles = StyleSheet.create({
+    container: {
+        width: "85%",
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    imageView: {
+        width: "100%",
+        height: "100%",
+        borderRadius: 100,
+        borderWidth: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
 
-    <View style={[styles.dial, style, {
-            transform: [
-                { rotate }, { scale },
-            ]
-        }]}>
-        <Image
-            source={require('../../images/eos_remote_icon.png')}
-            style={[styles.headerImage]}
-        />
-    </View>
-)
 
-const styles = StyleSheet.create({
-    coverResponder: {
-        padding: 20, // needs a minimum
-    },
-    dial: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-        elevation: 5,
-        shadowColor: GREY_LIGHT,
-        shadowOffset: { width: 1, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 1,
-    },
-    innerDialDecorator: {
-        top: 10,
-        left: 10,
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-        backgroundColor: 'white',
-        elevation: 3,
-    },
-    pointer: {
-        top: 20,
-        left: 20,
-        position: 'absolute',
-        width: 10,
-        height: 10,
-        backgroundColor: 'rgb(221,223,226)',
-        borderRadius: 5,
-    },
-})
+
+
+
+
+
+    
+
+
+
+
+
+
+
+

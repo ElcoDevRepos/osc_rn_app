@@ -2,6 +2,7 @@ import React from 'react';
 import {
     View,
     Text,
+    StyleSheet
 } from 'react-native';
 
 import styles from '../../helpers/styles';
@@ -11,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Pressable } from 'react-native';
 
 export default EncoderButton = ({ name }) => {
-    
+
     const button = buttonsAll[name];
 
     //console.log(button);
@@ -29,19 +30,39 @@ export default EncoderButton = ({ name }) => {
     </CustomButton>
     */
 
-    return (        
-            <Pressable
-                style={[styles.encoderBtn, styles[button.style]]}
-                address={button.address}
-                onPressIn={() => {
-                    tcpOsc.sendMessage(button.address, [{ type: "i", value: 1 }])
-                }}
-                onPressOut={() => {
-                    tcpOsc.sendMessage(button.address, [{ type: "i", value: 0 }])
-                }}>
-                    <Text style={[styles.encoderBtnText, styles[button.styleText]]}>{button.label}</Text>
-            </Pressable>
+    return (
+        <Pressable
+            style={[localstyles.encoderBtn, styles[button.style]]}
+            address={button.address}
+            onPressIn={() => {
+                tcpOsc.sendMessage(button.address, [{ type: "i", value: 1 }])
+            }}
+            onPressOut={() => {
+                tcpOsc.sendMessage(button.address, [{ type: "i", value: 0 }])
+            }}>
+            <Text style={[localstyles.encoderBtnText, styles[button.styleText]]}>{button.label}</Text>
+        </Pressable>
 
-        );
-    
-}
+    );
+
+};
+
+const localstyles = StyleSheet.create({
+
+    encoderBtn: {
+        width: '100%',
+        height: '100%',
+
+        borderRadius: 0,
+        backgroundColor: '#141630',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    encoderBtnText: {
+        color: '#ffffff'
+    },
+
+})

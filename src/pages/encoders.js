@@ -16,10 +16,8 @@ import InfoPatch from '../components/infopanels/infoPatch';
 import InfoNotes from '../components/infopanels/infoNotes';
 import StaticButton from '../components/staticButton';
 
-//import { EncoderWheel } from '../components/encoders/encoderWheel';
-//import EncoderWheel from '../components/encoders/encoderWheel2';
-import EncoderWheel from '../components/encoders/text';
-import MovingCircle from '../components/encoders/movingCircle';
+
+import EncoderWheel from '../components/encoders/encoderWheel';
 
 export default Encoders = () => {
 
