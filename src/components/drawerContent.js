@@ -9,7 +9,7 @@ export default class DrawerContent extends React.Component {
         this.state = {
             isConsolesExpanded: false,
             isLayoutsExpanded: false,
-            isUserExpanded: true,
+            isUserExpanded: false,
             isSettingsExpanded: false,
             isAdding: false
         }
