@@ -67,7 +67,7 @@ export default class DrawerContent extends React.Component {
                     }
                     isExpanded={this.state.isConsolesExpanded}
                     onPress={() => {
-                        this.setState({ isConsolesExpanded: !this.state.isConsolesExpanded })
+                        this.setState({ isConsolesExpanded: !this.state.isConsolesExpanded, isAdding: !this.state.isConsolesExpanded ? false : true })
                     }}
                 >
                     <ListItem key={0} onPress={tcpOsc.reconnect} bottomDivider>
