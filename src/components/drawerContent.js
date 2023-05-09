@@ -9,13 +9,24 @@ export default class DrawerContent extends React.Component {
         this.state = {
             isConsolesExpanded: false,
             isLayoutsExpanded: false,
-            isUserExpanded: false,
+            isUserExpanded: true,
             isSettingsExpanded: false,
             isAdding: false
         }
     }
 
-
+    renderTextButtons = () => {
+        let buttons = [];
+        for (let i = 1; i < 10; i++) {
+            buttons.push(<Pressable style={{ height: 75, width: "33%", backgroundColor: "darkblue", borderColor: 'lightblue', borderWidth: 2 }}>
+                <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', marginTop: 20 }}>{i}</Text>
+            </Pressable>)
+        }
+        buttons.push(<Pressable style={{ height: 75, width: "33%", backgroundColor: "darkblue", borderColor: 'lightblue', borderWidth: 2 }}>
+            <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', marginTop: 20 }}>0</Text>
+        </Pressable>)
+        return buttons
+    }
     render() {
         const styles = {
             row: {
@@ -52,6 +63,8 @@ export default class DrawerContent extends React.Component {
         const Row = ({ children }) => (
             <View style={styles.row}>{children}</View>
         )
+
+
         return (
             <View style={{ backgroundColor: "black", height: "100%" }}>
                 <ListItem.Accordion
@@ -105,7 +118,7 @@ export default class DrawerContent extends React.Component {
                                             inputContainerStyle={{ width: "50%", }}
                                             errorStyle={{}}
                                             errorProps={{}}
-                                            inputStyle={{textAlign: 'left'}}
+                                            inputStyle={{ textAlign: 'left' }}
                                             label="Console Name"
                                             labelStyle={{ marginBottom: 10 }}
                                             labelProps={{}}
@@ -117,7 +130,7 @@ export default class DrawerContent extends React.Component {
                                             inputContainerStyle={{ width: "50%" }}
                                             errorStyle={{}}
                                             errorProps={{}}
-                                            inputStyle={{textAlign: 'left'}}
+                                            inputStyle={{ textAlign: 'left' }}
                                             label="IP Address"
                                             labelStyle={{ marginBottom: 10 }}
                                             labelProps={{}}
@@ -125,7 +138,7 @@ export default class DrawerContent extends React.Component {
                                             rightIconContainerStyle={{}}
                                             placeholder="10.10.0.1"></ListItem.Input>
                                     </View>
-                                    <View style={{display: 'flex', flexDirection: 'row', alignSelf: 'center', marginTop: 35}}>
+                                    <View style={{ display: 'flex', flexDirection: 'row', alignSelf: 'center', marginTop: 35 }}>
                                         <Pressable>
                                             <Text style={{ color: "black", fontSize: 15 }}>SAVE</Text>
                                         </Pressable>
@@ -146,14 +159,52 @@ export default class DrawerContent extends React.Component {
                     }
                     isExpanded={this.state.isLayoutsExpanded}
                     onPress={() => {
-                        this.setState({ isLayoutsExpanded: !this.state.isLayoutsExpanded })
+                        this.setState({ isLayoutsExpanded: !this.state.isLayoutsExpanded, isAdding: !this.state.isLayoutsExpanded ? false : true })
                     }}
                 >
                     <ListItem key={0} onPress={tcpOsc.reconnect} bottomDivider>
-                        <ListItem.Content>
-                            <ListItem.Title>Reconnect</ListItem.Title>
-                        </ListItem.Content>
-                        <ListItem.Chevron />
+                        {
+                            !this.state.isAdding ?
+                                <ListItem.Content>
+                                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: "center", justifyContent: "center" }}>
+                                        <ListItem.Title>New Layout</ListItem.Title>
+                                        <Pressable style={{ padding: 5, backgroundColor: "black", borderColor: 'blue', borderWidth: 3, margin: 10 }}>
+                                            <Text style={{ color: "white", fontSize: 15 }}>Edit</Text>
+                                        </Pressable>
+                                        <Pressable style={{ padding: 5, backgroundColor: "black", borderColor: 'red', borderWidth: 3, margin: 10 }}>
+                                            <Text style={{ color: "white", fontSize: 15 }}>Edit</Text>
+                                        </Pressable>
+                                    </View>
+                                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: "center" }}>
+                                        <Pressable onPressIn={() => {
+                                            this.setState({ isAdding: true })
+                                        }} >
+                                            <Text style={{ textTransform: 'uppercase' }}>New Master Layout</Text>
+                                        </Pressable>
+                                    </View>
+                                </ListItem.Content>
+                                : <><ListItem.Content>
+                                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                        <ListItem.Input containerStyle={{}}
+                                            disabledInputStyle={{ background: "#ddd" }}
+                                            inputContainerStyle={{ width: "50%", }}
+                                            errorStyle={{}}
+                                            errorProps={{}}
+                                            inputStyle={{ textAlign: 'left' }}
+                                            label="Label for Master Layout"
+                                            labelStyle={{ marginBottom: 10 }}
+                                            labelProps={{}}
+                                            leftIconContainerStyle={{}}
+                                            rightIconContainerStyle={{}}
+                                            placeholder="New Layout"></ListItem.Input>
+                                    </View>
+                                    <View style={{ display: 'flex', flexDirection: 'row', alignSelf: 'center', marginTop: 35 }}>
+                                        <Pressable>
+                                            <Text style={{ color: "black", fontSize: 15 }}>SAVE</Text>
+                                        </Pressable>
+                                    </View>
+                                </ListItem.Content></>
+                        }
                     </ListItem>
                 </ListItem.Accordion>
                 <ListItem.Accordion
@@ -172,9 +223,19 @@ export default class DrawerContent extends React.Component {
                 >
                     <ListItem key={0} onPress={tcpOsc.reconnect} bottomDivider>
                         <ListItem.Content>
-                            <ListItem.Title>Reconnect</ListItem.Title>
+                            <View>
+                                <Text>USER NUMBER:</Text>
+                            </View>
+                            <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+                                {this.renderTextButtons()}
+                                <Pressable style={{ height: 75, width: "33%", backgroundColor: "darkblue", borderColor: 'lightblue', borderWidth: 2 }}>
+                                    <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', marginTop: 20 }}>Set</Text>
+                                </Pressable>
+                                <Pressable style={{ height: 75, width: "33%", backgroundColor: "darkblue", borderColor: 'lightblue', borderWidth: 2 }}>
+                                    <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', marginTop: 20 }}>Back</Text>
+                                </Pressable>
+                            </View>
                         </ListItem.Content>
-                        <ListItem.Chevron />
                     </ListItem>
                 </ListItem.Accordion>
                 <ListItem.Accordion
@@ -199,7 +260,7 @@ export default class DrawerContent extends React.Component {
                     </ListItem>
                 </ListItem.Accordion>
 
-            </View>
+            </View >
         );
     }
 }
