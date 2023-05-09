@@ -5,7 +5,13 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "8738b6a2-9c93-46d9-a0a0-3c895bb60b16"
+      }
+    },
+    "owner": "hunteraustintn"
   },
   "name": "osc_rn_app"
 }
