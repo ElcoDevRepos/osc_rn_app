@@ -2,16 +2,18 @@ import React from 'react';
 import { Pressable, View, Text } from 'react-native';
 import { Icon, ListItem } from '@rneui/base';
 import tcpOsc from '../../services/tcpOsc';
+import SelectDropdown from 'react-native-select-dropdown'
 
 export default class DrawerContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isConsolesExpanded: false,
+            isConsolesAdding: false,
             isLayoutsExpanded: false,
+            isLayoutsAdding: false,
             isUserExpanded: false,
-            isSettingsExpanded: false,
-            isAdding: false
+            isSettingsExpanded: true,
         }
     }
 
@@ -64,6 +66,8 @@ export default class DrawerContent extends React.Component {
             <View style={styles.row}>{children}</View>
         )
 
+        const connectionTypes = ["TCP", "UDP"]
+        const oscVersions = ["1.0 (Non-Slip)", "1.1 (Slip)"]
 
         return (
             <View style={{ backgroundColor: "black", height: "100%" }}>
@@ -80,12 +84,12 @@ export default class DrawerContent extends React.Component {
                     }
                     isExpanded={this.state.isConsolesExpanded}
                     onPress={() => {
-                        this.setState({ isConsolesExpanded: !this.state.isConsolesExpanded, isAdding: !this.state.isConsolesExpanded ? false : true })
+                        this.setState({ isConsolesExpanded: !this.state.isConsolesExpanded, isConsolesAdding: !this.state.isConsolesExpanded ? false : true })
                     }}
                 >
                     <ListItem key={0} onPress={tcpOsc.reconnect} bottomDivider>
                         {
-                            !this.state.isAdding ?
+                            !this.state.isConsolesAdding ?
                                 <ListItem.Content>
                                     <ListItem.Title>Reconnect</ListItem.Title>
                                     <ListItem.Subtitle>10.10.0.1</ListItem.Subtitle>
@@ -104,7 +108,7 @@ export default class DrawerContent extends React.Component {
                                     <Row>
                                         <Col>
                                             <Pressable onPressIn={() => {
-                                                this.setState({ isAdding: true })
+                                                this.setState({ isConsolesAdding: true })
                                             }}>
                                                 <Text style={{ textTransform: 'uppercase' }}>New Console</Text>
                                             </Pressable>
@@ -159,12 +163,12 @@ export default class DrawerContent extends React.Component {
                     }
                     isExpanded={this.state.isLayoutsExpanded}
                     onPress={() => {
-                        this.setState({ isLayoutsExpanded: !this.state.isLayoutsExpanded, isAdding: !this.state.isLayoutsExpanded ? false : true })
+                        this.setState({ isLayoutsExpanded: !this.state.isLayoutsExpanded, isLayoutsAdding: !this.state.isLayoutsExpanded ? false : true })
                     }}
                 >
                     <ListItem key={0} onPress={tcpOsc.reconnect} bottomDivider>
                         {
-                            !this.state.isAdding ?
+                            !this.state.isLayoutsAdding ?
                                 <ListItem.Content>
                                     <View style={{ display: 'flex', flexDirection: 'row', alignItems: "center", justifyContent: "center" }}>
                                         <ListItem.Title>New Layout</ListItem.Title>
@@ -177,7 +181,7 @@ export default class DrawerContent extends React.Component {
                                     </View>
                                     <View style={{ display: 'flex', flexDirection: 'row', alignItems: "center" }}>
                                         <Pressable onPressIn={() => {
-                                            this.setState({ isAdding: true })
+                                            this.setState({ isLayoutsAdding: true })
                                         }} >
                                             <Text style={{ textTransform: 'uppercase' }}>New Master Layout</Text>
                                         </Pressable>
@@ -254,9 +258,76 @@ export default class DrawerContent extends React.Component {
                 >
                     <ListItem key={0} onPress={tcpOsc.reconnect} bottomDivider>
                         <ListItem.Content>
-                            <ListItem.Title>Reconnect</ListItem.Title>
+                            <ListItem.Title>Connection Type</ListItem.Title>
+                            <SelectDropdown
+                                data={connectionTypes}
+                                onSelect={(selectedItem, index) => {
+                                    console.log(selectedItem, index)
+                                }}
+                                defaultValue={"TCP"}
+                                buttonTextAfterSelection={(selectedItem, index) => {
+                                    // text represented after item is selected
+                                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                                    return selectedItem
+                                }}
+                                rowTextForSelection={(item, index) => {
+                                    // text represented for each item in dropdown
+                                    // if data array is an array of objects then return item.property to represent item in dropdown
+                                    return item
+                                }}
+                                buttonStyle={{width: '100%'}}
+                            />
+                            <ListItem.Title style={{marginTop: 25}}>OSC Version (Only Matters for TCP)</ListItem.Title>
+                            <SelectDropdown
+                                data={oscVersions}
+                                onSelect={(selectedItem, index) => {
+                                    console.log(selectedItem, index)
+                                }}
+                                defaultValue={"1.1 (Slip)"}
+                                buttonTextAfterSelection={(selectedItem, index) => {
+                                    // text represented after item is selected
+                                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                                    return selectedItem
+                                }}
+                                rowTextForSelection={(item, index) => {
+                                    // text represented for each item in dropdown
+                                    // if data array is an array of objects then return item.property to represent item in dropdown
+                                    return item
+                                }}
+                                buttonStyle={{width: '100%'}}
+                            />
+                             <View style={{ display: 'flex', flexDirection: 'row', marginTop: 25 }}>
+                                        <ListItem.Input containerStyle={{}}
+                                            disabledInputStyle={{ background: "#ddd" }}
+                                            inputContainerStyle={{ width: "50%", }}
+                                            errorStyle={{}}
+                                            errorProps={{}}
+                                            inputStyle={{ textAlign: 'left' }}
+                                            label="Remote Port"
+                                            labelStyle={{ marginBottom: 10 }}
+                                            labelProps={{}}
+                                            leftIconContainerStyle={{}}
+                                            rightIconContainerStyle={{}}
+                                            placeholder="New Console"></ListItem.Input>
+                                        <ListItem.Input containerStyle={{}}
+                                            disabledInputStyle={{ background: "#ddd" }}
+                                            inputContainerStyle={{ width: "50%" }}
+                                            errorStyle={{}}
+                                            errorProps={{}}
+                                            inputStyle={{ textAlign: 'left' }}
+                                            label="IP Address"
+                                            labelStyle={{ marginBottom: 10 }}
+                                            labelProps={{}}
+                                            leftIconContainerStyle={{}}
+                                            rightIconContainerStyle={{}}
+                                            placeholder="10.10.0.1"></ListItem.Input>
+                                    </View>
+                                    <View style={{ display: 'flex', flexDirection: 'row', alignSelf: 'center', marginTop: 35 }}>
+                                        <Pressable>
+                                            <Text style={{ color: "black", fontSize: 15 }}>SAVE</Text>
+                                        </Pressable>
+                                    </View>
                         </ListItem.Content>
-                        <ListItem.Chevron />
                     </ListItem>
                 </ListItem.Accordion>
 
