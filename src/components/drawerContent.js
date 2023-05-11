@@ -13,7 +13,7 @@ export default class DrawerContent extends React.Component {
             isLayoutsExpanded: false,
             isLayoutsAdding: false,
             isUserExpanded: false,
-            isSettingsExpanded: true,
+            isSettingsExpanded: false,
         }
     }
 
@@ -275,9 +275,9 @@ export default class DrawerContent extends React.Component {
                                     // if data array is an array of objects then return item.property to represent item in dropdown
                                     return item
                                 }}
-                                buttonStyle={{width: '100%'}}
+                                buttonStyle={{ width: '100%' }}
                             />
-                            <ListItem.Title style={{marginTop: 25}}>OSC Version (Only Matters for TCP)</ListItem.Title>
+                            <ListItem.Title style={{ marginTop: 25 }}>OSC Version (Only Matters for TCP)</ListItem.Title>
                             <SelectDropdown
                                 data={oscVersions}
                                 onSelect={(selectedItem, index) => {
@@ -294,43 +294,66 @@ export default class DrawerContent extends React.Component {
                                     // if data array is an array of objects then return item.property to represent item in dropdown
                                     return item
                                 }}
-                                buttonStyle={{width: '100%'}}
+                                buttonStyle={{ width: '100%' }}
                             />
-                             <View style={{ display: 'flex', flexDirection: 'row', marginTop: 25 }}>
-                                        <ListItem.Input containerStyle={{}}
-                                            disabledInputStyle={{ background: "#ddd" }}
-                                            inputContainerStyle={{ width: "50%", }}
-                                            errorStyle={{}}
-                                            errorProps={{}}
-                                            inputStyle={{ textAlign: 'left' }}
-                                            label="Remote Port"
-                                            labelStyle={{ marginBottom: 10 }}
-                                            labelProps={{}}
-                                            leftIconContainerStyle={{}}
-                                            rightIconContainerStyle={{}}
-                                            placeholder="New Console"></ListItem.Input>
-                                        <ListItem.Input containerStyle={{}}
-                                            disabledInputStyle={{ background: "#ddd" }}
-                                            inputContainerStyle={{ width: "50%" }}
-                                            errorStyle={{}}
-                                            errorProps={{}}
-                                            inputStyle={{ textAlign: 'left' }}
-                                            label="IP Address"
-                                            labelStyle={{ marginBottom: 10 }}
-                                            labelProps={{}}
-                                            leftIconContainerStyle={{}}
-                                            rightIconContainerStyle={{}}
-                                            placeholder="10.10.0.1"></ListItem.Input>
-                                    </View>
-                                    <View style={{ display: 'flex', flexDirection: 'row', alignSelf: 'center', marginTop: 35 }}>
-                                        <Pressable>
-                                            <Text style={{ color: "black", fontSize: 15 }}>SAVE</Text>
-                                        </Pressable>
-                                    </View>
+                            <View style={{ display: 'flex', flexDirection: 'row', marginTop: 25 }}>
+                                <ListItem.Input containerStyle={{}}
+                                    disabledInputStyle={{ background: "#ddd" }}
+                                    inputContainerStyle={{ width: "50%", }}
+                                    errorStyle={{}}
+                                    errorProps={{}}
+                                    inputStyle={{ textAlign: 'left' }}
+                                    label="Remote Port"
+                                    labelStyle={{ marginBottom: 10 }}
+                                    labelProps={{}}
+                                    leftIconContainerStyle={{}}
+                                    rightIconContainerStyle={{}}
+                                    placeholder="New Console"></ListItem.Input>
+                                <ListItem.Input containerStyle={{}}
+                                    disabledInputStyle={{ background: "#ddd" }}
+                                    inputContainerStyle={{ width: "50%" }}
+                                    errorStyle={{}}
+                                    errorProps={{}}
+                                    inputStyle={{ textAlign: 'left' }}
+                                    label="IP Address"
+                                    labelStyle={{ marginBottom: 10 }}
+                                    labelProps={{}}
+                                    leftIconContainerStyle={{}}
+                                    rightIconContainerStyle={{}}
+                                    placeholder="10.10.0.1"></ListItem.Input>
+                            </View>
+                            <View style={{ display: 'flex', flexDirection: 'row', alignSelf: 'center', marginTop: 35 }}>
+                                <Pressable>
+                                    <Text style={{ color: "black", fontSize: 15 }}>SAVE</Text>
+                                </Pressable>
+                            </View>
                         </ListItem.Content>
                     </ListItem>
                 </ListItem.Accordion>
-
+                <ListItem>
+                    <ListItem.Content>
+                        <ListItem.Title>RELEASE NOTES</ListItem.Title>
+                    </ListItem.Content>
+                    <ListItem.Chevron></ListItem.Chevron>
+                </ListItem>
+                <ListItem>
+                    <ListItem.Content>
+                        <ListItem.Title>DISCONNECT</ListItem.Title>
+                    </ListItem.Content>
+                    <ListItem.Chevron></ListItem.Chevron>
+                </ListItem>
+                <ListItem>
+                    <ListItem.Content>
+                        <ListItem.Title>STORE CONFIG</ListItem.Title>
+                    </ListItem.Content>
+                    <ListItem.Chevron></ListItem.Chevron>
+                </ListItem>
+                <ListItem>
+                    <ListItem.Content>
+                        <ListItem.Title>STORE APP STATE</ListItem.Title>
+                    </ListItem.Content>
+                    <ListItem.Chevron></ListItem.Chevron>
+                </ListItem>
             </View >
         );
     }
