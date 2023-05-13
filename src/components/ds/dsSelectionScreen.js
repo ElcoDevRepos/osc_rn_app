@@ -11,17 +11,31 @@ import DSModuleTypeButton from './dsModuleTypeButton';
 import DSFlexiButton from './dsFlexiButton';
 
 
-export default DSSelectionScreen = ({ route, navigation }) => {
+export default DSSelectionScreen = ({ route = undefined, navigation }) => {
     
-    //console.log("MODULE IS: " + route);
-    const { module } = route.params;
+    console.log("======================MODULE IS: " + route.params);
+
+    let module = 1;
+
+    if (route.params == undefined) {
+       // const { module }  = 1;
+        console.log("ROUTE.PARAMS IS UNDEFINED " + module);
+    } else {
+        console.log(route);
+        console.log("ROUTE.PARAMS IS DEFINED " + module);
+         module  = route.params.module;
+    }
+    
+   
+    console.log("APPSTATE" + app.appState['ds' + module]);
 
     if (app.appState['ds' + module].flexi == "on") {
         // Update the UI
+        console.log("FLEXI IS ON");
         app.dispatch({ type: "ds_Flexi", payload: { style: "btn12Pressed", label: "Flexi On" } });
     } else {
-
         // Update the UI
+console.log("FLEXI IS OFF");
         app.dispatch({ type: "ds_Flexi", payload: { style: "btn12", label: "Flexi Off" } });
     }
 

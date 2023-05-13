@@ -46,8 +46,6 @@ function requestFaders(bankNum = undefined, pageNum = undefined, faderCount = un
 */
 app.faders = {};
 
-
-
 app.faders.requestFaders = (bankNum = undefined, pageNum = undefined, faderCount = undefined) => {
 
     // Define the Faderbank with eos

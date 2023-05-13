@@ -5,18 +5,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
-import './appState';
+import appState from './appState';
+// import appConfig from './appConfig';
 
 
 global.app = {};
 
+require('./appConfig.js')
 require('./dsFunctions.js');
 require('./faderFunctions.js');
+require('./layoutFunctions.js');
 
 app.test = "This is a test";
 
 // SET APP STATE TO THE DEFAULTS
 app.appState = { ...appState };
+
 
 export default app;
 
@@ -29,6 +33,7 @@ app.updater = (osc_message, dispatch = null) => {
     let hasArgs = true;
     let fullArgArr = [];
     const rerenderArray = [];
+    const connected = true;
 
     console.log("UPDATER :  ", osc_message);
 
@@ -45,12 +50,12 @@ app.updater = (osc_message, dispatch = null) => {
         }
 
         // LOG THE OSC
-        let logText = buttonsAll['oscLog']['label'];
-        let updateMessage = "CONSOLE :: " + address + " : " + argValue + " ";
+       // let logText = buttonsAll['oscLog']['label'];
+        // let updateMessage = "CONSOLE :: " + address + " : " + argValue + " ";
         //console.log("UpdateMessage", updateMessage);
 
-        buttonsAll['oscLog']['label'] = updateMessage + '\n' + logText;
-        app.dispatch({ type: "oscLog", payload: { label: updateMessage + '\n' + logText } });
+        //buttonsAll['oscLog']['label'] = updateMessage + '\n' + logText;
+        //app.dispatch({ type: "oscLog", payload: { label: updateMessage + '\n' + logText } });
 
         //rerenderArray.push('oscLog');
 
@@ -103,63 +108,59 @@ app.updater = (osc_message, dispatch = null) => {
 
             if (argValue.includes("LIVE:")) {
 
-                app.dispatch({ type: "commandLine", payload: { label: argValue, style: buttonsAll['commandLine']['style'] } });
-                app.dispatch({ type: "info_chan_style", payload: { style: buttonsAll['info_chan']['style'] } });
-                app.dispatch({ type: "info_patch_style", payload: { style: buttonsAll['info_patch']['style'] } });
-                app.dispatch({ type: "info_level_style", payload: { style: buttonsAll['info_level']['style'] } });
-                app.dispatch({ type: "info_notes_style", payload: { style: buttonsAll['info_notes']['style'] } });
-                app.dispatch({ type: "pageContainer", payload: { style: "pageContainerLive" } });
+                if (app.appState.cmdLine != argValue) {
+                    // Only Rerender if the state has changed
+                    app.dispatch({ type: "commandLine", payload: { label: argValue} });
+                    app.appState.cmdLine = argValue;
+                }
 
-                // $('.app-header').addClass('app-header-live');
-                // $('.app-wrapper').addClass('app-wrapper-live');
-                // $('[data-asc-id="commandLine"]').addClass('info-live');
-                // $('.app-header').removeClass('app-header-blind app-header-patch');
-                // $('.app-wrapper').removeClass('app-wrapper-blind app-wrapper-patch');
-                // $('[data-asc-id="commandLine"]').removeClass('info-patch');
-                // $('[data-asc-id="commandLine"]').removeClass('info-blind info-patch');
+                if (app.appState.cmdState != "LIVE") {
+                    // Only Rerender if the state has changed
+                    app.dispatch({ type: "info_chan_style", payload: { style: buttonsAll['info_chan']['style'] } });
+                    app.dispatch({ type: "info_patch_style", payload: { style: buttonsAll['info_patch']['style'] } });
+                    app.dispatch({ type: "info_level_style", payload: { style: buttonsAll['info_level']['style'] } });
+                    app.dispatch({ type: "info_notes_style", payload: { style: buttonsAll['info_notes']['style'] } });
+                    app.dispatch({ type: "pageContainer", payload: { style: "pageContainerLive" } });
+                    app.dispatch({ type: "COMMANDLINE_STYLE", payload: { style: buttonsAll['commandLine']['style'] } });
+                    app.appState.cmdState = "LIVE";
+                }
 
             } if (argValue.includes("BLIND:")) {
 
-                app.dispatch({ type: "commandLine", payload: { label: argValue, style: "infoBlind" } });
-                app.dispatch({ type: "info_chan_style", payload: { style: "infoBlind" } });
-                app.dispatch({ type: "info_patch_style", payload: { style: "infoBlind" } });
-                app.dispatch({ type: "info_level_style", payload: { style: "infoBlind" } });
-                app.dispatch({ type: "info_notes_style", payload: { style: "infoBlind" } });
-                app.dispatch({ type: "pageContainer", payload: { style: "pageContainerBlind" } });
+                if (app.appState.cmdLine != argValue) {
+                    // Only Rerender if the state has changed
+                    app.dispatch({ type: "commandLine", payload: { label: argValue} });
+                    app.appState.cmdLine = argValue;
+                }
 
-
-                // $('.app-header').addClass('app-header-blind');
-                // $('.app-wrapper').addClass('app-wrapper-blind');
-                // $('[data-asc-id="commandLine"]').addClass('info-blind');
-                // $('.app-header').removeClass('app-header-live app-header-patch');
-                // $('.app-wrapper').removeClass('app-wrapper-live app-wrapper-patch');
-                // $('[data-asc-id="commandLine"]').removeClass('info-live info-patch');
+                if (app.appState.cmdState != "BLIND") {
+                    app.dispatch({ type: "COMMANDLINE_STYLE", payload: { style: "infoBlind" } });
+                    app.dispatch({ type: "info_chan_style", payload: { style: "infoBlind" } });
+                    app.dispatch({ type: "info_patch_style", payload: { style: "infoBlind" } });
+                    app.dispatch({ type: "info_level_style", payload: { style: "infoBlind" } });
+                    app.dispatch({ type: "info_notes_style", payload: { style: "infoBlind" } });
+                    app.dispatch({ type: "pageContainer", payload: { style: "pageContainerBlind" } });
+                    app.appState.cmdState = "BLIND";
+                }
 
             } if (argValue.includes("Patch Channel:")) {
 
-
-                app.dispatch({ type: "commandLine", payload: { label: argValue, style: "infoPatch" } });
-                app.dispatch({ type: "info_chan_style", payload: { style: "infoPatch" } });
-                app.dispatch({ type: "info_patch_style", payload: { style: "infoPatch" } });
-                app.dispatch({ type: "info_level_style", payload: { style: "infoPatch" } });
-                app.dispatch({ type: "info_notes_style", payload: { style: "infoPatch" } });
-                app.dispatch({ type: "pageContainer", payload: { style: "pageContainerPatch" } });
-
-                // $('.app-header').addClass('app-header-patch');
-                // $('.app-wrapper').addClass('app-wrapper-patch');
-                // $('[data-asc-id="commandLine"]').addClass('info-patch');
-                // $('.app-header').removeClass('app-header-blind app-header-live');
-                // $('.app-wrapper').removeClass('app-wrapper-blind app-wrapper-live');
-                // $('[data-asc-id="commandLine"]').removeClass('info-blind info-live');
+                if (app.appState.cmdLine != argValue) {
+                    // Only Rerender if the state has changed
+                    app.dispatch({ type: "commandLine", payload: { label: argValue} });
+                    app.appState.cmdLine = argValue;
+                }
+                if (app.appState.cmdState != "PATCH") {
+                    app.dispatch({ type: "COMMANDLINE_STYLE", payload: { label: argValue, style: "infoPatch" } });
+                    app.dispatch({ type: "info_chan_style", payload: { style: "infoPatch" } });
+                    app.dispatch({ type: "info_patch_style", payload: { style: "infoPatch" } });
+                    app.dispatch({ type: "info_level_style", payload: { style: "infoPatch" } });
+                    app.dispatch({ type: "info_notes_style", payload: { style: "infoPatch" } });
+                    app.dispatch({ type: "pageContainer", payload: { style: "pageContainerPatch" } });
+                    app.appState.cmdState = "PATCH";
+                }
 
             }
-
-
-
-
-            //buttonsAll['commandLine']['label'] = argValue;
-
-            // $('[data-asc-id="commandLine"]').text(argValue);
 
         } else if (address.includes('/eos/out/softkey')) {
 
@@ -179,13 +180,13 @@ app.updater = (osc_message, dispatch = null) => {
 
             // console.log("SOFTKEY NUMBER : ", softkeyNumber, address);
 
-            app.dispatch({ type: "softkey_" + softkeyNumber, payload: { label: argValue } });
-
-
-            // $('[data-asc-id="softkey_'+ softkeyNumber +'"]').text(argValue);
+            if (app.appState["softkey_" + softkeyNumber] != argValue) {
+                app.dispatch({ type: "softkey_" + softkeyNumber, payload: { label: argValue } });
+                app.appState["softkey_" + softkeyNumber] = argValue;
+            }
 
         } else if (address.includes('/eos/out/active/chan')) {
-            console.log("UPDATER INPUT ACTIVE CHAN", osc_message);
+            // console.log("UPDATER INPUT ACTIVE CHAN", osc_message);
             rerenderArray.push('remote', 'focus', 'facePanel');
 
             // //////////  ADDRESS  /////////// //
@@ -194,19 +195,27 @@ app.updater = (osc_message, dispatch = null) => {
             // EXAMPLE
             // /eos/out/active/chan : Value = 's' (1 [100] Label Text1 Generic Dimmer @ 1)
             // //////////////////////////////////
-
-
-            //wheels = [];
+   
             // Check if Value is empty
             if (argValue == "") {
-                app.dispatch({ type: "info_chan", payload: { label: "Chan : " } });
-                app.dispatch({ type: "info_patch", payload: { label: "Patch : " } });
-                app.dispatch({ type: "info_level", payload: { label: "Level : " } });
-                app.dispatch({ type: "info_notes", payload: { label: "Notes : " } });
-                // $('[data-asc-id="info-chan"]').text("Chan : ");
-                // $('[data-asc-id="info-level"]').text("Level : ");
-                // $('[data-asc-id="info-patch"]').text("Patch : ");
-                // $('[data-asc-id="info-notes"]').text("Notes : ");
+
+                if (app.appState["info_chan"] != "Chan : ") {
+                    app.dispatch({ type: "info_chan", payload: { label: "Chan : " } });
+                    app.appState["info_chan"] = "Chan : ";
+                    }
+                if (app.appState["info_patch"] != "Patch : ") {
+                    app.dispatch({ type: "info_patch", payload: { label: "Patch : " } });
+                    app.appState["info_patch"] = "Patch : ";
+                    }
+                if (app.appState["info_level"] != "Level : ") {
+                    app.dispatch({ type: "info_level", payload: { label: "Level : " } });
+                    app.appState["info_level"] = "Level : ";
+                    }
+                if (app.appState["info_notes"] != "Notes : ") {
+                    app.dispatch({ type: "info_notes", payload: { label: "Notes : " } });
+                    app.appState["info_notes"] = "Notes : ";
+                    }
+
             }
 
             let value = argValue;
@@ -215,11 +224,21 @@ app.updater = (osc_message, dispatch = null) => {
 
                 // get patch info
                 argArr = value.split('@');
+               
+                let absAddress = argArr[argArr.length - 1];
+                let universeAddrress  = absAddress;
+
+                if (!isNaN(absAddress)) {
+                    // absAddress is a number so we can do Math
+                    universeAddrress = (Math.floor(absAddress/512)+1) + "/" + (absAddress % 512);   
+                }
 
 
                 if (typeof argArr[1] !== "undefined") {
-                    app.dispatch({ type: "info_patch", payload: { label: "Patch : " + argArr[argArr.length - 1] } });
-                    // $('[data-asc-id="info-patch"]').text("Patch : " + argArr[argArr.length - 1]);
+                  if (app.appState["info_patch"] != "Patch : " + universeAddrress) {
+                    app.dispatch({ type: "info_patch", payload: { label: "Patch : " + universeAddrress } });
+                    app.appState["info_patch"] = "Patch : " + universeAddrress;
+                    }
                 }
 
                 // Reduce the value for the next function
@@ -227,7 +246,7 @@ app.updater = (osc_message, dispatch = null) => {
 
             }
 
-            console.log("NEW VALUE : " + value);
+            // console.log("NEW VALUE : " + value);
 
 
             if (value.includes('[')) {
@@ -236,30 +255,31 @@ app.updater = (osc_message, dispatch = null) => {
 
                 if (typeof argArr[0] !== "undefined") {
                     appState.activeChan = argArr[0];
-                    // console.log("Active Chan :" + app.appState.activeChan);
+                   
+                   if (app.appState["info_chan"] != "Chan : " + argArr[0]) {
                     app.dispatch({ type: "info_chan", payload: { label: "Chan : " + argArr[0] } });
-                    //buttonsAll['info_chan']['label'] = "Chan : " + argArr[0];
-                    // $('[data-asc-id="info-chan"]').text("Chan : " + argArr[0]);
+                    app.appState["info_chan"] = "Chan : " + argArr[0];
+                    }
 
                 }
 
                 value = argArr[1];
 
-                console.log("NEW VALUE : " + value);
+                // console.log("NEW VALUE : " + value);
 
                 argArr = value.split(']');
 
                 if (typeof argArr[0] !== "undefined") {
 
-                    // buttonsAll['info-level']['label'] = "Level : " + argArr[0];
+                   if (app.appState["info_level"] != "Level : " + argArr[0]) {
                     app.dispatch({ type: "info_level", payload: { label: "Level : " + argArr[0] } });
-
-                    // $('[data-asc-id="info-level"]').text("Level : " + argArr[0]);
+                    app.appState["info_level"] = "Level : " + argArr[0];
+                    }
                 }
 
                 value = argArr[1];
 
-                console.log("NEW VALUE : " + value);
+                // console.log("NEW VALUE : " + value);
 
             } else {
                 // we have a blank channel
@@ -270,22 +290,18 @@ app.updater = (osc_message, dispatch = null) => {
             if (appState.activeChan != appState.preActiveChan || appState.activeChan == "") {
                 newChannel = true;
                 appState.preActiveChan = appState.activeChan;
-                //disableAllEncoders();
+                app.disableAllEncoders();
+
             } else {
                 newChannel = false;
             }
 
-            // buttonsAll['info-notes']['label'] = "Notes : " + value;
-            app.dispatch({ type: "info_notes", payload: { label: "Notes : " + value } });
-
-            // $('[data-asc-id="info-notes"]').text("Notes : " + value);
-
-
-
-            //console.log("argArr", argArr);
+            if (app.appState["info_notes"] != "Notes : " + value) {
+                app.dispatch({ type: "info_notes", payload: { label: "Notes : " + value } });
+                app.appState["info_notes"] = "Notes : " + value;
+            }  
 
             // END '/eos/out/active/chan/'
-
         } else if (address.includes('/eos/out/active/cue/text')) {
 
             rerenderArray.push('remote', 'facePanel', 'playback');
@@ -295,7 +311,7 @@ app.updater = (osc_message, dispatch = null) => {
             let line1 = "";
             let line2 = "";
 
-            console.log("This is cue/text", argValue);
+            // console.log("This is cue/text", argValue);
 
             if (hasArgs && argValue != "") {
 
@@ -335,17 +351,20 @@ app.updater = (osc_message, dispatch = null) => {
 
             } // end if hasArgs
 
-            app.dispatch({ type: "CURRENT_Q_LABEL", payload: { label: line1 } });
-            app.dispatch({ type: "CURRENT_Q_TIME", payload: { label: line2 } });
-
-            // $('[data-asc-id="active-cue"]').html(line1);
-            // $('[data-asc-id="active-time"]').text(line2);
-
+            if (app.appState["currentQ"] != line1) {
+                app.dispatch({ type: "CURRENT_Q_LABEL", payload: { label: line1 } });
+                app.appState["currentQ"] = line1;
+            }
+            
+            if (app.appState["currentQTime"] != line2) {
+                app.dispatch({ type: "CURRENT_Q_TIME", payload: { label: line2 } });
+                app.appState["currentQTime"] = line2;
+            }  
 
         } else if (address.includes('/eos/out/show/name')) {
 
-            console.log("SHOW NAME");
-            console.log(argValue);
+           // console.log("SHOW NAME");
+           // console.log(argValue);
 
             app.dispatch({ type: "showName", payload: { label: argValue, style: "showNameText" } });
 
@@ -400,12 +419,15 @@ app.updater = (osc_message, dispatch = null) => {
 
             }// end if hasArgs
 
-            app.dispatch({ type: "PENDING_Q_LABEL", payload: { label: line1 } });
-            app.dispatch({ type: "PENDING_Q_TIME", payload: { label: line2 } });
-
-            // $('[data-asc-id="pending-cue"]').html(line1);
-            // $('[data-asc-id="pending-time"]').text(line2);
-
+            if (app.appState["pendingQ"] != line1) {
+                app.dispatch({ type: "PENDING_Q_LABEL", payload: { label: line1 } });
+                app.appState["pendingQ"] = line1;
+            }
+            
+            if (app.appState["pendingQTime"] != line2) {
+                app.dispatch({ type: "PENDING_Q_TIME", payload: { label: line2 } });
+                app.appState["pendingQTime"] = line2;
+            }  
 
         } else if (address.includes('/eos/out/previous/cue/text')) {
             // /eos/out/previous/cue/text : 2 Cue 2 Label 5.0 (s)
@@ -444,25 +466,26 @@ app.updater = (osc_message, dispatch = null) => {
                     cueLabel = cueLabel.trim();
 
                     if (cueLabel != "") {
-                        line1 = '<span class="nonactive-number">Q' + cueNum + '</span> "' + cueLabel + '"';
+                        line1 = 'Q' + cueNum + ' "' + cueLabel + '"';
                     } else {
-                        line1 = '<span class="nonactive-number">Q' + cueNum;
+                        line1 = 'Q' + cueNum;
                     }
 
                     line2 = cueTime + 'sec ' + completion;
+
+
 
                 } // end if no args
 
             } //end if hasArgs
 
-            // $('[data-asc-id="previous-cue"]').html(line1);
-            // $('[data-asc-id="previous-time"]').text(line2);
-
+        app.appState["previousQ"] = line1;
+        app.appState["previousQTime"] = line2;
 
         } else if (address.includes('/eos/out/active/cue/')) {
             // /eos/out/active/cue : 0.07000000029802322 (f)
-            console.log("ACTIVE CUE");
-            console.log(argValue);
+           // console.log("ACTIVE CUE");
+           // console.log(argValue);
 
         } else if (address.includes('/eos/out/user')) {
 
@@ -508,7 +531,6 @@ app.updater = (osc_message, dispatch = null) => {
             let faderNum = addArr[1];
             let value = 100 - Math.round(argValue * 100);
             let percentage = Math.round(argValue * 100) + "%";
-
 
             app.appState['fader' + faderNum].enabled = true;
            
@@ -573,7 +595,7 @@ app.updater = (osc_message, dispatch = null) => {
             if ((address === "/eos/out/active/wheel/1") && newChannel) {
                 // There has been a channel change
                 // $('.encoder-edit').html('');
-                wheels = [];
+                app.appState.wheels = [];
             }
 
             if (argValue.includes('[')) {
@@ -583,12 +605,12 @@ app.updater = (osc_message, dispatch = null) => {
                 if (typeof argArr[0] !== "undefined") {
 
                     centerText = argArr[0].trim();
-                    /*
-                    if (!wheels.includes(centerText)) {
-                      wheels[wheelNumber] = centerText;
+                    
+                    if (!app.appState.wheels.includes(centerText)) {
+                      app.appState.wheels[wheelNumber] = centerText;
                     }
-                    */
-                    // console.log(wheels);
+                    
+                    // console.log(app.appState.wheels);
                 }
 
                 argArr = argArr[1].split(']');
@@ -596,26 +618,28 @@ app.updater = (osc_message, dispatch = null) => {
 
             } // end Arg Value Includes [
 
-            for (let i = 0; i < 12; i++) {
+            for (let i = 1; i <= 12; i++) {
                 // Loop through all the encoders and check for matches
-                //console.log(app.appState.encoders[i]);
+                // console.log(app.appState['encoder' + i]);
 
-                /*
-                if (app.appState.encoders[i].centerText == centerText && centerText != "") {
-        
-                  if (app.appState.encoders[i].mode == 'superfine') {
-                    app.appState.encoders[i].address = "/eos/active/wheel/fine/"+wheelNumber;
-                  } else {
-                    app.appState.encoders[i].address = "/eos/active/wheel/"+wheelNumber;
-                  }
-        
-                  app.appState.encoders[i].wheel = wheelNumber;
-                  enableEncoder(i);
-                  encNum = i+1;
-                  $('[data-asc-id="encoder'+encNum+'-level"]').text(encoderValue);
-        
+                if (app.appState['encoder' + i].centerText == centerText && centerText != "") {
+                    // THE ENCODER CENTER TEXT MATCHES THE WHEEL CENTER TEXT
+
+                    // ALWAYS UPDATE THE VALUE WHEN THE CENTER TEXT MATCHES
+                    app.dispatch({ type: "ENCODER" + i + '_VALUE', payload: { label: encoderValue } });
+
+
+                    if (app.appState['encoder' + i].enabled && app.appState['encoder' + i].wheel == wheelNumber) {
+                        // CHECK TO SEE IF THE ENCODER IS ALREADY ENABLED AND IF IT'S THE SAME WHEEL
+                        // IF IT IS, DO NOTHING
+                        console.log("SKIPPING ENCODER UPDATE");
+                    } else {
+                        // THERE IS A DISCREPANCY.  REESTABLISH THE ENCODER MAPPING
+                        app.enableEncoder(i, wheelNumber);
+                    }
+                    
                 }
-                */
+                
             }
 
             // END '/eos/out/active/wheel/'
@@ -747,11 +771,17 @@ app.getAppState = async () => {
 
 app.getAppConfig = async () => {
     try {
-        const appConfig = await AsyncStorage.getItem('app_config');
-        console.log(appConfig);
-        if (appConfig !== null) {
+        const appConfigFromStorage = await AsyncStorage.getItem('app_config');
+        console.log("APPCONFIG FROM STORAGE" + appConfigFromStorage);
+        if (appConfigFromStorage !== null) {
             // value previously stored
+            app.appConfig = JSON.parse(appConfigFromStorage);
+
+        } else {
+            // There was no appConfig in storage - so we'll continue to use the default
         }
+
+        return app.appConfig;
     } catch (e) {
         // error reading value
     }
@@ -759,16 +789,16 @@ app.getAppConfig = async () => {
 
 app.updateAppState = async () => {
 
-    console.log("UPDATER  updateAppState");
+    // console.log("UPDATER  updateAppState");
 
     let stateToStore = JSON.stringify(app.appState);
 
-    console.log("State to Store : " + stateToStore);
+    // console.log("State to Store : " + stateToStore);
 
     try {
         const storeAppState = await AsyncStorage.setItem('app_state', stateToStore);
 
-        console.log("This is the Store Return" + storeAppState);
+       // console.log("This is the Store Return" + storeAppState);
 
     } catch (e) {
         // error reading value
@@ -779,9 +809,95 @@ app.updateAppState = async () => {
 }
 
 app.updateAppConfig = async () => {
+
+    let config = JSON.stringify(app.appConfig);
     try {
-        const appConfig = await AsyncStorage.setItem('app_config', {});
+        const storeAppConfig = await AsyncStorage.setItem('app_config', config);
+
+        console.log("================= CONFIG SAVED ======================");
+        console.log(JSON.stringify(storeAppConfig));    
     } catch (e) {
         // error reading value
     }
+
+    // return config;
+}
+
+app.enableEncoder = (encoderNum, wheelNumber = undefined) => {
+    
+    if (wheelNumber == undefined) {
+      
+        const wheelNumber = app.appState['encoder' + encoderNum].wheel;  
+    
+    }
+
+    console.log("ENABLE ENCODER" + encoderNum);
+
+    if (app.appState['encoder' + encoderNum].mode == 'superfine') {
+        app.appState['encoder' + encoderNum].address = "/eos/active/wheel/fine/" + wheelNumber;
+        app.appState['encoder' + encoderNum].incValue = app.appConfig.fine;
+        app.appState['encoder' + encoderNum].decValue = -app.appConfig.fine;
+    } else if (app.appState['encoder' + encoderNum].mode == 'fine') {
+        app.appState['encoder' + encoderNum].address = "/eos/active/wheel/" + wheelNumber;
+        app.appState['encoder' + encoderNum].incValue = app.appConfig.fine;
+        app.appState['encoder' + encoderNum].decValue = -app.appConfig.fine;
+    } else {
+        // it's either blank or coarse
+        app.appState['encoder' + encoderNum].address = "/eos/active/wheel/" + wheelNumber;
+        app.appState['encoder' + encoderNum].incValue = app.appConfig.coarse;
+        app.appState['encoder' + encoderNum].decValue = -app.appConfig.coarse;
+    }
+
+    app.appState['encoder' + encoderNum].wheel = wheelNumber;
+    app.appState['encoder' + encoderNum].enabled = true;
+    app.dispatch({ type: "ENCODER" + encoderNum + '_ENABLE', payload: { bool: true } });
+    app.dispatch({ type: "ENCODER" + encoderNum + '_CENTERTEXT', payload: { label: app.appState["encoder"+encoderNum].centerText } });
+
+    tcpOsc.sendMessage(app.appState['encoder' + encoderNum].address, [{ type: "i", value: 0 }])
+}
+
+app.disableAllEncoders = () => {
+
+    for (let encoderNum = 1; encoderNum <= 12; encoderNum++) {
+        app.disableEncoder(encoderNum);
+    }
+
+    app.appState.wheels = [];
+    
+}
+
+app.clearEncoder = (encoderNum) => {
+    
+    app.appState['encoder' + encoderNum].centerText = "---";
+    app.appState['encoder' + encoderNum].wheel = "";
+    app.appState['encoder' + encoderNum].value = "";
+    app.dispatch({ type: "ENCODER" + encoderNum + '_CENTERTEXT', payload: { label: "---" } });
+
+    app.disableEncoder(encoderNum);
+
+}
+
+app.disableEncoder = (encoderNum) => {
+    app.appState['encoder' + encoderNum].enabled = false;
+    app.dispatch({ type: "ENCODER" + encoderNum + '_ENABLE', payload: { bool: false } });
+    // app.dispatch({ type: "ENCODER" + encoderNum + '_CENTERTEXT', payload: { label: "---" } });
+    app.dispatch({ type: "ENCODER" + encoderNum + '_VALUE', payload: { label: "" } });
+}
+
+app.sendTick = (encoderNum, type) => {
+    // Send the good news to EOS
+
+    console.log("SEND TICK " + encoderNum + " " + type);
+
+    console.log("SEND TICK APPSTATE: " + JSON.stringify(app.appState['encoder' + encoderNum]));
+    if (type == "+") {
+
+        tcpOsc.sendMessage(app.appState['encoder' + encoderNum].address, [{ type: "i", value: app.appState['encoder' + encoderNum].incValue }])
+
+    } else if (type == "-") {
+
+        tcpOsc.sendMessage(app.appState['encoder' + encoderNum].address, [{ type: "i", value: app.appState['encoder' + encoderNum].decValue }])
+
+    }
+
 }

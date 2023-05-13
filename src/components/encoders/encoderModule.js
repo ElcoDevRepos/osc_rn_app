@@ -11,33 +11,49 @@ import tcpOsc from '../../../services/tcpOsc';
 import { useSelector, useDispatch } from 'react-redux';
 import EncoderButton from './encoderBTN';
 import EncoderWheel from './encoderWheel';
+import EncoderMode from './encoderMode';
+import EncoderValue from './encoderValue';
+import EncoderCenterText from './encoderCenterText';
 
 export default EncoderModule = ({ module }) => {
     
     //const button = buttonsAll[name];
 
     //console.log(button);
- 
+
+
 
     return (
         
         < View style={[localstyles.encoder]} >
             <View style={[styles.row, localstyles.encoderWheel_row]}>
 
-                <View style={[{width: "10%", height: "10%", position: 'absolute', top: "5%", left: '5%', backgroundColor: "cyan"}] }></View>
 
-                <Text style={[{ color: "#FFF", fontSize: 20, zIndex: 900, position: 'absolute', top: '45%' }]}>CENTER TEXT</Text>
 
-                <EncoderWheel>                    
+ 
+                
 
-                </EncoderWheel>
 
-                <View style={[{ width: "10%", height: "10%", position: 'absolute', bottom: "5%", right: '5%', backgroundColor: "red" }]}></View>
+                <EncoderWheel module={module} />
+
+                <EncoderCenterText module={module} />
+
+                <View style={[{ width: "40%", height: "12%", position: 'absolute', alignContent: "flex-end", justifyContent: "flex-end", bottom: "3%", right: '3%', backgroundColor: "transparent" }]}>
+                    <EncoderValue module={module}  />
+                </View>
+
+                <View style={[{ width: "12%", height: "12%", position: 'absolute', top: "6%", left: '6%', backgroundColor: "transparent", alignContent: "center", justifyContent: "center" }]}>
+
+                    <View style={[{ width: "100%", height: "100%", borderColor: "cyan", borderWidth: 2, borderRadius: 100, alignContent: "center", justifyContent: "center" }]} >
+                        <EncoderMode module={module} />
+                    </View>
+
+                </View>
                 
             </View>
             <View style={[styles.row, localstyles.encoderBtn_row]}>
                 <View style={[localstyles.encoderBtn_col]} >
-                    <EncoderButton name={'encoder'+module+'_min'} />
+                    <EncoderButton name={'encoder' + module + '_min'} />
                 </View>
                 <View style={[localstyles.encoderBtn_col, localstyles.encoderBtn_max]} >
                     <EncoderButton name={'encoder' + module +'_max'} />

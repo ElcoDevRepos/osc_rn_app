@@ -20,12 +20,16 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../../helpers/styles';
 import buttonsAll from '../../helpers/buttonsAll';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 import ShowName from '../../components/infopanels/showName';
 import HeaderNavMain from './headerNavMain';
 import EncoderLayoutNav from './encoderLayoutNav';
 import DSLayoutNav from './dsLayoutNav';
 import PlaybackLayoutNav from './playbackLayoutNav';
 import FocusLayoutNav from './focusLayoutNav';
+
+import EditIcon from './editIcon';
 
 // Placing Images here with some descriptions.  They will need States and Stuff.
 
@@ -57,55 +61,21 @@ const TenKeyIcon = (props) => (
     </TouchableWithoutFeedback>
 )
 
-const SettingsIcon = (props) => (
-    <TouchableWithoutFeedback onPress={props.onPress}>
-        <Image
-            source={require('../../images/edit_icon.png')}
-            style={[styles.headerImage]}
-            />
-    </TouchableWithoutFeedback>
-)
+
+
 
 
 
 export default Header = ({ openSettings }) => {
 
     const navigation = useNavigation();
-        
-    const [isMainNavShown, setIsMainNavShown] = useState(true);
-    const toggleMainNav = event => { setIsMainNavShown(true) };
 
-    const [isEncoderLayoutNavShown, setIsEncoderLayoutNavShown] = useState(false);
-    const toggleEncoderLayoutNav = event => { setIsEncoderLayoutNavShown(true) };
+    const isMainNavShown = useSelector(state => state.appReducer.MAIN_NAV.bool);
+    const isEncoderLayoutNavShown = useSelector(state => state.appReducer.ENCODER_LAYOUT_NAV.bool);
+    const isDSLayoutNavShown = useSelector(state => state.appReducer.DS_LAYOUT_NAV.bool);
+    const isPlaybackLayoutNavShown = useSelector(state => state.appReducer.PLAYBACK_LAYOUT_NAV.bool);
+    const isFocusLayoutNavShown = useSelector(state => state.appReducer.FOCUS_LAYOUT_NAV.bool);
 
-    const [isDSLayoutNavShown, setIsDSLayoutNavShown] = useState(false);
-    const toggleDSLayoutNav = event => { setIsDSLayoutNavShown(true) };
-
-    const [isPlaybackLayoutNavShown, setIsPlaybackLayoutNavShown] = useState(false);
-    const togglePlaybackLayoutNav = event => { setIsPlaybackLayoutNavShown(true) };
-
-    const [isFocusLayoutNavShown, setIsFocusLayoutNavShown] = useState(false);
-    const toggleFocusLayoutNav = event => { setIsFocusLayoutNavShown(true) };
-
-    const hideAllHeaderNav = event => {
-        setIsMainNavShown(false);
-        setIsEncoderLayoutNavShown(false);
-        setIsDSLayoutNavShown(false);
-        setIsPlaybackLayoutNavShown(false);
-        setIsFocusLayoutNavShown(false);
-        }
-
-    const openEditMenu = () => {
-
-        PAGENAME = 'ENCODERS';
-
-        switch (PAGENAME) {
-            case 'ENCODERS':
-                navigation.navigate('EncoderEdit');
-                break;
-
-        }
-    }
 
     return (
             
@@ -136,9 +106,7 @@ export default Header = ({ openSettings }) => {
                         <TenKeyIcon />
                     </View>
                     <View style={[styles.col, styles.col4]} >
-                        <SettingsIcon onPress={() => {
-                            openEditMenu();
-                        }} />
+                        <EditIcon />
                     </View>
                 </View>
             </View>

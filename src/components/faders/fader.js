@@ -75,7 +75,7 @@ export default Fader = ({ num }) => {
                     maximumValue={100}
                     minimumValue={0}
                     style={{ width: "100%", height: "100%", paddingBottom: 10 }}
-                    step={0.5}
+                    step={1}
                     orientation="vertical"
                     thumbTouchSize={{ width: 100, height: 40 }}
                     thumbStyle={{ height: '10%', width: '60%', backgroundColor: '#000000', borderColor: "#cccccc", borderRadius: 0, borderWidth: 2 }}

@@ -1,14 +1,15 @@
 
 import { StyleSheet } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
     text: {
         color: '#FFFFFF',
-        fontSize: 20
+        fontSize: wp('1.5%')
     },
 
     pageContainer: {
-        flex: 1,
+        height: hp('90%'),
         flexDirection: 'column'
     },
     pageContainerLive: {
@@ -20,29 +21,32 @@ const styles = StyleSheet.create({
     pageContainerPatch: {
         backgroundColor: '#290703'
     },
+    pageContainerEdit: {
+    backgroundColor: '#15152d'
+    },
     height50: {
         flexBasis: '50%'
     },
     height100: {
-        height: '100%'
+        flexBasis: '100%'
     },
     header: {
         backgroundColor: '#15152d',
         color: 'white',
-        fontSize: 22,
+        fontSize: wp('1.8%'),
         fontWeight: 'bold'
     },
     rowHeader: {
-        height: '10%',
+        height: hp('10%'),
         alignItems: 'flex-end',
         borderBottomColor: '#297efd',
-        borderBottomWidth: 2,
+        borderBottomWidth: hp('0.4%'),
     },
     headerImage: {
         maxHeight: '90%',
         maxWidth: '100%',
-        padding: 10,
-        margin: 4,
+        padding: hp('0.5%'),
+        margin: hp('0.25%'),
         alignSelf: 'center',
         resizeMode: 'contain'
         
@@ -52,61 +56,60 @@ const styles = StyleSheet.create({
     },
     appNav: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
     },
     row_single_remote: {
-        flexBasis: '12.2%'
+        height: hp('9.9%')
     },
     row_double_remote: {
-        flexBasis: '24.4%'
+        height: hp('19.8%')
     },
     row_half_remote: {
-        flexBasis: '6.1%'
+        height: hp('4.8%')
     },
 
     row_half_focus: {
-        flexBasis: '5.75%'
+        height: hp('4.5%')
     },
     row_single_focus: {
-        flexBasis: '11.5%'
+        height: hp('9.3%')
     },
     row_double_focus: {
-        flexBasis: '23%'
+        height: hp('18.6')
     },
     row_half_facepanel: {
-        flexBasis: '5.4%'
+        height: hp('4.43')
     },
     row_single_facepanel: {
-        flexBasis: '10.8%'
+        height: hp('8.86')
     },
     row_double_facepanel: {
-        flexBasis: '21.6%'
+        height: hp('17.71')
     },
     row_single_ds: {
-        flexBasis: '11.2%'
+        height: hp('9.18')
     },
     row_double_ds: {
-        flexBasis: '22%'
+        height: hp('18.39')
     },
     row_half_ds: {
-        flexBasis: '5.6%'
+        height: hp('4.51')
     },
 
 
     row_half_playback: {
-        flexBasis: '5.4%'
+        height: hp('4.92')
     },
     row_single_playback: {
-        flexBasis: '12%'
+        height: hp('9.84')
     },
     row_top_playback: {
-        flexBasis: '15%'
+        height: hp('12.3')
     },
     row_double_playback: {
-        flexBasis: '24%'
+        height: hp('19.68')
     },
     row_fader_playback: {
-        flexBasis: '48%'
+        height: hp('39.36')
     },
 
 
@@ -117,6 +120,27 @@ const styles = StyleSheet.create({
         height: '41%'
     },
 
+
+    row_single_encoder: {
+        flexBasis: '12.2%'
+    },
+
+    row_layout_encoder: {
+        flexBasis: '9.5%'
+    },
+
+    row_half_encoder: {
+        flexBasis: '4.55%'
+    },
+
+    enc_row_encoder: {
+        height: '87.8%'
+    },
+
+
+    enc_col_encoder: {
+        width: wp('22.8%')
+    },
    
 
     faderContainer: {
@@ -141,13 +165,13 @@ const styles = StyleSheet.create({
     },
 
     faderPercentageText: {
-        fontSize: 20,
+        fontSize: wp('1.8%'),
         fontWeight: "bold",
         textAlign: 'center',
         color: '#ffffff'
     },
     faderPageLabel: {
-        fontSize: 20,
+        fontSize: wp('1.8%'),
         fontWeight: "bold",
         textAlign: 'center',
         color: '#ffffff',
@@ -169,7 +193,7 @@ const styles = StyleSheet.create({
     },
     oscLogText: {
         color: '#ffffff',
-        fontSize: 30
+        fontSize: wp('2.8%'),
     },
     
 
@@ -181,12 +205,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: '100%',
-        borderWidth: 2,
-        borderRadius: 5,
-        padding: 5
+        borderWidth: hp('0.18%'),
+        borderRadius: hp('0.5%'),
+        padding: hp('0.35%')
     },
     btnText: {
-        fontSize: 16,
+        fontSize: wp('1.4%'),
         textAlign: 'center'
     },
     labeltext: {
@@ -197,8 +221,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
-        height: '100%'
+      /*  width: '100%',
+        height: '100%' */
     },
 
     /* style 1 - RED */
@@ -483,11 +507,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: '100%',
-        borderWidth: 2,
-        paddingLeft: 4
+        borderWidth: hp('0.3%'),
+        paddingLeft: wp('0.2%')
     },
     infoText: {
-        fontSize: 16
+        fontSize: wp('1.4%')
     },
     info1: {
         borderColor: '#c61c00',
@@ -585,11 +609,12 @@ const styles = StyleSheet.create({
     modal: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#15152dcc',
     },
 
     modalContainer: {
-        backgroundColor: '#00000010',
+        backgroundColor: '#00000099',
         borderColor: '#297efd',
         borderWidth: 2,
         padding: 10,
@@ -628,15 +653,51 @@ const styles = StyleSheet.create({
     },
 
 
+    /* LAYOUTS AND MENUS */
+    layoutMenu: {
+        height: hp('82%'),
+        bottom: hp('7%'),
+        width: wp('20%'),
+        borderColor: "#aaaaaa", 
+        borderWidth: hp('0.3%'), 
+        backgroundColor: '#333333',
+        flexDirection: 'column',
+        justifyContent: 'space-evenly'
+
+    },
+    layoutSaveMenu: {
+        position: 'absolute', 
+        left: wp('10%'),
+        padding: hp('0.6%')
+    },
+    layoutLabelMenu: {
+        position: 'absolute',
+        left: wp('20%'),
+        padding: hp('0.6%')
+    },
+    layoutDeleteMenu: {
+        position: 'absolute',
+        left: wp('30%'),
+        padding: hp('0.6%')
+    },
+    row_single_layouts: {
+        height: hp('9.3%')
+    },
+    layoutBtnActive: {
+        borderColor: '#ffffff99',
+        backgroundColor: '#58585e'
+    },
+
+
 
     /* BOOTSTRAP FOR DUMMIES */
     row: {
-        width: '100%',
+        flexbasis: 1,
         flexDirection: 'row'
     },
     col: {
         height: '100%',
-        padding: 4
+        padding: hp('0.3%')
     },
     col1: {
         width: '8.3333333%',

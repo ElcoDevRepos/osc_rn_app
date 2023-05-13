@@ -1,83 +1,12 @@
-  function createAppState() {
-    // App State is an object to store all the current conditions of the App
-    // Will use appState to store config at appropriate Times
-    let appState = {};
-
-    appState.console = 0;
-    appState.currentPage = "remotePage";
-    appState.currentMasterLayout = 0;
-    appState.edit = false;
-    appState.editEnabled = true;
-    appState.activeChan = "";
-    appState.preActiveChan = "";
-    // Direct Select Page
-    appState.ds=[];
-    for (let j = 0; j < 5; j++) {
-    // Creates 4 DS Slots per page
-    appState.ds[j] = JSON.parse(JSON.stringify(defaultDS));
-    appState.ds[j].dsID = j + 1;
-    }
-
-    // Encoder Page
-
-    appState.encoders=[];
-    for (let j = 0; j < 12; j++) {
-    // Creates 4 DS Slots per page
-    appState.encoders[j] = JSON.parse(JSON.stringify(defaultEncoder));
-    appState.encoders[j].encoderID = j + 1;
-    appState.encoders[j].centerText = "--Clear--";
-    appState.encoders[j].address = "/eos/active/wheel/2";
-    appState.encoders[j].incValue = 8.00;
-    appState.encoders[j].decValue = -8.00;
-    appState.encoders[j].argType = 'f';
-    }
-
-    appState.faders=[];
-    for (let i = 0; i < 1; i++) {
-      // Create 1 FaderBank
-      appState.faders[i] = JSON.parse(JSON.stringify([]));
-      for (let j = 0; j < 10; j++) {
-        // Create 10 Faders
-        appState.faders[i][j] = {"level" : 0, "enabled" : false};
-      }
-
-    }
-
-    appState.faderPage = {"page" : 1};
-
-    appState.colorStore = false;
-
-    appState.colors = [];
-    appState.colors[0] = "#ffffff";
-    appState.colors[1] = "#ffdd99";
-    appState.colors[2] = "#ffaa66";
-    appState.colors[3] = "#ff0000";
-    appState.colors[4] = "#ff6600";
-    appState.colors[5] = "#ffff00";
-    appState.colors[6] = "#66ff00";
-    appState.colors[7] = "#00ff66";
-    appState.colors[8] = "#00ffff";
-    appState.colors[9] = "#0066ff";
-    appState.colors[10] = "#0000ff";
-    appState.colors[11] = "#6600ff";
-    appState.colors[12] = "#ff00ff";
-
-    // Currently No Savable States
-    appState.remotePage = {};
-    appState.facepanelPage = {};
-
-    return appState;
-
-  }
-
-global.appState = {
-  "console": "0",
+export default appState = {
+  "currentConsole": "0",
   "currentPage": "encoderPage",
   "currentMasterLayout": 0,
   "edit": false,
   "editEnabled": true,
   "activeChan": "1  ",
-  "preActiveChan": "1  ",
+    "preActiveChan": "1  ",
+    "wheels": [],
   "ds1" : 
     {
       "dsID": 1,
@@ -130,11 +59,11 @@ global.appState = {
       "mode": "coarse",
       "enabled": false,
       "value": "",
-      "centerText": "--Clear--",
+      "centerText": "Pan",
       "incValue": 8,
       "decValue": -8,
       "argType": "f",
-      "address": "/eos/active/wheel/2"
+      "address": "/eos/active/wheel/1"
     },
   "encoder2" :
     {
@@ -329,9 +258,7 @@ global.appState = {
         "level": 0,
         "enabled": false
     },
-  "faderPage": {
-    "page": 1
-  },
+  "faderPage": 1,
   "colorStore": false,
   "colors": [
     "#faf6ff",
@@ -356,36 +283,9 @@ global.appState = {
 
 
 
-const defaultConsole = {
-          'name' : '',
-          'label' : '',
-          'type' : '',
-          'remoteAddress' : '10.101.0.1',
-          'localAddress' : '10.101.0.2',
-          'remotePort' : '8000',
-          'localPort' : '9000'
-      };
 
-    const defaultEncoder = {
-        'encoderID' : '1',
-        'wheel' : '',
-        'mode' : 'coarse',
-        'enabled' : false,
-        'value' : '',
-        'centerText' : '',
-        'incValue' : '',
-        'decValue' : '',
-        'argType' : 'f',
-        'address' : '/eos/active/wheel/'
-    };
 
-    const defaultDS = {
-        'dsID' : 1,
-        'type' : 'none',
-        'enabled' : false,
-        'flexi' : 'off',
-        'page' : '1'
-    };
+
 
     const defaultMasterLayout = {
       'label' : 'New Layout'
@@ -402,7 +302,10 @@ const defaultConsole = {
       'oscVersion' : '1.1',
       'user' : '0',
       'curMaster' : '0',
-      'consoles' : [],
+      'consoles': [],
+      'coarse': 8,
+      'fine': 1,
+
       'remotePage' :
       {
         "encoderStart" : 0,

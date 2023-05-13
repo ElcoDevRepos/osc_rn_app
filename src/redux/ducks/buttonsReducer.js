@@ -132,7 +132,19 @@ export default (state = initialState, action) => {
                 commandLine: {
                     // COPY ALL THE FIELDS IN COMMANDLINE
                     ...state.commandLine,
-                    label: action.payload.label,
+                    label: action.payload.label
+                }
+            }
+
+            break;
+                    case 'COMMANDLINE_STYLE':
+            // spread the state into it's parts and add the proper actions.'
+            return {
+                // COPY ALL THE STATES
+                ...state,
+                COMMANDLINE_STYLE: {
+                    // COPY ALL THE FIELDS IN COMMANDLINE
+                    ...state.COMMANDLINE_STYLE,
                     style: action.payload.style
                 }
             }

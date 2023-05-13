@@ -1,0 +1,519 @@
+{
+  "label": "New Master Layout",
+  "layouts": [
+    {
+      "Remote": {
+      },
+      "FacePanel": {
+      },
+      "Focus": {
+        "encoder": [
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "ce " nterText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incVa",
+            "lue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"": null,
+            "argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\"": "/eos/active/wheel/"
+          }
+        ]
+      },
+      "Encoders": {
+        "encoder": [
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "addre " ss\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel",
+            "/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"w" "heel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coars",
+            "e\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"va" "lue\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"",
+            "---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"dec" "Value\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"DirectSelects\":{},\"Playback\":{}},{\"Remote\":{},\"FacePanel\":{},\"Focus\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"",
+            "enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\"": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValu " e\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"Encoders\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decV",
+            "alue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\"",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/activ,
+            "e/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID" ":",
+            ","
+            "wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\"": null,
+            : "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": "fa",
+            "lse",
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "center " Text\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"DirectSelects\":{},\"Playback\":{}},{\"Remote\":{},\"FacePanel\":{},\"Focus\":{\"encoder\":[{\"encoderID\":\"\"",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "co,
+            "arse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,": null,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText ": "
+            "---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"Encoders\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerT",
+            "ext\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":",
+            8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argTy " pe\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eo",
+            "s/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"en" "coderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\"",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enab " led\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"DirectSelects\":{},\"Playback\":{}},{\"Remote\":{},\"FacePanel\":{},\"Focus",
+            ":{" "encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encode",
+            "rID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mo": null,
+            "de\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\"": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          }
+        ]
+      },
+      "Encoders": {
+        "encoder": [
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabl " ed\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"",
+            "centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"inc" "Value\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8",
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "addres " s\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/",
+            "},{" "encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wh",
+            "eel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"DirectSelects\":{},\"Playback\":{}},{\"Rem" "ote\":{},\"FacePanel\":{},\"Focus\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"",
+            "/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{": null,
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          }
+        ]
+      },
+      "Encoders": {
+        "encoder": [
+          {
+            "encoderID": "",
+            "whe " el\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\"",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "valu " e\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"--",
+            "-\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decVa" "lue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active,
+            "/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"DirectSel": null,
+            "ects\":{},\"Playback\":{}},{\"Remote\":{},\"FacePanel\":{},\"Focus\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\"": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "add " ress\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/whe",
+            "el/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"Encoders\":{\"e" "ncoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":",
+            "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": ",
+            "coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":fals" "e",
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerTe " xt\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8",
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argTyp " e\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos",
+            "/active/wheel/\"}]},\"DirectSelects\":{},\"Playback\":{}},{\"Remote\":{},\"FacePanel\":{},\"Focus\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":" "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "de " cValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"",
+            "f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/act" "ive/wheel/\"}]},\"Encoders\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/",
+            "active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"enco" "derID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"",
+            "mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enable" "d\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"c",
+            "enterText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incV" "alue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,",
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          }
+        ]
+      },
+      "DirectSelects": {
+      },
+      "Playback": {
+      }
+    },
+    {
+      "Remote": {
+      },
+      "FacePanel": {
+      },
+      "Focus": {
+        "encoder": [
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": "f",
+            "alse",
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "cente " rText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue",
+            ":8," "decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"arg",
+            "Type\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"Encoders\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"": null,
+            "argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\"": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "whee " l\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value ": ",
+            "," "centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---",
+            "," "incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"DirectSelects\":{},\"Playback\":{}},{\"Remote\":{},\"FacePanel\":{},\"Focus\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"",
+            "," "mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"ena",
+            "bled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\"",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "i " ncValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"Encoders\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\"",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          },
+          {
+            "encoderID": "",
+            "wheel": "",
+            "mode": "coarse",
+            "enabled": false,
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValu " e\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"a",
+            "ddress\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/w" "heel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"",
+            "," "wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"c",
+            "oarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false",
+            "value": "",
+            "centerText": "---",
+            "incValue": 8,
+            "decValue": -8,
+            "argType": "f",
+            "address": "/eos/active/wheel/"
+          }
+        ]
+      },
+      "DirectSelects": {
+      },
+      "Playback": {
+      }
+    },
+    {
+      "Remote": {
+      },
+      "FacePanel": {
+      },
+      "Focus": {
+        "encode " r\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"w",
+        "heel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coars" "e\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"va",
+        "lue\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"Encoders\":{\"encoder\":[{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,": null,
+        "value": "",
+        "centerText": "---",
+        "incValue": 8,
+        "decValue": -8,
+        "argType": "f",
+        "address": "/eos/active/wheel/"
+      },
+      {
+        "encoderID": "",
+        "wheel": "",
+        "mode": "coarse",
+        "enabled": false,
+        "value": "",
+        "centerText ": "
+        "---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"",
+        : null,
+        "decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\"": "f",
+        "address": "/eos/active/wheel/"
+      },
+      {
+        "encoderID": "",
+        "wheel": "",
+        "mode": "coarse",
+        "enabled": false,
+        "value": "",
+        "centerText": "---",
+        "incValue": 8,
+        "decValue": -8,
+        "argType": "f",
+        "address": "/eos/a,
+        "ctive/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encod" "erID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"},{\"encoderID\":\"\",\"wheel\":\"\",\"mode\":\"coarse\",\"enabled\":false,\"value\":\"\",\"centerText\":\"---\",\"incValue\":8,\"decValue\":-8,\"argType\":\"f\",\"address\":\"/eos/active/wheel/\"}]},\"DirectSelects\":{},\"Playback\":{}}]}"

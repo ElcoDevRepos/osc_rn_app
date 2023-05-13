@@ -21,7 +21,14 @@ import Drawer from 'react-native-drawer';
 
 import { useNavigation } from '@react-navigation/native';
 
-import LinearGradient from 'react-native-linear-gradient';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange as loc,
+  removeOrientationListener as rol
+} from 'react-native-responsive-screen';
+
+// import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   NativeEventEmitter
@@ -43,28 +50,53 @@ import OscLog from './src/pages/osclog';
 // MODALS AND POPUPS
 import ColorPicker from './src/pages/colorPicker';
 import EncoderEdit from './src/pages/encoderEdit';
+import FocusEdit from './src/pages/focusEdit';
+import PlaybackEdit from './src/pages/playbackEdit';
+import DirectSelectEdit from './src/pages/directSelectEdit';
 import DSSelectionScreen from './src/components/ds/dsSelectionScreen';
 
 // APPLICATION
-import './src/functions/app';
+import app from './src/functions/app';
 
 // STYLES
 import styles from './src/helpers/styles';
 
-import './src/helpers/appState';
+// import './src/helpers/appState';
 
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import app from './src/functions/app';
 
-export default function MainApp() {
 
+if (typeof global.app.ds.requestDS === 'undefined') {
+    // During Development this is causing crashes on hot reload
+    require('./src/functions/dsFunctions.js');
+}
+
+export default MainApp = () => {
+    
     const dispatch = useDispatch();
 
     app.dispatch = dispatch;
+        
+    
+    useEffect(() => {
+    // useEffect waits for the component to be mounted before running
+    // On App load, read from local storage and store app config/state
+    // Anything in here is fired on component mount.
+        
+        //app.getAppConfig();
+        initApp();
+
+        return () => {
+            
+        // Anything in here is fired on component unmount.
+        }
+
+  }, [])
+
     /*
   const [isRemoteShown, setIsRemoteShown] = useState(true);
   const [isFocusShown, setIsFocusShown] = useState(false);
@@ -119,103 +151,143 @@ export default function MainApp() {
     //console.log("ATTEMPTING TO UPDATE APP STATE");
     const initApp = () => {
 
-        // FOR DEVELOPEMENT ONLY.  REMOVE FOR PRODUCTION
+       // FOR DEVELOPEMENT ONLY.  REMOVE FOR PRODUCTION
        // app.appState.console = 1;
+
+
+       // FOR DEVELOPEMENT ONLY.  REMOVE FOR PRODUCTION
+       // RESET THE APP STATE
        // app.updateAppState(app.appState);
 
-        // On App load, read from local storage and store app config/state
+       // FOR DEVELOPEMENT ONLY.  REMOVE FOR PRODUCTION
+       // RESET THE APP CONFIG
+       // app.appConfig = app.createNewAppConfig();
+       // app.updateAppConfig(app.appConfig);
+        
+
+       // On App load, read from local storage and store app config/state
+       
+
+       
+       // On App load, read from local storage and store app config/state
         app.getAppState().then(
             function (appStateFromStorage) {
-                /* code if successful */
-                console.log("MainApp : Returned from Storage" + appStateFromStorage)
+                
+                // console.log("appState : Returned from Storage" + JSON.stringify(app.appState));
 
-                console.log("Updated App State", app.appState)
+                //console.log("appConfig : Returned from Storage" + JSON.stringify(app.appConfig));
 
+                //console.log("Updated App State", app.appState)
+
+                app.getAppConfig().then(
+                    function () {
+
+                        // console.log("appState : Returned from Storage" + JSON.stringify(app.appState));
+
+                        //console.log("appConfig : Returned from Storage" + JSON.stringify(app.appConfig));
+
+                        //console.log("Updated App State", app.appState)
+
+                        app.populateLayouts();
+
+                    }
+                );
             },
             function (error) {
-                /* code if some error */
+               
             }
         );
 
+       
 
-        // Wait for App to catch up 
+
+        // GATHER IP ADDRESS AND PORT INFORMATION FROM LOCAL STORAGE HERE AND TRY TO CONNECT
+
+        if (!isConnected) {
+
+            //app.dispatch = dispatch;
+
+            const eventEmitter = new NativeEventEmitter(tcpOsc);
+
+            try {
+
+                if (tcpOsc.isConnected) {
+                    tcpOsc.destroyConnection();
+                }
+
+                tcpOsc.startConnection(3037, '192.168.50.119');
+
+                setIsConnected(true);
+
+
+                if (eventEmitter.listenerCount('GotMessage') > 0) {
+
+                    eventEmitter.removeAllListeners('GotMessage');
+                }
+
+                eventEmitter.addListener('GotMessage', (oscMessage) => {
+
+                    app.updater(oscMessage, dispatch);
+
+                })
+
+            } catch (error) {
+
+            }
+
+            // THE CONNECTION IS A MAYBE.   TRY TO PING EOS
+            setTimeout(() => {
+                try {
+                    console.log("===== SENDING EOS PING =====");
+
+
+                    if (tcpOsc.sendMessage("/eos/ping", [{ type: "i", value: 1 }])) {
+                        console.log("RETURN IS TRUE");
+                        //setIsConnected(true);
+                    } else {
+                        console.log("RETURN IS FALSE");
+                    };
+
+
+                }
+
+                catch (error) {
+
+                    console.log("===== EOS PING FAILED =====");
+
+                }
+            }, 1000);
+
+
+
+        }
+
+        
+            // Wait for App to catch up 
         setTimeout(() => {
-            // Get Direct Selects 
-            app.ds.requestDS();
-            app.faders.requestFaders();
+            if (1) {
+                // Get Direct Selects 
+                app.ds.requestDS();
+                app.faders.requestFaders();
+               // app.disableAllEncoders();
+            }
             }, 2000);
         
 
     }
 
-    if (!isConnected) {
-        
 
-        //app.dispatch = dispatch;
-
-        const eventEmitter = new NativeEventEmitter(tcpOsc);
-        try {
-            tcpOsc.startConnection(3037, '192.168.50.119');
-
-            setIsConnected(true);
-
-
-            if (eventEmitter.listenerCount('GotMessage') > 0) {
-
-                eventEmitter.removeAllListeners('GotMessage');
-            }
-
-            eventEmitter.addListener('GotMessage', async (oscMessage) => {
-
-                app.updater(oscMessage, dispatch);
-
-            })
-
-        } catch (error) {
-
-        }
-
-    }
-
-    useEffect(() => {
-    // useEffect waits for the component to be mounted before running
-    // On App load, read from local storage and store app config/state
-      app.getAppConfig();
-      initApp();
-
-  }, [])
+    app.dispatch({ type: "LAYOUT_SAVE_VIEW", payload: { bool: false } });
+    app.dispatch({ type: "LAYOUT_LABEL_VIEW", payload: { bool: false } });
+    app.dispatch({ type: "LAYOUT_DELETE_VIEW", payload: { bool: false } });
 
 
 
-    
-
-
-  /**
-   * Use these connection methods to connect and send to the EOS Server as preferred
-   */
-  /**
-   * TCP Connection and send
-   */
-
-
-
-
-  /*
-        <HeaderRNE
-      backgroundColor='#000'
-      centerComponent={{ text: 'OSC', style: styles.heading }}
-    />
-  */
-
-  /** 
-   * UDP Connection and Send 
-   * */
-
-  //osc.createClient("192.168.50.119", 8000);
-  //osc.sendMessage("/eos/ping", ['0']);
   
   
-    const PageStack = createBottomTabNavigator();
+    // const PageStack = createBottomTabNavigator();
+
+     const PageStack = createNativeStackNavigator();
 
     const MyTheme = {
         dark: true,
@@ -251,7 +323,12 @@ export default function MainApp() {
                     <Header openSettings={openSettings} />
 
                     <PageStack.Navigator initialRouteName="Remote" screenOptions={{
-                        headerShown: false, animation: 'none', tabBarVisible: false, tabBarStyle: { display: 'none' }
+                        headerShown: false,
+                        animation: 'none',
+                        tabBarVisible: false,
+                        tabBarStyle: { display: 'none' },
+                        lazy: false,
+                        optimizationsEnabled: false
                     }}
                         screenListeners={{
                             state: (e) => {
@@ -268,7 +345,7 @@ export default function MainApp() {
                                     case "Playback":
                                     case "OscLog":
 
-                                        app.appState.currentPage = currentPage;
+                                       // app.appState.currentPage = currentPage;
                                         break;
                                     default:
                                         break;
@@ -293,6 +370,9 @@ export default function MainApp() {
                                 presentation: 'transparentModal'
                             }} />
                             <PageStack.Screen name="EncoderEdit" component={EncoderEdit} />
+                            <PageStack.Screen name="FocusEdit" component={FocusEdit} />
+                            <PageStack.Screen name="DirectSelectEdit" component={DirectSelectEdit} />
+                            <PageStack.Screen name="PlaybackEdit" component={PlaybackEdit} />
                             <PageStack.Screen name="DSSelectionScreen" component={DSSelectionScreen} options={{ presentation: 'transparentModal' }} />
                         </PageStack.Group>
                     </PageStack.Navigator>

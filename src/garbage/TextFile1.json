@@ -1,0 +1,379 @@
+{
+	"label": "New Master Layout",
+	"layouts": [
+		{
+			"encoder1": {
+				"encoderID": 1,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder2": {
+				"encoderID": 2,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder3": {
+				"encoderID": 3,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder4": {
+				"encoderID": 4,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder5": {
+				"encoderID": 5,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder6": {
+				"encoderID": 6,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder7": {
+				"encoderID": 7,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder8": {
+				"encoderID": 8,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder9": {
+				"encoderID": 9,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder10": {
+				"encoderID": 10,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder11": {
+				"encoderID": 11,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder12": {
+				"encoderID": 12,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"ds1": {
+				"dsID": 1,
+				"type": "chan",
+				"enabled": true,
+				"flexi": "off",
+				"page": "1",
+				"label": "SELECT"
+			},
+			"ds2": {
+				"dsID": 2,
+				"type": "chan",
+				"enabled": true,
+				"flexi": "off",
+				"page": "1",
+				"label": "SELECT"
+			},
+			"ds3": {
+				"dsID": 3,
+				"type": "chan",
+				"enabled": true,
+				"flexi": "off",
+				"page": "1",
+				"label": "SELECT"
+			},
+			"ds4": {
+				"dsID": 4,
+				"type": "chan",
+				"enabled": true,
+				"flexi": "off",
+				"page": "1",
+				"label": "SELECT"
+			},
+			"ds5": {
+				"dsID": 5,
+				"type": "chan",
+				"enabled": true,
+				"flexi": "off",
+				"page": "1",
+				"label": "SELECT"
+			},
+			"faderPage": 1
+		},
+		{
+			"encoder1": {
+				"encoderID": 1,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder2": {
+				"encoderID": 2,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder3": {
+				"encoderID": 3,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder4": {
+				"encoderID": 4,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder5": {
+				"encoderID": 5,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder6": {
+				"encoderID": 6,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder7": {
+				"encoderID": 7,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder8": {
+				"encoderID": 8,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder9": {
+				"encoderID": 9,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder10": {
+				"encoderID": 10,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder11": {
+				"encoderID": 11,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"encoder12": {
+				"encoderID": 12,
+				"wheel": "",
+				"mode": "coarse",
+				"enabled": false,
+				"value": "",
+				"centerText": "---",
+				"incValue": 8,
+				"decValue": -8,
+				"argType": "f",
+				"address": "/eos/active/wheel/"
+			},
+			"ds1": {
+				"dsID": 1,
+				"type": "chan",
+				"enabled": true,
+				"flexi": "off",
+				"page": "1",
+				"label": "SELECT"
+			},
+			"ds2": {
+				"dsID": 2,
+				"type": "chan",
+				"enabled": true,
+				"flexi": "off",
+				"page": "1",
+				"label": "SELECT"
+			},
+			"ds3": {
+				"dsID": 3,
+				"type": "chan",
+				"enabled": true,
+				"flexi": "off",
+				"page": "1",
+				"label": "SELECT"
+			},
+			"ds4": {
+				"dsID": 4,
+				"type": "chan",
+				"enabled": true,
+				"flexi": "off",
+				"page": "1",
+				"label": "SELECT"
+			},
+			"ds5": {
+				"dsID": 5,
+				"type": "chan",
+				"enabled": true,
+				"flexi": "off",
+				"page": "1",
+				"label": "SELECT"
+			},
+			"faderPage": 1
+		}
+	]
+}
